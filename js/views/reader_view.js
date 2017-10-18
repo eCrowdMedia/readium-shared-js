@@ -1,27 +1,27 @@
 //  Created by Boris Schneiderman.
 // Modified by Daniel Weck
 //  Copyright (c) 2014 Readium Foundation and/or its licensees. All rights reserved.
-//  
-//  Redistribution and use in source and binary forms, with or without modification, 
+//
+//  Redistribution and use in source and binary forms, with or without modification,
 //  are permitted provided that the following conditions are met:
-//  1. Redistributions of source code must retain the above copyright notice, this 
+//  1. Redistributions of source code must retain the above copyright notice, this
 //  list of conditions and the following disclaimer.
-//  2. Redistributions in binary form must reproduce the above copyright notice, 
-//  this list of conditions and the following disclaimer in the documentation and/or 
+//  2. Redistributions in binary form must reproduce the above copyright notice,
+//  this list of conditions and the following disclaimer in the documentation and/or
 //  other materials provided with the distribution.
-//  3. Neither the name of the organization nor the names of its contributors may be 
-//  used to endorse or promote products derived from this software without specific 
+//  3. Neither the name of the organization nor the names of its contributors may be
+//  used to endorse or promote products derived from this software without specific
 //  prior written permission.
-//  
-//  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
-//  ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED 
-//  WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. 
-//  IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, 
-//  INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, 
-//  BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, 
-//  DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF 
-//  LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE 
-//  OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED 
+//
+//  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
+//  ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+//  WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
+//  IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT,
+//  INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING,
+//  BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+//  DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+//  LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE
+//  OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED
 //  OF THE POSSIBILITY OF SUCH DAMAGE.
 
 define(["../globals", "jquery", "underscore", "eventEmitter", "./fixed_view", "../helpers", "./iframe_loader", "./internal_links_support",
@@ -47,7 +47,6 @@ define(["../globals", "jquery", "underscore", "eventEmitter", "./fixed_view", ".
  * @constructor
  */
 var ReaderView = function (options) {
-
     $.extend(this, new EventEmitter());
 
     var self = this;
@@ -55,6 +54,9 @@ var ReaderView = function (options) {
     var _package = undefined;
     var _spine = undefined;
     var _viewerSettings = new ViewerSettings({});
+    if (options.viewerSetting){
+        _viewerSettings.update(options.viewerSetting);
+    }
     //styles applied to the container divs
     var _userStyles = new StyleCollection();
     //styles applied to the content documents
@@ -105,7 +107,6 @@ var ReaderView = function (options) {
      */
     this.createViewForType = function (viewType, options) {
         var createdView;
-
         // NOTE: _$el == options.$viewport
         _$el.css("overflow", "hidden");
 
@@ -166,7 +167,17 @@ var ReaderView = function (options) {
 
     //based on https://docs.google.com/spreadsheet/ccc?key=0AoPMUkQhc4wcdDI0anFvWm96N0xRT184ZE96MXFRdFE&usp=drive_web#gid=0 document
     function deduceDesiredViewType(spineItem) {
-
+        if (spineItem.isReflowable() && MooReaderApp.SETTING.writingMode === 'vertical'){
+            _viewerSettings.scroll = 'auto';
+            return ReaderView.VIEW_TYPE_COLUMNIZED;
+        }if (spineItem.isReflowable() && spineItem.spine.direction === 'rtl'){
+            _viewerSettings.scroll = 'auto';
+            return ReaderView.VIEW_TYPE_COLUMNIZED;
+        }
+        if (spineItem.paginationInfo && spineItem.paginationInfo.isVerticalWritingMode){
+            _viewerSettings.scroll = 'auto';
+            return ReaderView.VIEW_TYPE_COLUMNIZED;
+        }
         //check settings
         if (_viewerSettings.scroll == "scroll-doc") {
             return ReaderView.VIEW_TYPE_SCROLLED_DOC;
@@ -195,11 +206,11 @@ var ReaderView = function (options) {
 
     // returns true is view changed
     function initViewForItem(spineItem, callback) {
-
         var desiredViewType = deduceDesiredViewType(spineItem);
 
         if (_currentView) {
-
+            console.log('getCurrentViewType',self.getCurrentViewType());
+            console.log('desiredViewType',desiredViewType);
             if (self.getCurrentViewType() == desiredViewType) {
                 callback(false);
                 return;
@@ -227,12 +238,12 @@ var ReaderView = function (options) {
 
 
         _currentView = self.createViewForType(desiredViewType, viewCreationParams);
-        
+        console.log('_currentView',_currentView);
         Globals.logEvent("READER_VIEW_CREATED", "EMIT", "reader_view.js");
         self.emit(Globals.Events.READER_VIEW_CREATED, desiredViewType);
 
         _currentView.on(Globals.Events.CONTENT_DOCUMENT_LOADED, function ($iframe, spineItem) {
-            
+
             Globals.logEvent("CONTENT_DOCUMENT_LOADED", "ON", "reader_view.js (current view) [ " + spineItem.href + " ]");
 
             if (!Helpers.isIframeAlive($iframe[0])) return;
@@ -251,16 +262,19 @@ var ReaderView = function (options) {
         });
 
         _currentView.on(Globals.Events.CONTENT_DOCUMENT_LOAD_START, function ($iframe, spineItem) {
+
             Globals.logEvent("CONTENT_DOCUMENT_LOAD_START", "EMIT", "reader_view.js [ " + spineItem.href + " ]");
             self.emit(Globals.Events.CONTENT_DOCUMENT_LOAD_START, $iframe, spineItem);
         });
 
         _currentView.on(Globals.Events.CONTENT_DOCUMENT_UNLOADED, function ($iframe, spineItem) {
+
+            Globals.logEvent("CONTENT_DOCUMENT_UNLOADED", "EMIT", "reader_view.js [ " + spineItem.href + " ]");
             self.emit(Globals.Events.CONTENT_DOCUMENT_UNLOADED, $iframe, spineItem);
         });
 
         _currentView.on(Globals.InternalEvents.CURRENT_VIEW_PAGINATION_CHANGED, function (pageChangeData) {
-            
+
             Globals.logEvent("InternalEvents.CURRENT_VIEW_PAGINATION_CHANGED", "ON", "reader_view.js");
 
             //we call on onPageChanged explicitly instead of subscribing to the Globals.Events.PAGINATION_CHANGED by
@@ -317,7 +331,7 @@ var ReaderView = function (options) {
 
         Globals.logEvent("InternalEvents.CURRENT_VIEW_PAGINATION_CHANGED", "OFF", "reader_view.js");
         _currentView.off(Globals.InternalEvents.CURRENT_VIEW_PAGINATION_CHANGED);
-        
+
         _currentView.remove();
         _currentView = undefined;
     }
@@ -375,12 +389,20 @@ var ReaderView = function (options) {
      * @param {Views.ReaderView.OpenBookData} openBookData - object with open book data
      */
     this.openBook = function (openBookData) {
-
+        //取得個別書籍的設定（翻頁方向等）
+        var bookSetting = localStorage[MooReaderApp.BOOKINFO.cid];
+        bookSetting = bookSetting ? JSON.parse(bookSetting) : '';
         var packageData = openBookData.package ? openBookData.package : openBookData;
 
         _package = new Package(packageData);
 
         _spine = _package.spine;
+        // 判斷使用者設定翻頁方向時需要
+        if (bookSetting.writingMode === 'vertical'){
+            _spine.direction = 'rtl';
+        }else if (bookSetting.writingMode === 'horizontal'){
+            _spine.direction = 'ltr';
+        }
         _spine.handleLinear(true);
 
         if (_mediaOverlayPlayer) {
@@ -460,8 +482,8 @@ var ReaderView = function (options) {
     };
 
     function onMediaPlayerStatusChanged(status) {
+
         Globals.logEvent("MEDIA_OVERLAY_STATUS_CHANGED", "EMIT", "reader_view.js (via MediaOverlayPlayer + AudioPlayer)");
-console.trace(JSON.stringify(status));
         self.emit(Globals.Events.MEDIA_OVERLAY_STATUS_CHANGED, status);
     }
 
@@ -555,7 +577,8 @@ console.trace(JSON.stringify(status));
      * @fires Globals.Events.SETTINGS_APPLIED
      */
     this.updateSettings = function (settingsData) {
-
+        console.trace();
+        console.log('updateSettings', settingsData);
 //console.debug("UpdateSettings: " + JSON.stringify(settingsData));
 
         _viewerSettings.update(settingsData);
@@ -565,9 +588,9 @@ console.trace(JSON.stringify(status));
         }
 
         if (_currentView && !settingsData.doNotUpdateView) {
-
+            console.log('before bookmark');
             var bookMark = _currentView.bookmarkCurrentPage();
-
+            console.log('after boookmark', bookMark);
             if (bookMark && bookMark.idref) {
 
                 var wasPlaying = false;
@@ -598,13 +621,12 @@ console.trace(JSON.stringify(status));
                     Globals.logEvent("SETTINGS_APPLIED 1 (view update)", "EMIT", "reader_view.js");
                     self.emit(Globals.Events.SETTINGS_APPLIED);
                 });
-                
+
                 return;
             }
         }
 
         Globals.logEvent("SETTINGS_APPLIED 2 (no view update)", "EMIT", "reader_view.js");
-console.trace(JSON.stringify(settingsData));
         self.emit(Globals.Events.SETTINGS_APPLIED);
     };
 
@@ -732,7 +754,7 @@ console.trace(JSON.stringify(settingsData));
      * @param {object} initiator optional
      */
     this.openPageIndex = function (pageIndex, initiator) {
-
+        console.log('openpageIndex', pageIndex, initiator);
         if (!_currentView) {
             return false;
         }
@@ -764,9 +786,10 @@ console.trace(JSON.stringify(settingsData));
 
     // dir: 0 => new or same page, 1 => previous, 2 => next
     function openPage(pageRequest, dir) {
-
+        // console.log('openPage:dir',dir);
+        // console.log('pageRequest',pageRequest);
         initViewForItem(pageRequest.spineItem, function (isViewChanged) {
-
+            // console.log('isViewChanged',isViewChanged);
             if (!isViewChanged) {
                 _currentView.setViewSettings(_viewerSettings);
             }
@@ -1294,7 +1317,7 @@ console.trace(JSON.stringify(settingsData));
 
         readerView.on(Globals.Events.CONTENT_DOCUMENT_LOADED, function ($iframe, spineItem) {
             Globals.logEvent("CONTENT_DOCUMENT_LOADED", "ON", "reader_view.js (via BackgroundAudioTrackManager) [ " + spineItem.href + " ]");;
-            
+
             try {
                 if (spineItem && spineItem.idref && $iframe && $iframe[0]) {
                     // console.log("CONTENT_DOCUMENT_LOADED");
@@ -1311,7 +1334,7 @@ console.trace(JSON.stringify(settingsData));
 
         readerView.on(Globals.Events.PAGINATION_CHANGED, function (pageChangeData) {
             Globals.logEvent("PAGINATION_CHANGED", "ON", "reader_view.js (via BackgroundAudioTrackManager)");
-            
+
             // console.log("PAGINATION_CHANGED");
             // console.debug(pageChangeData);
             //
@@ -1429,7 +1452,7 @@ console.trace(JSON.stringify(settingsData));
 
         readerView.on(Globals.Events.MEDIA_OVERLAY_STATUS_CHANGED, function (value) {
             Globals.logEvent("MEDIA_OVERLAY_STATUS_CHANGED", "ON", "reader_view.js (via BackgroundAudioTrackManager)");
-            
+
             if (!value.smilIndex) return;
             var package = readerView.package();
             var smil = package.media_overlay.smilAt(value.smilIndex);

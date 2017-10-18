@@ -50,7 +50,7 @@ var ScrollView = function (options, isContinuousScroll, reader) {
     } catch(err) {
         console.error(err);
     }
-    
+
     $.extend(this, new EventEmitter());
 
     var SCROLL_MARGIN_TO_SHOW_LAST_VISBLE_LINE = 5;
@@ -94,6 +94,7 @@ var ScrollView = function (options, isContinuousScroll, reader) {
         _$contentFrame.css("-webkit-overflow-scrolling", "touch");
         _$contentFrame.css("width", "100%");
         _$contentFrame.css("height", "100%");
+        _$contentFrame.css("padding", "0 20px");
         _$contentFrame.css("position", "relative");
 
         var settings = reader.viewerSettings();
@@ -677,11 +678,16 @@ var ScrollView = function (options, isContinuousScroll, reader) {
             reader);
 
         pageView.on(OnePageView.Events.SPINE_ITEM_OPEN_START, function($iframe, spineItem) {
-            
+
             Globals.logEvent("OnePageView.Events.SPINE_ITEM_OPEN_START", "ON", "scroll_view.js [ " + spineItem.href + " ]");
 
             Globals.logEvent("CONTENT_DOCUMENT_LOAD_START", "EMIT", "scroll_view.js [ " + spineItem.href + " ]");
             self.emit(Globals.Events.CONTENT_DOCUMENT_LOAD_START, $iframe, spineItem);
+        });
+
+        pageView.on(Globals.Events.CONTENT_DOCUMENT_UNLOADED, function($iframe, spineItem) {
+            Globals.logEvent("CONTENT_DOCUMENT_UNLOADED", "ON", "scroll_view.js [ " + spineItem.href + " ]");
+            self.emit(Globals.Events.CONTENT_DOCUMENT_UNLOADED, $iframe, spineItem);
         });
 
         pageView.render();
@@ -789,7 +795,8 @@ var ScrollView = function (options, isContinuousScroll, reader) {
         var scrollPos = scrollTop();
 
         var loadedView = createPageViewForSpineItem();
-
+        console.log('loadedView',loadedView);
+        console.log('loadedView:element',loadedView.element());
         _$contentFrame.append(loadedView.element());
 
         loadedView.loadSpineItem(spineItem, function (success, $iframe, spineItem, isNewlyLoaded, context) {
@@ -943,12 +950,12 @@ var ScrollView = function (options, isContinuousScroll, reader) {
             pageRange = getPageViewRange(pageView);
             sfiNav = pageView.getNavigator();
 
-            var domRange = sfiNav.getDomRangeFromRangeCfi(pageRequest.elementCfi);            
+            var domRange = sfiNav.getDomRangeFromRangeCfi(pageRequest.elementCfi);
             if (!domRange) {
                 console.warn("Range for cfi=" + pageRequest.elementCfi + " not found!");
                 return;
             }
-            
+
             var domRangeAsRange = getDomRangeAsRange(pageView, domRange);
             if (isRangeIsVisibleOnScreen(pageView, domRangeAsRange, 60)) {
                 //TODO refactoring required
@@ -998,12 +1005,15 @@ var ScrollView = function (options, isContinuousScroll, reader) {
     }
 
     function calculatePageCount() {
-
+        console.log('pagecount->scrollHieght', scrollHeight());
+        console.log('pagecount->viewHeight', viewHeight());
+        console.log(scrollHeight() / viewHeight());
+        console.log(Math.ceil(scrollHeight() / viewHeight()));
         return Math.ceil(scrollHeight() / viewHeight());
     }
 
     function onPaginationChanged(initiator, paginationRequest_spineItem, paginationRequest_elementId) {
-        
+
         Globals.logEvent("InternalEvents.CURRENT_VIEW_PAGINATION_CHANGED", "EMIT", "scroll_view.js");
         self.emit(Globals.InternalEvents.CURRENT_VIEW_PAGINATION_CHANGED, {
             paginationInfo: self.getPaginationInfo(),
@@ -1032,7 +1042,7 @@ var ScrollView = function (options, isContinuousScroll, reader) {
     this.openPageNext = function (initiator) {
 
         var pageRequest;
-
+        console.log('openPageNext->scrollBottom::'+scrollBottom());
         if (scrollBottom() > 0) {
 
             pageRequest = new PageOpenRequest(undefined, initiator);
@@ -1101,15 +1111,15 @@ var ScrollView = function (options, isContinuousScroll, reader) {
 
         var el = pageView.element();
         var pos = el.position();
-        
+
         if (_jQueryPositionNeedsFix) {
             var offsetParent = el.offsetParent();
             pos.top -= offsetParent.scrollTop();
             pos.left -= offsetParent.scrollLeft();
         }
 
-        range.top = pos.top + scrollTop();
-        range.bottom = range.top + pageView.getCalculatedPageHeight();
+        range.top = parseInt(pos.top + scrollTop(), 10);
+        range.bottom = parseInt(range.top + pageView.getCalculatedPageHeight(), 10);
 
         return range;
     }
@@ -1130,28 +1140,25 @@ var ScrollView = function (options, isContinuousScroll, reader) {
         var paginationInfo = new CurrentPagesInfo(_spine, false);
 
         var visibleViews = getVisiblePageViews();
-
         for (var i = 0, count = visibleViews.length; i < count; i++) {
 
             pageView = visibleViews[i];
             spineItem = pageView.currentSpineItem();
             pageViewRange = getPageViewRange(pageView);
-
             heightAboveViewport = Math.max(viewPortRange.top - pageViewRange.top, 0);
             heightBelowViewport = Math.max(pageViewRange.bottom - viewPortRange.bottom, 0);
-
+            heightBelowViewport = (heightBelowViewport <= 2) ? 0 : heightBelowViewport;//2是chrome的scrollTop會有小數點造成誤差
             pageCountAbove = Math.ceil(heightAboveViewport / viewPortHeight);
             pageCountBelow = Math.ceil(heightBelowViewport / viewPortHeight);
             pageCount = pageCountAbove + pageCountBelow + 1;
 
             paginationInfo.addOpenPage(pageCountAbove, pageCount, spineItem.idref, spineItem.index);
         }
-
         return paginationInfo;
     };
 
     this.bookmarkCurrentPage = function () {
-        
+
         return self.getFirstVisibleCfi();
     };
 
@@ -1210,9 +1217,10 @@ var ScrollView = function (options, isContinuousScroll, reader) {
         var found = undefined;
 
         forEachItemView(function (pageView) {
+            console.log('currentSpineItem:',pageView.currentSpineItem());
             if (pageView.currentSpineItem().idref == spineItemIdref) {
 
-                found = pageView.getNavigator().getElementByCfi(spineItemIdref, cfi, classBlacklist, elementBlacklist, idBlacklist);
+                found = pageView.getNavigator().getElementByCfi(cfi, classBlacklist, elementBlacklist, idBlacklist);
                 return false;
             }
 
@@ -1302,8 +1310,8 @@ var ScrollView = function (options, isContinuousScroll, reader) {
 
         var range = {
 
-            top: scrollTop() - expand,
-            bottom: scrollTop() + viewHeight() + expand
+            top: parseInt(scrollTop() - expand, 10),
+            bottom: parseInt(scrollTop() + viewHeight() + expand)
         };
 
         if (range.top < 0) {
@@ -1367,7 +1375,7 @@ var ScrollView = function (options, isContinuousScroll, reader) {
 
         return elementRange;
     }
-    
+
     function getDomRangeAsRange(pageView, domRange) {
 
         var pageRange = getPageViewRange(pageView);
@@ -1462,13 +1470,13 @@ var ScrollView = function (options, isContinuousScroll, reader) {
             return pageView.isVisibleSpineItemElementCfi(spineIdRef, partialCfi);
         }
     };
-    
+
     function getFirstOrLastVisibleCfi(pickerFunc) {
         var pageViews = getVisiblePageViews();
         var selectedPageView = pickerFunc(pageViews);
         var pageViewTopOffset = selectedPageView.element().position().top;
         var visibleContentOffsets, frameDimensions;
-        
+
         var setupFunctions = [
             function () {
                 visibleContentOffsets = {
@@ -1478,7 +1486,7 @@ var ScrollView = function (options, isContinuousScroll, reader) {
             },
             function() {
                 var height = selectedPageView.element().height();
-                
+
                 if (pageViewTopOffset >= 0) {
                     height = viewHeight() - pageViewTopOffset;
                 }
@@ -1487,32 +1495,32 @@ var ScrollView = function (options, isContinuousScroll, reader) {
                     width: selectedPageView.element().width(),
                     height: height
                 };
-                
+
                 visibleContentOffsets = {
                     top: 0,
                     left: 0
                 };
             }
         ];
-        
+
         //invoke setup function
         pickerFunc(setupFunctions)();
-        
+
         var cfiFunctions = [
             selectedPageView.getFirstVisibleCfi,
             selectedPageView.getLastVisibleCfi
         ];
-        
+
         return pickerFunc(cfiFunctions)(visibleContentOffsets, frameDimensions);
     }
-    
+
     this.getFirstVisibleCfi = function () {
-        
+
         return getFirstOrLastVisibleCfi(_.first);
     };
 
     this.getLastVisibleCfi = function () {
-        
+
         return getFirstOrLastVisibleCfi(_.last);
     };
 
@@ -1526,6 +1534,7 @@ var ScrollView = function (options, isContinuousScroll, reader) {
         rangeCfi2 = rangeCfi2 || {};
 
         return callOnVisiblePageView(function (pageView) {
+            console.log('pageView',pageView);
             if (pageView.currentSpineItem().idref === rangeCfi.idref) {
                 return pageView.getDomRangeFromRangeCfi(rangeCfi.contentCFI, rangeCfi2.contentCFI, inclusive);
             }
