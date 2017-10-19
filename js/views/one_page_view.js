@@ -57,6 +57,11 @@ var OnePageView = function (options, classes, enableBookStyleOverrides, reader) 
 
     var _$scaler;
 
+    var _lastBodySize = {
+        width: undefined,
+        height: undefined
+    };
+
     var PageTransitionHandler = function (opts) {
         var PageTransition = function (begin, end) {
             this.begin = begin;
@@ -369,6 +374,7 @@ var OnePageView = function (options, classes, enableBookStyleOverrides, reader) 
             _$epubHtml = $("html", epubContentDocument);
             if (!_$epubHtml || _$epubHtml.length == 0) {
                 _$epubHtml = $("svg", epubContentDocument);
+                _$epubBody = undefined;
             } else {
                 _$epubBody = $("body", _$epubHtml);
             }
@@ -402,22 +408,60 @@ var OnePageView = function (options, classes, enableBookStyleOverrides, reader) 
             }
             //_$epubHtml.css("overflow", "hidden");
 
-            if (_enableBookStyleOverrides) {
+            if (_enableBookStyleOverrides) { // not fixed layout (reflowable in scroll view)
                 self.applyBookStyles();
             }
 
             updateMetaSize();
 
-            var bodyElement = _$epubBody[0];
-            bodyElement.resizeSensor = new ResizeSensor(bodyElement, function() {
-                console.log("OnePageView iframe body resized", $(bodyElement).width(), $(bodyElement).height());
-                var src = _spine.package.resolveRelativeUrl(_currentSpineItem.href);
-                Globals.logEvent("OnePageView.Events.CONTENT_SIZE_CHANGED", "EMIT", "one_page_view.js [ " + _currentSpineItem.href + " -- " + src + " ]");
-                self.emit(OnePageView.Events.CONTENT_SIZE_CHANGED, _$iframe, _currentSpineItem);
-                //updatePagination();
-            });
+            initResizeSensor();
 
             _pageTransitionHandler.onIFrameLoad();
+        }
+    }
+
+    function initResizeSensor() {
+
+        if (_$epubBody // undefined with SVG spine items
+            && _enableBookStyleOverrides // not fixed layout (reflowable in scroll view)
+            ) {
+
+            var bodyElement = _$epubBody[0];
+            if (bodyElement.resizeSensor) {
+                return;
+            }
+
+            // We need to make sure the content has indeed be resized, especially
+            // the first time it is triggered
+            _lastBodySize.width = $(bodyElement).width();
+            _lastBodySize.height = $(bodyElement).height();
+
+            bodyElement.resizeSensor = new ResizeSensor(bodyElement, function() {
+
+                var newBodySize = {
+                    width: $(bodyElement).width(),
+                    height: $(bodyElement).height()
+                };
+
+                console.debug("OnePageView content resized ...", newBodySize.width, newBodySize.height, _currentSpineItem.idref);
+
+                if (newBodySize.width != _lastBodySize.width || newBodySize.height != _lastBodySize.height) {
+                    _lastBodySize.width = newBodySize.width;
+                    _lastBodySize.height = newBodySize.height;
+
+                    console.debug("... updating pagination.");
+
+                    var src = _spine.package.resolveRelativeUrl(_currentSpineItem.href);
+
+                    Globals.logEvent("OnePageView.Events.CONTENT_SIZE_CHANGED", "EMIT", "one_page_view.js [ " + _currentSpineItem.href + " -- " + src + " ]");
+
+                    self.emit(OnePageView.Events.CONTENT_SIZE_CHANGED, _$iframe, _currentSpineItem);
+
+                    //updatePagination();
+                } else {
+                    console.debug("... ignored (identical dimensions).");
+                }
+            });
         }
     }
 
@@ -426,7 +470,8 @@ var OnePageView = function (options, classes, enableBookStyleOverrides, reader) 
 
         _viewSettings = settings;
 
-        if (_enableBookStyleOverrides && !docWillChange) {
+        if (_enableBookStyleOverrides  // not fixed layout (reflowable in scroll view)
+            && !docWillChange) {
             self.applyBookStyles();
         }
 
@@ -446,7 +491,7 @@ var OnePageView = function (options, classes, enableBookStyleOverrides, reader) 
 
     function updateHtmlFontInfo() {
 
-        if (!_enableBookStyleOverrides) return;
+        if (!_enableBookStyleOverrides) return;  // fixed layout (not reflowable in scroll view)
 
         if (_$epubHtml && _viewSettings) {
             var i = _viewSettings.fontSelection;
@@ -460,7 +505,7 @@ var OnePageView = function (options, classes, enableBookStyleOverrides, reader) 
 
     this.applyBookStyles = function () {
 
-        if (!_enableBookStyleOverrides) return;
+        if (!_enableBookStyleOverrides) return;  // fixed layout (not reflowable in scroll view)
 
         if (_$epubHtml) {
             Helpers.setStyles(_bookStyles.getStyles(), _$epubHtml);
@@ -474,6 +519,8 @@ var OnePageView = function (options, classes, enableBookStyleOverrides, reader) 
 
     //this is called by scroll_view for fixed spine item
     this.scaleToWidth = function (width) {
+
+        if (_enableBookStyleOverrides) return;  // not fixed layout (reflowable in scroll view)
 
         if (_meta_size.width <= 0) return; // resize event too early!
 
@@ -582,6 +629,8 @@ var OnePageView = function (options, classes, enableBookStyleOverrides, reader) 
 
     this.transformContentImmediate = function (scale, left, top) {
 
+        if (_enableBookStyleOverrides) return;  // not fixed layout (reflowable in scroll view)
+
         var elWidth = Math.ceil(_meta_size.width * scale);
         var elHeight = Math.floor(_meta_size.height * scale);
 
@@ -607,7 +656,9 @@ var OnePageView = function (options, classes, enableBookStyleOverrides, reader) 
             enable3D = true;
         }
 
-        if (reader.needsFixedLayoutScalerWorkAround()) {
+        if (_$epubBody // not SVG spine item (otherwise fails in Safari OSX)
+            && reader.needsFixedLayoutScalerWorkAround()) {
+
             var css1 = Helpers.CSSTransformString({scale: scale, enable3D: enable3D});
 
             // See https://github.com/readium/readium-shared-js/issues/285
@@ -661,6 +712,8 @@ var OnePageView = function (options, classes, enableBookStyleOverrides, reader) 
 
         _meta_size.width = 0;
         _meta_size.height = 0;
+
+        if (_enableBookStyleOverrides) return; // not fixed layout (reflowable in scroll view)
 
         var size = undefined;
 
@@ -972,7 +1025,7 @@ var OnePageView = function (options, classes, enableBookStyleOverrides, reader) 
             $iframe: _$iframe,
             frameDimensions: getFrameDimensions,
             visibleContentOffsets: getVisibleContentOffsets,
-            classBlacklist: ["cfi-marker", "mo-cfi-highlight", "resize-sensor", "resize-sensor-expand", "resize-sensor-shrink"],
+            classBlacklist: ["cfi-marker", "mo-cfi-highlight", "resize-sensor", "resize-sensor-expand", "resize-sensor-shrink", "resize-sensor-inner"],
             elementBlacklist: [],
             idBlacklist: ["MathJax_Message", "MathJax_SVG_Hidden"]
         });
