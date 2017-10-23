@@ -270,17 +270,6 @@ var ReflowableView = function(options, reader){
     }
 
     function onIFrameLoad(success) {
-        if (!success) {
-            applyIFrameLoad(success);
-            return;
-        }
-        var fontLoader = new FontLoader(_$iframe);
-        fontLoader.waitForFonts(function () {
-            applyIFrameLoad(success);
-        });
-    }
-
-    function applyIFrameLoad(success) {
         _isWaitingFrameRender = false;
 
         //while we where loading frame new request came
@@ -373,6 +362,19 @@ var ReflowableView = function(options, reader){
                 if (writingMode.indexOf("vertical") >= 0 || writingMode.indexOf("tb-") >= 0 || writingMode.indexOf("bt-") >= 0)
                 {
                     _htmlBodyIsVerticalWritingMode = true;
+                    //2017.10.18 因應Chrome改版，一律要加上Writing mode
+                    _$epubHtml.find('head').append('<style>'+
+                        'html,body{'+
+                            '-webkit-writing-mode: vertical-rl !important;'+
+                            '-moz-writing-mode: vertical-rl !important;'+
+                            '-ms-writing-mode: vertical-rl !important;'+
+                            '-o-writing-mode: vertical-rl !important;'+
+                            '-epub-writing-mode: vertical-rl !important;'+
+                            'writing-mode: vertical-rl !important;}'+
+                        '.highlight-rect{'+
+                        'transform: skewY(5deg);'+
+                        '}'+
+                    '</style>');
                 }
             }
         }
