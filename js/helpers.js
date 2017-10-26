@@ -245,7 +245,7 @@ Helpers.UpdateHtmlLineHeight = function ($epubHtml, lineHeight) {
     var factor = parseFloat(lineHeight / 100).toFixed(2);
     var win = $epubHtml[0].ownerDocument.defaultView;
     // var $textblocks = $('p, div, span, h1, h2, h3, h4, h5, h6, li, blockquote, td, pre', $epubHtml);
-    var $textblocks = $epubHtml[0].ownerDocument.querySelectorAll('p, div, span, h1, h2, h3, h4, h5, h6, li, blockquote, td, pre');
+    var $textblocks = $epubHtml[0].ownerDocument.querySelectorAll('p, div, span, h1, h2, h3, h4, h5, h6, li, blockquote, td, pre, dt, dd, code, a');
     var ll = $textblocks.length;
     var originalLineHeight;
     for (var i = 0; i < ll; i++) {
@@ -649,7 +649,7 @@ Helpers.triggerLayout = function ($iframe) {
     catch (ex) {
         console.error(ex);
     }
-    console.log('p1',window.performance.now() - time1);
+    perf && console.log('p1',window.performance.now() - time1);
     try {
         var el = doc.createElementNS("http://www.w3.org/1999/xhtml", "style");
         el.appendChild(doc.createTextNode("*{}"));
@@ -668,11 +668,11 @@ Helpers.triggerLayout = function ($iframe) {
     catch (ex) {
         console.error(ex);
     }
-    console.log('p2',window.performance.now() - time1);
+    perf && console.log('p2',window.performance.now() - time1);
     if (doc.body) {
         var val = doc.body.offsetTop; // triggers layout
     }
-    console.log('p3',window.performance.now() - time1);
+    perf && console.log('p3',window.performance.now() - time1);
     if (perf) {
         var time2 = window.performance.now();
 
