@@ -642,7 +642,6 @@ var OnePageView = function (options, classes, enableBookStyleOverrides, reader) 
         _$el.css("height", elHeight + "px");
 
         if (!_$epubHtml) {
-//                  debugger;
             return;
         }
 
