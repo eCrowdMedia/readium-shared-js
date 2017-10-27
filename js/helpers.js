@@ -382,8 +382,7 @@ Helpers.UpdateHtmlFontAttributes = function ($epubHtml, fontSize, fontObj, callb
         // font size for any children.
         var ll = $textblocks.length;
         var ele, fontSizeAttr, style, originalLineHeight, originalFontSize, lineHeightAttr;
-        for (var i = 0; i < $textblocks.length; i++) {
-
+        for (var i = 0; i < ll; i++) {
             ele = $textblocks[i];
 
             fontSizeAttr = ele.getAttribute('data-original-font-size');
@@ -442,8 +441,6 @@ Helpers.UpdateHtmlFontAttributes = function ($epubHtml, fontSize, fontObj, callb
 
         $epubHtml.css("font-size", fontSize + "%");
 
-
-
         if (perf) {
             var time2 = window.performance.now();
 
@@ -460,7 +457,6 @@ Helpers.UpdateHtmlFontAttributes = function ($epubHtml, fontSize, fontObj, callb
             //     alert(diff);
             // }, 2000);
         }
-        ele.style.fontSize = (originalFontSize * factor) + 'px';
 
         callback();
     };
