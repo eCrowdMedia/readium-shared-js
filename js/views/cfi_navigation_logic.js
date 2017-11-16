@@ -92,6 +92,20 @@ var CfiNavigationLogic = function(options) {
     }
 
     function getNodeRangeClientRect(startNode, startOffset, endNode, endOffset) {
+        console.log('paginationInfo',options.paginationInfo);
+        var visibleContentOffsets;
+        if (isVerticalWritingMode()) {
+            visibleContentOffsets = {
+                top: (options.paginationInfo ? options.paginationInfo.pageOffset : 0),
+                left: 0
+            };
+        }else{
+            visibleContentOffsets = {
+                top: 0,
+                left: (options.paginationInfo ? options.paginationInfo.pageOffset : 0)
+            }
+        }
+        console.log('getVisibleContentOffsets',visibleContentOffsets);
         var range = createRange();
         range.setStart(startNode, startOffset ? startOffset : 0);
         if (endNode.nodeType === Node.ELEMENT_NODE) {
@@ -101,7 +115,21 @@ var CfiNavigationLogic = function(options) {
         }
         window.nodeRange = range;
         window.ggRangeRect = range.getBoundingClientRect();
-        return normalizeRectangle(range.getBoundingClientRect(),0,0);
+        var rect;
+        var plainRectObject;
+        if (range.collapsed) {
+            rect = range.getClientRects()[0];
+        } else {
+            rect = range.getBoundingClientRect();
+        }
+        return plainRectObject = {
+            left: rect.left + visibleContentOffsets.left ,
+            right: rect.right + visibleContentOffsets.left,
+            top: rect.top + visibleContentOffsets.top,
+            bottom: rect.bottom + visibleContentOffsets.top,
+            width: rect.right - rect.left,
+            height: rect.bottom - rect.top
+        };
     }
 
     function getNodeClientRectList(node, visibleContentOffsets) {
@@ -222,7 +250,7 @@ var CfiNavigationLogic = function(options) {
                 left: 0
             };
         }
-        
+
         // CAUSES REGRESSION BUGS !! TODO FIXME
         // https://github.com/readium/readium-shared-js/issues/384#issuecomment-305145129
         // else {
@@ -1075,7 +1103,8 @@ var CfiNavigationLogic = function(options) {
             //if given a range cfi the exact page index needs to be calculated by getting node info from the range cfi
             var nodeRangeInfoFromCfi = this.getNodeRangeInfoFromCfi(partialCfi);
             //the page index is calculated from the node's client rectangle
-            // console.log('nodeRangeInfoFromCfi',nodeRangeInfoFromCfi);
+            console.log('nodeRangeInfoFromCfi',nodeRangeInfoFromCfi);
+            console.log(findPageBySingleRectangle(nodeRangeInfoFromCfi.clientRect));
             return findPageBySingleRectangle(nodeRangeInfoFromCfi.clientRect);
         }
 
@@ -1085,9 +1114,10 @@ var CfiNavigationLogic = function(options) {
         if (!$element) {
             return -1;
         }
+        console.log('cfi_navigation_logic:getPageForElementCfi$element',$element);
 
         var pageIndex = this.getPageForPointOnElement($element, cfiParts.x, cfiParts.y);
-
+        console.log('cfi_navigation_logic:getPageForElementCfi:pageIndex',pageIndex);
         return pageIndex;
 
     };
@@ -1159,7 +1189,7 @@ var CfiNavigationLogic = function(options) {
                 console.log(nodeRangeClientRect);
                 addOverlayRect(nodeRangeClientRect, 'purple', contentDoc);
             }
-
+            console.log('isRangeCfi:nodeRangeClientRect',nodeRangeClientRect);
             return {startInfo: startRangeInfo, endInfo: endRangeInfo, clientRect: nodeRangeClientRect}
         } else {
             var $element = self.getElementByCfi(cfi,
@@ -1168,6 +1198,7 @@ var CfiNavigationLogic = function(options) {
                 this.getIdBlacklist());
 
             var visibleContentOffsets = getVisibleContentOffsets();
+            console.log('isNOTRangeCfi:nodeRangeClientRect',getNormalizedBoundingRect($element, visibleContentOffsets));
             return {startInfo: null, endInfo: null, clientRect: getNormalizedBoundingRect($element, visibleContentOffsets)};
         }
     };

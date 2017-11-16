@@ -528,7 +528,7 @@ var ReflowableView = function(options, reader){
                     _cfiClassBlacklist,
                     _cfiElementBlacklist,
                     _cfiIdBlacklist);
-
+                console.log('openPageInternal:pageIndex',pageIndex);
                 if (pageIndex < 0) pageIndex = 0;
             }
             catch (e)
@@ -588,7 +588,7 @@ var ReflowableView = function(options, reader){
     };
 
     function redraw() {
-
+        console.log('reflowable_view_redraw:_paginationInfo.pageOffset',_paginationInfo.pageOffset);
         var offsetVal =  -_paginationInfo.pageOffset + "px";
 
         if (_htmlBodyIsVerticalWritingMode)
@@ -628,6 +628,7 @@ var ReflowableView = function(options, reader){
     }
 
     function onPaginationChanged_(initiator, paginationRequest_spineItem, paginationRequest_elementId) {
+        console.log('onPaginationChanged_:_paginationInfo.currentSpreadIndex',_paginationInfo.currentSpreadIndex, _paginationInfo.visibleColumnCount);
         _paginationInfo.pageOffset = (_paginationInfo.columnWidth + _paginationInfo.columnGap) * _paginationInfo.visibleColumnCount * _paginationInfo.currentSpreadIndex;
 
         redraw();

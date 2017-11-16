@@ -803,8 +803,8 @@ var ReaderView = function (options) {
 
     // dir: 0 => new or same page, 1 => previous, 2 => next
     function openPage(pageRequest, dir) {
-        // console.log('openPage:dir',dir);
-        // console.log('pageRequest',pageRequest);
+        console.log('openPage:dir',dir);
+        console.log('pageRequest',pageRequest);
         initViewForItem(pageRequest.spineItem, function (isViewChanged) {
             // console.log('isViewChanged',isViewChanged);
             if (!isViewChanged) {
@@ -1042,38 +1042,38 @@ var ReaderView = function (options) {
 
         var DEBUG = true; // change this to visualize the CFI range
         if (!DEBUG) return;
-            
+
         var paginationInfo = this.getPaginationInfo();
         console.log(JSON.stringify(paginationInfo));
-        
+
         if (paginationInfo.isFixedLayout) return;
-    
+
         try {
             ReadiumSDK._DEBUG_CfiNavigationLogic.clearDebugOverlays();
-            
+
         } catch (error) {
             //ignore
         }
-        
+
         try {
             console.log(cfi);
-            
+
             var range = this.getDomRangeFromRangeCfi(cfi);
             console.log(range);
-            
+
             var res = ReadiumSDK._DEBUG_CfiNavigationLogic.drawDebugOverlayFromDomRange(range);
             console.log(res);
-        
+
             var cfiFirst = ReadiumSDK.reader.getFirstVisibleCfi();
             console.log(cfiFirst);
-            
+
             var cfiLast  = ReadiumSDK.reader.getLastVisibleCfi();
             console.log(cfiLast);
-            
+
         } catch (error) {
             //ignore
         }
-        
+
         setTimeout(function() {
             try {
                 ReadiumSDK._DEBUG_CfiNavigationLogic.clearDebugOverlays();
