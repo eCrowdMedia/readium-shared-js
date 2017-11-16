@@ -92,18 +92,6 @@ var CfiNavigationLogic = function(options) {
     }
 
     function getNodeRangeClientRect(startNode, startOffset, endNode, endOffset) {
-        var visibleContentOffsets;
-        if (isVerticalWritingMode()) {
-            visibleContentOffsets = {
-                top: (options.paginationInfo ? options.paginationInfo.pageOffset : 0),
-                left: 0
-            };
-        }else{
-            visibleContentOffsets = {
-                top: 0,
-                left: (options.paginationInfo ? options.paginationInfo.pageOffset : 0)
-            }
-        }
         var range = createRange();
         range.setStart(startNode, startOffset ? startOffset : 0);
         if (endNode.nodeType === Node.ELEMENT_NODE) {
@@ -111,23 +99,16 @@ var CfiNavigationLogic = function(options) {
         } else if (endNode.nodeType === Node.TEXT_NODE) {
             range.setEnd(endNode, endOffset ? endOffset : 0);
         }
-        window.nodeRange = range;
-        window.ggRangeRect = range.getBoundingClientRect();
-        var rect;
-        var plainRectObject;
+
+        // Webkit has a bug where collapsed ranges provide an empty rect with getBoundingClientRect()
+        // https://bugs.webkit.org/show_bug.cgi?id=138949
+        // Thankfully it implements getClientRects() properly...
+        // A collapsed text range may still have geometry!
         if (range.collapsed) {
-            rect = range.getClientRects()[0];
+            return normalizeRectangle(range.getClientRects()[0], 0, 0);
         } else {
-            rect = range.getBoundingClientRect();
+            return normalizeRectangle(range.getBoundingClientRect(), 0, 0);
         }
-        return plainRectObject = {
-            left: rect.left + visibleContentOffsets.left ,
-            right: rect.right + visibleContentOffsets.left,
-            top: rect.top + visibleContentOffsets.top,
-            bottom: rect.bottom + visibleContentOffsets.top,
-            width: rect.right - rect.left,
-            height: rect.bottom - rect.top
-        };
     }
 
     function getNodeClientRectList(node, visibleContentOffsets) {
@@ -439,7 +420,7 @@ var CfiNavigationLogic = function(options) {
         // console.log('frameDimensions',frameDimensions);
         var normalizedRectangle = normalizeRectangle(
             clientRectangle, visibleContentOffsets.left, visibleContentOffsets.top);
-
+        console.log('findPageBySingleRectangle:normalizedRectangle',normalizedRectangle);
         return calculatePageIndexByRectangles([normalizedRectangle], frameDimensions);
     }
 
@@ -549,8 +530,6 @@ var CfiNavigationLogic = function(options) {
      * @returns {Object}
      */
     function normalizeRectangle(textRect, leftOffset, topOffset) {
-        // console.log('normalizeRectangle:textRect',textRect, leftOffset, topOffset);
-        // console.trace();
         var plainRectObject = {
             left: textRect.left,
             right: textRect.right,
@@ -559,9 +538,9 @@ var CfiNavigationLogic = function(options) {
             width: textRect.right - textRect.left,
             height: textRect.bottom - textRect.top
         };
-        // console.log('normalizeRectangle:before',plainRectObject);
+        leftOffset = leftOffset || 0;
+        topOffset = topOffset || 0;
         offsetRectangle(plainRectObject, leftOffset, topOffset);
-        // console.log('normalizeRectangle:after',plainRectObject);
         return plainRectObject;
     }
 
@@ -574,12 +553,10 @@ var CfiNavigationLogic = function(options) {
      * @param {number} topOffset
      */
     function offsetRectangle(rect, leftOffset, topOffset) {
-        if (!isVerticalWritingMode()){
-            rect.left += leftOffset;
-            rect.right += leftOffset;
-            rect.top += topOffset;
-            rect.bottom += topOffset;
-        }
+        rect.left += leftOffset;
+        rect.right += leftOffset;
+        rect.top += topOffset;
+        rect.bottom += topOffset;
     }
 
     /**
@@ -1101,6 +1078,7 @@ var CfiNavigationLogic = function(options) {
             //if given a range cfi the exact page index needs to be calculated by getting node info from the range cfi
             var nodeRangeInfoFromCfi = this.getNodeRangeInfoFromCfi(partialCfi);
             //the page index is calculated from the node's client rectangle
+            console.log('nodeRangeInfoFromCfi.clientRect',nodeRangeInfoFromCfi.clientRect);
             return findPageBySingleRectangle(nodeRangeInfoFromCfi.clientRect);
         }
 
