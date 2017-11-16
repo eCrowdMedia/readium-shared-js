@@ -92,7 +92,6 @@ var CfiNavigationLogic = function(options) {
     }
 
     function getNodeRangeClientRect(startNode, startOffset, endNode, endOffset) {
-        console.log('paginationInfo',options.paginationInfo);
         var visibleContentOffsets;
         if (isVerticalWritingMode()) {
             visibleContentOffsets = {
@@ -105,7 +104,6 @@ var CfiNavigationLogic = function(options) {
                 left: (options.paginationInfo ? options.paginationInfo.pageOffset : 0)
             }
         }
-        console.log('getVisibleContentOffsets',visibleContentOffsets);
         var range = createRange();
         range.setStart(startNode, startOffset ? startOffset : 0);
         if (endNode.nodeType === Node.ELEMENT_NODE) {
@@ -1103,8 +1101,6 @@ var CfiNavigationLogic = function(options) {
             //if given a range cfi the exact page index needs to be calculated by getting node info from the range cfi
             var nodeRangeInfoFromCfi = this.getNodeRangeInfoFromCfi(partialCfi);
             //the page index is calculated from the node's client rectangle
-            console.log('nodeRangeInfoFromCfi',nodeRangeInfoFromCfi);
-            console.log(findPageBySingleRectangle(nodeRangeInfoFromCfi.clientRect));
             return findPageBySingleRectangle(nodeRangeInfoFromCfi.clientRect);
         }
 
@@ -1114,10 +1110,8 @@ var CfiNavigationLogic = function(options) {
         if (!$element) {
             return -1;
         }
-        console.log('cfi_navigation_logic:getPageForElementCfi$element',$element);
 
         var pageIndex = this.getPageForPointOnElement($element, cfiParts.x, cfiParts.y);
-        console.log('cfi_navigation_logic:getPageForElementCfi:pageIndex',pageIndex);
         return pageIndex;
 
     };
@@ -1189,7 +1183,6 @@ var CfiNavigationLogic = function(options) {
                 console.log(nodeRangeClientRect);
                 addOverlayRect(nodeRangeClientRect, 'purple', contentDoc);
             }
-            console.log('isRangeCfi:nodeRangeClientRect',nodeRangeClientRect);
             return {startInfo: startRangeInfo, endInfo: endRangeInfo, clientRect: nodeRangeClientRect}
         } else {
             var $element = self.getElementByCfi(cfi,
@@ -1198,7 +1191,6 @@ var CfiNavigationLogic = function(options) {
                 this.getIdBlacklist());
 
             var visibleContentOffsets = getVisibleContentOffsets();
-            console.log('isNOTRangeCfi:nodeRangeClientRect',getNormalizedBoundingRect($element, visibleContentOffsets));
             return {startInfo: null, endInfo: null, clientRect: getNormalizedBoundingRect($element, visibleContentOffsets)};
         }
     };
