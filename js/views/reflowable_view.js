@@ -487,7 +487,7 @@ var ReflowableView = function(options, reader){
     }
 
     function _openPageInternal(pageRequest) {
-
+        console.log('_openPageInternal:pageRequest',pageRequest);
         if(_isWaitingFrameRender) {
             _deferredPageRequest = pageRequest;
             return false;
@@ -507,6 +507,8 @@ var ReflowableView = function(options, reader){
             pageIndex = pageRequest.spineItemPageIndex;
         }
         else if(pageRequest.elementId) {
+            console.log('_paginationInfo.currentPageIndex:',_paginationInfo.currentPageIndex);
+            console.log('_navigationLogic.getPageIndexDeltaForElementId(pageRequest.elementId)', _navigationLogic.getPageIndexDeltaForElementId(pageRequest.elementId));
             pageIndex = _paginationInfo.currentPageIndex + _navigationLogic.getPageIndexDeltaForElementId(pageRequest.elementId);
         }
         else if(pageRequest.firstVisibleCfi && pageRequest.lastVisibleCfi) {

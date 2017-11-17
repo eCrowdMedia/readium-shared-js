@@ -411,8 +411,11 @@ var CfiNavigationLogic = function (options) {
 
             if (isVwm) {
                 var topOffset = firstRectangle.top;
-                console.log('topOffset, frameDimensions.height',topOffset, frameDimensions.height);
-                pageIndex = Math.round(topOffset / frameDimensions.height);
+                // console.log('topOffset, frameDimensions.height, paginationInfo',topOffset, frameDimensions.height, options.paginationInfo);
+                // pageIndex = Math.round(topOffset / frameDimensions.height);
+                //2017.11.17 steve: Readium忘了考慮直排的翻頁也包含columnGap，算頁數才使用不精準的四捨五入。
+                pageIndex = Math.floor(topOffset / (frameDimensions.height + options.paginationInfo.columnGap) );
+
             } else {
                 var leftOffset = firstRectangle.left;
                 if (isRtl) {
