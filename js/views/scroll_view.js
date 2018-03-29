@@ -590,16 +590,28 @@ var ScrollView = function (options, isContinuousScroll, reader) {
     function findPageViewForSpineItem(spineItem, reverse) {
 
         var retView = undefined;
-
+        var currentSpineIdref = '';
         forEachItemView(function (pageView) {
-            if (pageView.currentSpineItem() == spineItem) {
-                retView = pageView;
-                //brake the iteration
-                return false;
+            if(typeof spineItem == 'string'){
+                if (pageView.currentSpineItem().idref == spineItem) {
+                    retView = pageView;
+                    //brake the iteration
+                    return false;
+                }
+                else {
+                    return true;
+                }
+            }else{
+                if (pageView.currentSpineItem() == spineItem) {
+                    retView = pageView;
+                    //brake the iteration
+                    return false;
+                }
+                else {
+                    return true;
+                }
             }
-            else {
-                return true;
-            }
+
 
         }, reverse);
 
@@ -1349,7 +1361,7 @@ var ScrollView = function (options, isContinuousScroll, reader) {
     this.getNodeRangeInfoFromCfi = function(spineIdRef, partialCfi){
         var pageView = findPageViewForSpineItem(spineIdRef);
         if (pageView) {
-            return pageView.isVisibleSpineItemElementCfi(spineIdRef, partialCfi);
+            return pageView.getNodeRangeInfoFromCfi(spineIdRef, partialCfi);
         }
     };
 

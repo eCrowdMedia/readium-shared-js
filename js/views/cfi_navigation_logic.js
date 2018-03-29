@@ -107,8 +107,6 @@ var CfiNavigationLogic = function (options) {
         }
 
     function getNodeRangeClientRect(startNode, startOffset, endNode, endOffset) {
-        // console.trace();
-        // console.log(startNode, startOffset, endNode, endOffset);
         var range = createRange();
         range.setStart(startNode, startOffset ? startOffset : 0);
         if (endNode.nodeType === Node.ELEMENT_NODE) {
@@ -116,8 +114,6 @@ var CfiNavigationLogic = function (options) {
         } else if (endNode.nodeType === Node.TEXT_NODE) {
             range.setEnd(endNode, endOffset ? endOffset : 0);
         }
-        // window.ggRange = range;
-        // console.log('ggRange', ggRange);
 
         // Webkit has a bug where collapsed ranges provide an empty rect with getBoundingClientRect()
         // https://bugs.webkit.org/show_bug.cgi?id=138949
@@ -245,10 +241,11 @@ var CfiNavigationLogic = function (options) {
          * @returns {Object}
          */
         function getVisibleContentOffsets() {
+
             if (options.visibleContentOffsetsGetter) {
                 return options.visibleContentOffsetsGetter();
             }
-
+            // console.log('isVerticalWritingMode()',isVerticalWritingMode());
             if (isVerticalWritingMode() && options.paginationOffsetsGetter) {
                 return options.paginationOffsetsGetter();
             }
@@ -303,19 +300,16 @@ var CfiNavigationLogic = function (options) {
                     return rect;
                 });
             }
-            // console.log('clientRectangles',clientRectangles);
             var visibilityPercentage = 0;
 
             if (clientRectangles.length === 1) {
                 var adjustedRect = clientRectangles[0];
 
                 if (isPaginatedView()) {
-                    // console.log('before:adjustedRect',adjustedRect);
                     if (adjustedRect.bottom > frameDimensions.height || adjustedRect.top < 0) {
                         // because of webkit inconsistency, that single rectangle should be adjusted
                         // until it hits the end OR will be based on the FIRST column that is visible
                         adjustRectangle(adjustedRect, true, frameDimensions);
-                        // console.log('after:adjustedRect',adjustedRect);
                     }
                 }
 
@@ -792,7 +786,6 @@ var CfiNavigationLogic = function (options) {
         // create Range from target node and search for visibleOutput Range
         function getVisibleTextRangeOffsets(textNode, pickerFunc, visibleContentOffsets, frameDimensions) {
             visibleContentOffsets = visibleContentOffsets || getVisibleContentOffsets();
-
             var nodeRange = createRangeFromNode(textNode);
             var nodeClientRects = getRangeClientRectList(nodeRange, visibleContentOffsets);
             var splitRatio = deterministicSplit(nodeClientRects, pickerFunc([0, 1]));
@@ -911,7 +904,6 @@ var CfiNavigationLogic = function (options) {
         function getFirstVisibleTextRangeCfi(visibleContentOffsets, frameDimensions) {
             // console.log('visibleContentOffsets, frameDimensions',visibleContentOffsets, frameDimensions)
             var visibleLeafNode = self.findFirstVisibleElement(visibleContentOffsets, frameDimensions);
-            // console.log('visibleLeafNode',visibleLeafNode);
             return findVisibleLeafNodeCfi(visibleLeafNode, _.first, visibleContentOffsets, frameDimensions);
         }
 
@@ -1000,16 +992,12 @@ var CfiNavigationLogic = function (options) {
 
         this.getPageIndexDeltaForCfi = function (partialCfi, classBlacklist, elementBlacklist, idBlacklist) {
             if (this.isRangeCfi(partialCfi)) {
-                console.log('isRangeCfi:partialCfi', partialCfi);
                 //if given a range cfi the exact page index needs to be calculated by getting node info from the range cfi
                 var nodeRangeInfoFromCfi = this.getNodeRangeInfoFromCfi(partialCfi);
                 //the page index is calculated from the node's client rectangle
-                console.log('nodeRangeInfoFromCfi',nodeRangeInfoFromCfi);
                 return findPageIndexDeltaBySingleRectangle(nodeRangeInfoFromCfi.clientRect);
             }
-            console.log('notRangeCfi:partialCfi', partialCfi);
             var $element = getElementByPartialCfi(partialCfi, classBlacklist, elementBlacklist, idBlacklist);
-            console.log('element from getElementByPartialCfi',$element);
             if (!$element) {
                 return -1;
             }
@@ -1200,7 +1188,6 @@ var CfiNavigationLogic = function (options) {
 
             // first try to get delta by rectangles
             var pageIndex = findPageIndexDeltaByRectangles($element);
-            console.log('getPageIndexDeltaForElement:pageIndex', pageIndex);
             // for hidden elements (e.g., page breaks) there are no rectangles
             if (pageIndex === null) {
 
@@ -1666,9 +1653,7 @@ var CfiNavigationLogic = function (options) {
 
                     if (node.nodeType === Node.TEXT_NODE && !isValidTextNode(node))
                         return NodeFilter.FILTER_REJECT;
-                    // console.log('gg:visibleContentOffsets, frameDimensions',visibleContentOffsets, frameDimensions);
                     var visibilityResult = checkVisibilityByRectangles($(node), true, visibleContentOffsets, frameDimensions);
-                    // console.log('visibilityResult',visibilityResult );
                     return visibilityResult ? NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_REJECT;
                 },
                 false
@@ -1721,11 +1706,6 @@ var CfiNavigationLogic = function (options) {
             if (!firstVisibleElement) {
                 return null;
             }
-            console.log({
-                element: firstVisibleElement,
-                textNode: textNode,
-                percentVisible: percentVisible
-            });
             return {
                 element: firstVisibleElement,
                 textNode: textNode,

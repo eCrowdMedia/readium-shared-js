@@ -379,7 +379,8 @@ var OnePageView = function (options, classes, enableBookStyleOverrides, reader) 
                 _$epubBody = $("body", _$epubHtml);
             }
             //以下是readmoo新增的
-            if (MooReaderApp.SETTING.writingMode === 'vertical'){
+            var writingMode = store.getState().setting.writingMode;//2018.03.14 改成從React的store讀取，原本是MooReaderApp.SETTING
+            if (writingMode === 'vertical'){
                 _$epubHtml.find('head').append('<style>'+
                     'html,body{'+
                         '-webkit-writing-mode: vertical-rl !important;'+
@@ -388,11 +389,8 @@ var OnePageView = function (options, classes, enableBookStyleOverrides, reader) 
                         '-o-writing-mode: vertical-rl !important;'+
                         '-epub-writing-mode: vertical-rl !important;'+
                         'writing-mode: vertical-rl !important;}'+
-                    '.highlight-rect{'+
-                    'transform: skewY(5deg);'+
-                    '}'+
                 '</style>');
-            }else if (MooReaderApp.SETTING.writingMode === 'horizontal'){
+            }else if (writingMode === 'horizontal'){
                 _$epubHtml.find('head').append('<style>'+
                     'html,body{'+
                         '-webkit-writing-mode: horizontal-tb !important;'+
@@ -401,9 +399,6 @@ var OnePageView = function (options, classes, enableBookStyleOverrides, reader) 
                         '-o-writing-mode: horizontal-tb !important;'+
                         '-epub-writing-mode: horizontal-tb !important;'+
                         'writing-mode: horizontal-tb !important;}'+
-                    '.highlight-rect{'+
-                    'transform: skewX(5deg);'+
-                    '}'+
                 '</style>');
             }
             //_$epubHtml.css("overflow", "hidden");

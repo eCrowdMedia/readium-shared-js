@@ -172,7 +172,8 @@ var ReaderView = function (options) {
 
     //based on https://docs.google.com/spreadsheet/ccc?key=0AoPMUkQhc4wcdDI0anFvWm96N0xRT184ZE96MXFRdFE&usp=drive_web#gid=0 document
     function deduceDesiredViewType(spineItem) {
-        if (spineItem.isReflowable() && MooReaderApp.SETTING.writingMode === 'vertical'){
+        console.log('deduceDesiredViewType:store', store);
+        if (spineItem.isReflowable() && store.getState().setting.writingMode === 'vertical'){
             _viewerSettings.scroll = 'auto';
             return ReaderView.VIEW_TYPE_COLUMNIZED;
         }if (spineItem.isReflowable() && spineItem.spine.direction === 'rtl'){
@@ -413,7 +414,9 @@ var ReaderView = function (options) {
      */
     this.openBook = function (openBookData) {
         //取得個別書籍的設定（翻頁方向等）
-        var bookSetting = localStorage[MooReaderApp.BOOKINFO.cid];
+        console.log('openBookData:::',openBookData);
+
+        var bookSetting = localStorage[store.getState().bookId];
         bookSetting = bookSetting ? JSON.parse(bookSetting) : '';
         var packageData = openBookData.package ? openBookData.package : openBookData;
 
@@ -618,7 +621,8 @@ var ReaderView = function (options) {
 
         if (_currentView && !settingsData.doNotUpdateView) {
             console.log('before bookmark');
-            var bookMark = _currentView.bookmarkCurrentPage();
+            // var bookMark = _currentView.bookmarkCurrentPage();
+            var bookMark = MooReaderApp.getFirstVisibleCfi();////2018.03.27 換成MooReaderApp
             console.log('after boookmark', bookMark);
             if (bookMark && bookMark.idref) {
 

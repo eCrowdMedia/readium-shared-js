@@ -55,7 +55,7 @@ var ViewerSettings = function(settingsData) {
      * @type number
      */
 
-    this.fontSize = 100;
+    this.fontSize = 125;
 
     /**
      *
@@ -63,7 +63,7 @@ var ViewerSettings = function(settingsData) {
      * @type number
      */
 
-    this.columnGap = 20;
+    this.columnGap = 60;
 
     /**
      *

@@ -314,7 +314,8 @@ var ReflowableView = function(options, reader){
         var epubContentDocument = _$iframe[0].contentDocument;
         _$epubHtml = $("html", epubContentDocument);
         _$htmlBody = $("body", _$epubHtml);
-        if (MooReaderApp.SETTING.writingMode === 'vertical'){
+        var state = store.getState();//2018.03.13 改成STORE
+        if (state.setting.writingMode === 'vertical'){
             _$epubHtml.find('head').append('<style>'+
                 'html,body{'+
                     '-webkit-writing-mode: vertical-rl !important;'+
@@ -323,11 +324,8 @@ var ReflowableView = function(options, reader){
                     '-o-writing-mode: vertical-rl !important;'+
                     '-epub-writing-mode: vertical-rl !important;'+
                     'writing-mode: vertical-rl !important;}'+
-                '.highlight-rect{'+
-                'transform: skewY(5deg);'+
-                '}'+
             '</style>');
-        }else if (MooReaderApp.SETTING.writingMode === 'horizontal'){
+        }else if (state.setting.writingMode === 'horizontal'){
             _$epubHtml.find('head').append('<style>'+
                 'html,body{'+
                     '-webkit-writing-mode: horizontal-tb !important;'+
@@ -336,9 +334,6 @@ var ReflowableView = function(options, reader){
                     '-o-writing-mode: horizontal-tb !important;'+
                     '-epub-writing-mode: horizontal-tb !important;'+
                     'writing-mode: horizontal-tb !important;}'+
-                '.highlight-rect{'+
-                'transform: skewX(5deg);'+
-                '}'+
             '</style>');
         }
 
@@ -395,9 +390,6 @@ var ReflowableView = function(options, reader){
                             '-o-writing-mode: vertical-rl !important;'+
                             '-epub-writing-mode: vertical-rl !important;'+
                             'writing-mode: vertical-rl !important;}'+
-                        '.highlight-rect{'+
-                        'transform: skewY(5deg);'+
-                        '}'+
                     '</style>');
                 }
             }
@@ -600,14 +592,15 @@ var ReflowableView = function(options, reader){
         if (_deferredPageRequest) {
             return;
         }
-
-        var _firstVisibleCfi = self.getFirstVisibleCfi();
-        var _lastVisibleCfi = self.getLastVisibleCfi();
+        var _firstVisibleCfi = MooReaderApp.getFirstVisibleCfi();//2018.03.27 改用MooReaderApp.getFirstVisibleCfi
+        var _lastVisibleCfi = MooReaderApp.getFirstVisibleCfi();
+        console.warn('saveCurrentPosition 2 end:',_firstVisibleCfi);
         _lastPageRequest = new PageOpenRequest(_currentSpineItem, self);
         _lastPageRequest.setFirstAndLastVisibleCfi(_firstVisibleCfi.contentCFI, _lastVisibleCfi.contentCFI);
     };
 
     this.restoreCurrentPosition = function() {
+        console.warn('restoreCurrentPosition');
         if (_lastPageRequest) {
             _openPageInternal(_lastPageRequest);
         }
