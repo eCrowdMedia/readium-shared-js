@@ -172,7 +172,7 @@ var ReaderView = function (options) {
 
     //based on https://docs.google.com/spreadsheet/ccc?key=0AoPMUkQhc4wcdDI0anFvWm96N0xRT184ZE96MXFRdFE&usp=drive_web#gid=0 document
     function deduceDesiredViewType(spineItem) {
-        console.log('deduceDesiredViewType:store', store);
+        console.log('deduceDesiredViewType:store', spineItem, store);
         if (spineItem.isReflowable() && store.getState().setting.writingMode === 'vertical'){
             _viewerSettings.scroll = 'auto';
             return ReaderView.VIEW_TYPE_COLUMNIZED;
@@ -213,7 +213,6 @@ var ReaderView = function (options) {
     // returns true is view changed
     function initViewForItem(spineItem, callback) {
         var desiredViewType = deduceDesiredViewType(spineItem);
-
         if (_currentView) {
             console.log('getCurrentViewType',self.getCurrentViewType());
             console.log('desiredViewType',desiredViewType);
@@ -609,7 +608,7 @@ var ReaderView = function (options) {
      * @fires Globals.Events.SETTINGS_APPLIED
      */
     this.updateSettings = function (settingsData) {
-        console.trace();
+        // console.trace();
         console.log('updateSettings', settingsData);
 //console.debug("UpdateSettings: " + JSON.stringify(settingsData));
 
@@ -620,10 +619,10 @@ var ReaderView = function (options) {
         }
 
         if (_currentView && !settingsData.doNotUpdateView) {
-            console.log('before bookmark');
+            // console.log('before bookmark');
             // var bookMark = _currentView.bookmarkCurrentPage();
             var bookMark = MooReaderApp.getFirstVisibleCfi();////2018.03.27 換成MooReaderApp
-            console.log('after boookmark', bookMark);
+            // console.log('after boookmark', bookMark);
             if (bookMark && bookMark.idref) {
 
                 var wasPlaying = false;

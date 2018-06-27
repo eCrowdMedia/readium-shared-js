@@ -323,7 +323,13 @@ var ReflowableView = function(options, reader){
                     '-ms-writing-mode: vertical-rl !important;'+
                     '-o-writing-mode: vertical-rl !important;'+
                     '-epub-writing-mode: vertical-rl !important;'+
-                    'writing-mode: vertical-rl !important;}'+
+                    'writing-mode: vertical-rl !important;'+
+                '}'+
+                'body *{'+
+                    'margin-top: 0;'+
+                    'margin-bottom: 0;'+
+                    'text-align: left;'+
+                '}'+
             '</style>');
         }else if (state.setting.writingMode === 'horizontal'){
             _$epubHtml.find('head').append('<style>'+
@@ -404,7 +410,7 @@ var ReflowableView = function(options, reader){
         }
 
         // Some EPUBs may not have explicit RTL content direction (via CSS "direction" property or @dir attribute) despite having a RTL page progression direction. Readium consequently tweaks the HTML in order to restore the correct block flow in the browser renderer, resulting in the appropriate CSS columnisation (which is used to emulate pagination).
-        if (!_spine.isLeftToRight() && _htmlBodyIsLTRDirection && !_htmlBodyIsVerticalWritingMode)
+        if (!_spine.isLeftToRight() && !_htmlBodyIsLTRDirection && !_htmlBodyIsVerticalWritingMode)
         {
             _$htmlBody[0].setAttribute("dir", "rtl");
             _htmlBodyIsLTRDirection = false;
@@ -479,7 +485,7 @@ var ReflowableView = function(options, reader){
     }
 
     function _openPageInternal(pageRequest) {
-        console.log('_openPageInternal:pageRequest',pageRequest);
+        // console.log('_openPageInternal:pageRequest',pageRequest);
         if(_isWaitingFrameRender) {
             _deferredPageRequest = pageRequest;
             return false;
@@ -540,7 +546,7 @@ var ReflowableView = function(options, reader){
                     _cfiClassBlacklist,
                     _cfiElementBlacklist,
                     _cfiIdBlacklist);
-                console.log('openPageInternal:pageIndex',pageIndex);
+                // console.log('openPageInternal:pageIndex',pageIndex);
             }
             catch (e)
             {
@@ -594,7 +600,6 @@ var ReflowableView = function(options, reader){
         }
         var _firstVisibleCfi = MooReaderApp.getFirstVisibleCfi();//2018.03.27 改用MooReaderApp.getFirstVisibleCfi
         var _lastVisibleCfi = MooReaderApp.getFirstVisibleCfi();
-        console.warn('saveCurrentPosition 2 end:',_firstVisibleCfi);
         _lastPageRequest = new PageOpenRequest(_currentSpineItem, self);
         _lastPageRequest.setFirstAndLastVisibleCfi(_firstVisibleCfi.contentCFI, _lastVisibleCfi.contentCFI);
     };
@@ -607,7 +612,7 @@ var ReflowableView = function(options, reader){
     };
 
     function redraw() {
-        console.log('reflowable_view_redraw:_paginationInfo.pageOffset',_paginationInfo.pageOffset);
+        // console.log('reflowable_view_redraw:_paginationInfo.pageOffset',_paginationInfo.pageOffset);
         var offsetVal =  -_paginationInfo.pageOffset + "px";
 
         if (_htmlBodyIsVerticalWritingMode)
@@ -647,7 +652,7 @@ var ReflowableView = function(options, reader){
     }
 
     function onPaginationChanged_(initiator, paginationRequest_spineItem, paginationRequest_elementId) {
-        console.log('onPaginationChanged_:_paginationInfo.currentSpreadIndex',_paginationInfo.currentSpreadIndex, _paginationInfo.visibleColumnCount);
+        // console.log('onPaginationChanged_:_paginationInfo.currentSpreadIndex',_paginationInfo.currentSpreadIndex, _paginationInfo.visibleColumnCount);
         _paginationInfo.currentPageIndex = _paginationInfo.currentSpreadIndex * _paginationInfo.visibleColumnCount;
         _paginationInfo.pageOffset = (_paginationInfo.columnWidth + _paginationInfo.columnGap) * _paginationInfo.visibleColumnCount * _paginationInfo.currentSpreadIndex;
 
@@ -690,7 +695,7 @@ var ReflowableView = function(options, reader){
 
                 var pageRequest = new PageOpenRequest(prevSpineItem, initiator);
                 pageRequest.setLastPage();
-                self.openPage(pageRequest);
+                self.openPage(pageRequest, 1);
             }
         }
     };
@@ -715,7 +720,7 @@ var ReflowableView = function(options, reader){
 
                 var pageRequest = new PageOpenRequest(nextSpineItem, initiator);
                 pageRequest.setFirstPage();
-                self.openPage(pageRequest);
+                self.openPage(pageRequest, 2);
             }
         }
     };

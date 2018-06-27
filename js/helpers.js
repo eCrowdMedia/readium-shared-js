@@ -251,7 +251,6 @@ Helpers.UpdateHtmlLineHeight = function ($epubHtml, lineHeight) {
     for (var i = 0; i < ll; i++) {
         var ele = $textblocks[i],
             fontSizeAttr = ele.getAttribute('data-original-font-size');
-
         if (!fontSizeAttr) {
             var style = win.getComputedStyle(ele);
             var originalFontSize = parseInt(style.fontSize);
@@ -281,7 +280,7 @@ Helpers.UpdateHtmlLineHeight = function ($epubHtml, lineHeight) {
             ele.setAttribute("data-original-line-height", originalLineHeight * factor);
         }
     }
-    $epubHtml[0].style.lineHeight =  factor + "em";
+    $epubHtml[0].style.lineHeight =  factor;
     // $epubHtml.css("line-height", factor + "em");
 
     if (perf) {
@@ -384,9 +383,10 @@ Helpers.UpdateHtmlFontAttributes = function ($epubHtml, fontSize, fontObj, callb
         var ele, fontSizeAttr, style, originalLineHeight, originalFontSize, lineHeightAttr;
         for (var i = 0; i < ll; i++) {
             ele = $textblocks[i];
-
             fontSizeAttr = ele.getAttribute('data-original-font-size');
-            if (fontSizeAttr) {
+            lineHeightAttr = ele.getAttribute('data-original-line-height');
+
+            if (fontSizeAttr && lineHeightAttr) {
                 // early exit, original values already set.
                 break;
             }

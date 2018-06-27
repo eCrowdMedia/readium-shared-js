@@ -436,9 +436,9 @@ var CfiNavigationLogic = function (options) {
 
             var normalizedRectangle = normalizeRectangle(
                 clientRectangle, visibleContentOffsets.left, visibleContentOffsets.top);
-            console.log('findPageIndexDeltaBySingleRectangle:visibleContentOffsets',visibleContentOffsets);
+            // console.log('findPageIndexDeltaBySingleRectangle:visibleContentOffsets',visibleContentOffsets);
             if(isVerticalWritingMode()){
-                console.log('isVerticalWritingMode',isVerticalWritingMode());
+                // console.log('isVerticalWritingMode',isVerticalWritingMode());
                 normalizedRectangle.top -= visibleContentOffsets.top;
                 normalizedRectangle.bottom -= visibleContentOffsets.top;
                 normalizedRectangle.left -= visibleContentOffsets.left;
