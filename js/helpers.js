@@ -255,12 +255,13 @@ Helpers.UpdateHtmlLineHeight = function ($epubHtml, lineHeight) {
             var style = win.getComputedStyle(ele);
             var originalFontSize = parseInt(style.fontSize);
             originalLineHeight = parseInt(style.lineHeight);
-
             ele.setAttribute('data-original-font-size', originalFontSize);
             // getComputedStyle will not calculate the line-height if the value is 'normal'. In this case parseInt will return NaN
             if (originalLineHeight) {
                 ele.setAttribute('data-original-line-height', originalLineHeight);
                 ele.setAttribute('data-real-original-line-height', originalLineHeight);
+            }else{//2018.08.01 orinialLineHeight is NaN
+                ele.setAttribute('data-real-original-line-height', originalFontSize*factor);
             }
         }
     }
@@ -271,8 +272,7 @@ Helpers.UpdateHtmlLineHeight = function ($epubHtml, lineHeight) {
             lineHeightAttr = ele.getAttribute('data-original-line-height');
         if (realOriginalLineHeight) {
             originalLineHeight = Number(realOriginalLineHeight);
-        }
-        else {
+        }else {
             originalLineHeight = 0;
         }
 
