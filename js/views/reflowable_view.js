@@ -854,10 +854,10 @@ var ReflowableView = function(options, reader){
         // This may be an issue since it changes the assumptions some content authors might make when positioning their content.
         // _$htmlBody.css('position', 'relative');
         // 2017.11.16 merge 官方0.28版後，被加上relative，會導致highlight rects完全看不到，必須註解掉。
-
+        _$htmlBody.css('position','static');
         _$htmlBody.css('margin', 0);
         _$htmlBody.css('padding', 0);
-
+        // console.warn('_$htmlBody',_$htmlBody);
         _paginationInfo.rightToLeft = _spine.isRightToLeft();
 
         _paginationInfo.columnWidth = Math.round(((_htmlBodyIsVerticalWritingMode ? _lastViewPortSize.height : _lastViewPortSize.width) - _paginationInfo.columnGap * (_paginationInfo.visibleColumnCount - 1)) / _paginationInfo.visibleColumnCount);
