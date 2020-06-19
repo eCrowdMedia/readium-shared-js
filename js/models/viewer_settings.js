@@ -71,7 +71,7 @@ var ViewerSettings = function(settingsData) {
      * @type number
      */
 
-    this.columnMaxWidth = 700;
+    this.columnMaxWidth = 1000;
 
     /**
      *

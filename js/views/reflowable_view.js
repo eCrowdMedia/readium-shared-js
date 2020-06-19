@@ -787,7 +787,6 @@ var ReflowableView = function(options, reader){
 
         // Note that "availableWidth" does not contain "borderLeft" and "borderRight" (.width() excludes the padding and border and margin in the CSS box model of div#epub-reader-frame)
         var availableWidth = _$viewport.width();
-
         // ...So, we substract the page margins and button spacing to obtain the width available for actual text:
         var textWidth = availableWidth - adjustedGapLeft - adjustedGapRight;
 
@@ -798,7 +797,6 @@ var ReflowableView = function(options, reader){
         }
 
         var filler = 0;
-
         // Now, if the resulting width actually available for document content is greater than the maximum allowed value, we create even more left+right blank space to "compress" the horizontal run of text.
         if (textWidth > MAXW)
         {
@@ -821,7 +819,6 @@ var ReflowableView = function(options, reader){
                 filler = Math.floor((textWidth - MAXW) * 0.5);
             }
         }
-
         _$el.css({"left": (filler+adjustedGapLeft + "px"), "right": (filler+adjustedGapRight + "px")});
 
         updateViewportSize(); //_$contentFrame ==> _lastViewPortSize

@@ -2,33 +2,33 @@
 //
 //  Created by Boris Schneiderman.
 //  Copyright (c) 2014 Readium Foundation and/or its licensees. All rights reserved.
-//  
-//  Redistribution and use in source and binary forms, with or without modification, 
+//
+//  Redistribution and use in source and binary forms, with or without modification,
 //  are permitted provided that the following conditions are met:
-//  1. Redistributions of source code must retain the above copyright notice, this 
+//  1. Redistributions of source code must retain the above copyright notice, this
 //  list of conditions and the following disclaimer.
-//  2. Redistributions in binary form must reproduce the above copyright notice, 
-//  this list of conditions and the following disclaimer in the documentation and/or 
+//  2. Redistributions in binary form must reproduce the above copyright notice,
+//  this list of conditions and the following disclaimer in the documentation and/or
 //  other materials provided with the distribution.
-//  3. Neither the name of the organization nor the names of its contributors may be 
-//  used to endorse or promote products derived from this software without specific 
+//  3. Neither the name of the organization nor the names of its contributors may be
+//  used to endorse or promote products derived from this software without specific
 //  prior written permission.
-//  
-//  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
-//  ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED 
-//  WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. 
-//  IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, 
-//  INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, 
-//  BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, 
-//  DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF 
-//  LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE 
-//  OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED 
+//
+//  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
+//  ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+//  WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
+//  IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT,
+//  INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING,
+//  BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+//  DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+//  LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE
+//  OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED
 //  OF THE POSSIBILITY OF SUCH DAMAGE.
 
 define('readium_shared_js/globals',['jquery','eventEmitter'], function($, EventEmitter) {
-    
+
     var DEBUG = false;
-    
+
 /**
  * Top level ReadiumSDK namespace
  * @namespace
@@ -126,7 +126,7 @@ var Globals = {
          */
         CURRENT_VIEW_PAGINATION_CHANGED: "CurrentViewPaginationChanged",
     },
-    
+
     logEvent: function(eventName, eventType, eventSource) {
         if (DEBUG) {
             console.debug("#### ReadiumSDK.Events." + eventName + " - "+eventType+" - " + eventSource);
@@ -647,9 +647,9 @@ define('readium_shared_js/globalsSetup',['./globals', 'jquery', 'console_shim', 
     // Plugins bootstrapping begins
     Globals.Plugins = PluginsController;
     Globals.on(Globals.Events.READER_INITIALIZED, function(reader) {
-        
+
         Globals.logEvent("READER_INITIALIZED", "ON", "globalsSetup.js");
-        
+
         try {
             PluginsController.initialize(reader);
         } catch (ex) {
@@ -686,27 +686,27 @@ define('readium_shared_js', ['readium_shared_js/globalsSetup'], function (main) 
 
 //  Created by Boris Schneiderman.
 //  Copyright (c) 2014 Readium Foundation and/or its licensees. All rights reserved.
-//  
-//  Redistribution and use in source and binary forms, with or without modification, 
+//
+//  Redistribution and use in source and binary forms, with or without modification,
 //  are permitted provided that the following conditions are met:
-//  1. Redistributions of source code must retain the above copyright notice, this 
+//  1. Redistributions of source code must retain the above copyright notice, this
 //  list of conditions and the following disclaimer.
-//  2. Redistributions in binary form must reproduce the above copyright notice, 
-//  this list of conditions and the following disclaimer in the documentation and/or 
+//  2. Redistributions in binary form must reproduce the above copyright notice,
+//  this list of conditions and the following disclaimer in the documentation and/or
 //  other materials provided with the distribution.
-//  3. Neither the name of the organization nor the names of its contributors may be 
-//  used to endorse or promote products derived from this software without specific 
+//  3. Neither the name of the organization nor the names of its contributors may be
+//  used to endorse or promote products derived from this software without specific
 //  prior written permission.
-//  
-//  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
-//  ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED 
-//  WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. 
-//  IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, 
-//  INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, 
-//  BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, 
-//  DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF 
-//  LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE 
-//  OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED 
+//
+//  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
+//  ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+//  WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
+//  IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT,
+//  INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING,
+//  BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+//  DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+//  LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE
+//  OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED
 //  OF THE POSSIBILITY OF SUCH DAMAGE.
 
 define('readium_shared_js/models/bookmark_data',[],function() {
@@ -730,14 +730,14 @@ var BookmarkData = function(idref, contentCFI) {
      * @property contentCFI
      * @type {string}
      */
-    
+
     this.contentCFI = contentCFI;
 
     /**
      * serialize to string
      * @return JSON string representation
      */
-    
+
     this.toString = function(){
         return JSON.stringify(self);
     }
@@ -757,27 +757,27 @@ return BookmarkData;
 });
 //  Created by Boris Schneiderman.
 //  Copyright (c) 2014 Readium Foundation and/or its licensees. All rights reserved.
-//  
-//  Redistribution and use in source and binary forms, with or without modification, 
+//
+//  Redistribution and use in source and binary forms, with or without modification,
 //  are permitted provided that the following conditions are met:
-//  1. Redistributions of source code must retain the above copyright notice, this 
+//  1. Redistributions of source code must retain the above copyright notice, this
 //  list of conditions and the following disclaimer.
-//  2. Redistributions in binary form must reproduce the above copyright notice, 
-//  this list of conditions and the following disclaimer in the documentation and/or 
+//  2. Redistributions in binary form must reproduce the above copyright notice,
+//  this list of conditions and the following disclaimer in the documentation and/or
 //  other materials provided with the distribution.
-//  3. Neither the name of the organization nor the names of its contributors may be 
-//  used to endorse or promote products derived from this software without specific 
+//  3. Neither the name of the organization nor the names of its contributors may be
+//  used to endorse or promote products derived from this software without specific
 //  prior written permission.
-//  
-//  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
-//  ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED 
-//  WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. 
-//  IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, 
-//  INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, 
-//  BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, 
-//  DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF 
-//  LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE 
-//  OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED 
+//
+//  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
+//  ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+//  WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
+//  IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT,
+//  INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING,
+//  BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+//  DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+//  LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE
+//  OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED
 //  OF THE POSSIBILITY OF SUCH DAMAGE.
 
 define('readium_shared_js/models/current_pages_info',[],function() {
@@ -805,7 +805,7 @@ var CurrentPagesInfo = function(spine, isFixedLayout) {
      */
 
     this.isRightToLeft = spine.isRightToLeft();
-    
+
     /**
      * Is the ebook fixed layout or not?
      *
@@ -814,16 +814,16 @@ var CurrentPagesInfo = function(spine, isFixedLayout) {
      */
 
     this.isFixedLayout = isFixedLayout;
-    
+
     /**
      * Counts the number of spine items
      *
      * @property spineItemCount
      * @type number
-     */    
+     */
 
     this.spineItemCount = spine.items.length
-    
+
     /**
      * returns an array of open pages, each array item is a data structure (plain JavaScript object) with the following fields: spineItemPageIndex, spineItemPageCount, idref, spineItemIndex (as per the parameters of the addOpenPage() function below)
      *
@@ -840,7 +840,7 @@ var CurrentPagesInfo = function(spine, isFixedLayout) {
      * @param      {number} spineItemPageIndex
      * @param      {number} spineItemPageCount
      * @param      {string} idref
-     * @param      {number} spineItemIndex   
+     * @param      {number} spineItemIndex
      */
 
     this.addOpenPage = function(spineItemPageIndex, spineItemPageCount, idref, spineItemIndex) {
@@ -853,7 +853,7 @@ var CurrentPagesInfo = function(spine, isFixedLayout) {
      * Checks if navigation to the page on the left is possible (depending on page-progression-direction: previous page in LTR mode, next page in RTL mode)
      *
      * @method     canGoLeft
-     * @return bool true if turning to the left page is possible 
+     * @return bool true if turning to the left page is possible
      */
 
     this.canGoLeft = function () {
@@ -864,7 +864,7 @@ var CurrentPagesInfo = function(spine, isFixedLayout) {
      * Checks if navigation to the page on the right is possible (depending on page-progression-direction: next page in LTR mode, previous page in RTL mode)
      *
      * @method     canGoRight
-     * @return bool true if turning to the right page is possible 
+     * @return bool true if turning to the right page is possible
      */
 
     this.canGoRight = function () {
@@ -875,7 +875,7 @@ var CurrentPagesInfo = function(spine, isFixedLayout) {
      * Checks if navigation to the next page is possible (depending on page-progression-direction: right page in LTR mode, left page in RTL mode)
      *
      * @method     canGoNext
-     * @return bool true if turning to the next page is possible 
+     * @return bool true if turning to the next page is possible
      */
 
     this.canGoNext = function() {
@@ -900,7 +900,7 @@ var CurrentPagesInfo = function(spine, isFixedLayout) {
      * Checks if navigation to the previous page is possible (depending on page-progression-direction: left page in LTR mode, right page in RTL mode)
      *
      * @method     canGoPrev
-     * @return bool true if turning to the previous page is possible 
+     * @return bool true if turning to the previous page is possible
      */
 
     this.canGoPrev = function() {
@@ -947,37 +947,37 @@ return CurrentPagesInfo;
 });
   //  Created by Boris Schneiderman.
 //  Copyright (c) 2014 Readium Foundation and/or its licensees. All rights reserved.
-//  
-//  Redistribution and use in source and binary forms, with or without modification, 
+//
+//  Redistribution and use in source and binary forms, with or without modification,
 //  are permitted provided that the following conditions are met:
-//  1. Redistributions of source code must retain the above copyright notice, this 
+//  1. Redistributions of source code must retain the above copyright notice, this
 //  list of conditions and the following disclaimer.
-//  2. Redistributions in binary form must reproduce the above copyright notice, 
-//  this list of conditions and the following disclaimer in the documentation and/or 
+//  2. Redistributions in binary form must reproduce the above copyright notice,
+//  this list of conditions and the following disclaimer in the documentation and/or
 //  other materials provided with the distribution.
-//  3. Neither the name of the organization nor the names of its contributors may be 
-//  used to endorse or promote products derived from this software without specific 
+//  3. Neither the name of the organization nor the names of its contributors may be
+//  used to endorse or promote products derived from this software without specific
 //  prior written permission.
-//  
-//  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
-//  ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED 
-//  WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. 
-//  IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, 
-//  INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, 
-//  BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, 
-//  DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF 
-//  LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE 
-//  OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED 
+//
+//  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
+//  ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+//  WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
+//  IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT,
+//  INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING,
+//  BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+//  DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+//  LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE
+//  OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED
 //  OF THE POSSIBILITY OF SUCH DAMAGE.
 
 define('readium_shared_js/models/fixed_page_spread',[],function() {
 /**
- * Spread the page 
+ * Spread the page
  *
  * @class  Models.Spread
  * @constructor
- * @param spine 
- * @param {Boolean} isSyntheticSpread 
+ * @param spine
+ * @param {Boolean} isSyntheticSpread
  *
  */
 var Spread = function(spine, isSyntheticSpread) {
@@ -985,7 +985,7 @@ var Spread = function(spine, isSyntheticSpread) {
     var self = this;
 
     this.spine = spine;
-    
+
     this.leftItem = undefined;
     this.rightItem = undefined;
     this.centerItem = undefined;
@@ -1122,7 +1122,7 @@ var Spread = function(spine, isSyntheticSpread) {
      */
 
     function getItemPosition(item) {
-        
+
         // includes !item.isRenditionSpreadAllowed() ("rendition:spread-none") ==> force center position
         if(!_isSyntheticSpread) {
             return Spread.POSITION_CENTER;
@@ -1143,7 +1143,7 @@ var Spread = function(spine, isSyntheticSpread) {
      * Opens the next item
      *
      * @method     openNext
-     */ 
+     */
 
     this.openNext = function() {
 
@@ -1167,7 +1167,7 @@ var Spread = function(spine, isSyntheticSpread) {
      * Opens the previous item
      *
      * @method     openPrev
-     */ 
+     */
 
     this.openPrev = function() {
 
@@ -1191,8 +1191,8 @@ var Spread = function(spine, isSyntheticSpread) {
      * Returns an sorrted array of spine items (as per their order in the spine) that are currently in the FXL page layout
      *
      * @method     validItems
-     * @return     {array} 
-     */ 
+     * @return     {array}
+     */
 
     this.validItems = function() {
 
@@ -1215,7 +1215,7 @@ var Spread = function(spine, isSyntheticSpread) {
      * @method     getNeighbourItem
      * @param      {Models.SpineItem} item
      * @return     {Models.SpineItem} item
-     */ 
+     */
 
     function getNeighbourItem(item) {
 
@@ -1240,27 +1240,27 @@ return Spread;
 });
 //  Created by Boris Schneiderman.
 //  Copyright (c) 2016 Readium Foundation and/or its licensees. All rights reserved.
-//  
-//  Redistribution and use in source and binary forms, with or without modification, 
+//
+//  Redistribution and use in source and binary forms, with or without modification,
 //  are permitted provided that the following conditions are met:
-//  1. Redistributions of source code must retain the above copyright notice, this 
+//  1. Redistributions of source code must retain the above copyright notice, this
 //  list of conditions and the following disclaimer.
-//  2. Redistributions in binary form must reproduce the above copyright notice, 
-//  this list of conditions and the following disclaimer in the documentation and/or 
+//  2. Redistributions in binary form must reproduce the above copyright notice,
+//  this list of conditions and the following disclaimer in the documentation and/or
 //  other materials provided with the distribution.
-//  3. Neither the name of the organization nor the names of its contributors may be 
-//  used to endorse or promote products derived from this software without specific 
+//  3. Neither the name of the organization nor the names of its contributors may be
+//  used to endorse or promote products derived from this software without specific
 //  prior written permission.
-//  
-//  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
-//  ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED 
-//  WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. 
-//  IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, 
-//  INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, 
-//  BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, 
-//  DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF 
-//  LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE 
-//  OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED 
+//
+//  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
+//  ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+//  WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
+//  IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT,
+//  INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING,
+//  BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+//  DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+//  LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE
+//  OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED
 //  OF THE POSSIBILITY OF SUCH DAMAGE.
 
 define('readium_shared_js/models/spine_item',[], function() {
@@ -1271,7 +1271,7 @@ define('readium_shared_js/models/spine_item',[], function() {
  * @class  Models.SpineItem
  * @constructor
  * @param itemData container for spine item properties
- * @param {Number} index index of this spine item in the parent spine 
+ * @param {Number} index index of this spine item in the parent spine
  * @param {Models.Spine} spine parent spine
  *
  */
@@ -1280,7 +1280,7 @@ var SpineItem = function(itemData, index, spine){
     var self = this;
 
     /**
-     * The idref of the spine item, i.e. the ID-based pointer to the actual 
+     * The idref of the spine item, i.e. the ID-based pointer to the actual
      * manifest item that the spine item references
      *
      * @property idref
@@ -1300,7 +1300,7 @@ var SpineItem = function(itemData, index, spine){
     this.href = itemData.href;
 
     /**
-     * A flag indicating whether the spineItem has the attribute linear, which 
+     * A flag indicating whether the spineItem has the attribute linear, which
      * is either yes or no.  Default is yes.
      *
      * @property linear
@@ -1318,7 +1318,7 @@ var SpineItem = function(itemData, index, spine){
      * @default  auto
      */
     this.page_spread = itemData.page_spread;
-    
+
     /**
      * A string specifying the height and width from the rendition:viewport tag.
      * Note: This is deprecated in EPUB 3.1
@@ -1328,7 +1328,7 @@ var SpineItem = function(itemData, index, spine){
      * @default  None
      */
     this.rendition_viewport = itemData.rendition_viewport;
-    
+
     /**
      * A string specifying the type of synthetic spread for ALL spine items, where
      * where rendtion:spread-* can be left, right or center or auto
@@ -1359,7 +1359,7 @@ var SpineItem = function(itemData, index, spine){
      * @default  reflowable
      */
     this.rendition_layout = itemData.rendition_layout;
-    
+
     /**
      * A string specifying how "overflow" content that exceeds the current viewport should
      * be laid out.  Possible values are paginated, scrolled-continuous, scrolled-doc or auto
@@ -1369,7 +1369,7 @@ var SpineItem = function(itemData, index, spine){
      * @default  auto
      */
     this.rendition_flow = itemData.rendition_flow;
-    
+
     /**
      * The ID, if any, of the root SMIL element of the media overlay for the document.
      *
@@ -1390,7 +1390,7 @@ var SpineItem = function(itemData, index, spine){
 
     /**
      * The index of this spine item in the parent spine .
-     * 
+     *
      * @property index
      * @type     String
      * @default  None
@@ -1412,7 +1412,7 @@ var SpineItem = function(itemData, index, spine){
      * Sets a new page spread and checks its validity
      *
      * @method     setSpread
-     * @param      {String} spread  the new page spread 
+     * @param      {String} spread  the new page spread
      */
     this.setSpread = function(spread) {
         this.page_spread = spread;
@@ -1442,7 +1442,7 @@ var SpineItem = function(itemData, index, spine){
      * @return     {Boolean} TRUE if spread=none has NOT been specified, else FALSE
      */
     this.isRenditionSpreadAllowed = function() {
-        
+
         var rendition_spread = self.getRenditionSpread();
         return !rendition_spread || rendition_spread != SpineItem.RENDITION_SPREAD_NONE;
     };
@@ -1451,7 +1451,7 @@ var SpineItem = function(itemData, index, spine){
      * Checks to see if this spineItem explicitly specifies SPREAD_LEFT
      *
      * @method     isLeftPage
-     * @return     {Boolean} 
+     * @return     {Boolean}
      */
     this.isLeftPage = function() {
         return self.page_spread == SpineItem.SPREAD_LEFT;
@@ -1461,7 +1461,7 @@ var SpineItem = function(itemData, index, spine){
      * Checks to see if this spineItem explicitly specifies SPREAD_RIGHT
      *
      * @method     isRightPage
-     * @return     {Boolean} 
+     * @return     {Boolean}
      */
     this.isRightPage = function() {
         return self.page_spread == SpineItem.SPREAD_RIGHT;
@@ -1471,7 +1471,7 @@ var SpineItem = function(itemData, index, spine){
      * Checks to see if this spineItem explicitly specifies SPREAD_CENTER
      *
      * @method     isCenterPage
-     * @return     {Boolean} 
+     * @return     {Boolean}
      */
     this.isCenterPage = function() {
         return self.page_spread == SpineItem.SPREAD_CENTER;
@@ -1482,7 +1482,7 @@ var SpineItem = function(itemData, index, spine){
      * reflowable
      *
      * @method     isReflowable
-     * @return     {Boolean} 
+     * @return     {Boolean}
      */
     this.isReflowable = function() {
         return !self.isFixedLayout();
@@ -1493,10 +1493,10 @@ var SpineItem = function(itemData, index, spine){
      * fixed layout
      *
      * @method     isFixedLayout
-     * @return     {Boolean} 
+     * @return     {Boolean}
      */
     this.isFixedLayout = function() {
-        
+
         // cannot use isPropertyValueSetForItemOrPackage() here!
 
         var isLayoutExplicitlyDefined = self.getRenditionLayout();
@@ -1517,13 +1517,13 @@ var SpineItem = function(itemData, index, spine){
     };
 
     /**
-     * Returns a string indicating the type of layout for viewport overflow, 
-     * i.e. scrolldoc, scroll-continuous, paginated or auto.  Note that if the spineItem 
-     * has an override (local value) that is returned, else the package's 
+     * Returns a string indicating the type of layout for viewport overflow,
+     * i.e. scrolldoc, scroll-continuous, paginated or auto.  Note that if the spineItem
+     * has an override (local value) that is returned, else the package's
      * value is returned
      *
      * @method     getRenditionFlow
-     * @return     {String} 
+     * @return     {String}
      */
    this.getRenditionFlow = function() {
 
@@ -1533,15 +1533,15 @@ var SpineItem = function(itemData, index, spine){
 
         return self.spine.package.rendition_flow;
     };
-    
+
     /**
-     * Returns the rendition:viewport, if any. Note that if the spineItem 
-     * has an override (local value) that is returned, else the package's 
+     * Returns the rendition:viewport, if any. Note that if the spineItem
+     * has an override (local value) that is returned, else the package's
      * value is returned.
      * Note that this attribute is deprecated in EPUB 3.1
      *
      * @method     getRenditionViewport
-     * @return     {Boolean} 
+     * @return     {Boolean}
      */
      this.getRenditionViewport = function() {
 
@@ -1553,12 +1553,12 @@ var SpineItem = function(itemData, index, spine){
     };
 
     /**
-     * Returns the rendition:spread, if any. Note that if the spineItem 
-     * has an override (local value) that is returned, else the package's 
+     * Returns the rendition:spread, if any. Note that if the spineItem
+     * has an override (local value) that is returned, else the package's
      * value is returned.
      *
      * @method     getRenditionSpread
-     * @return     {Boolean} 
+     * @return     {Boolean}
      */
     this.getRenditionSpread = function() {
 
@@ -1570,12 +1570,12 @@ var SpineItem = function(itemData, index, spine){
     };
 
     /**
-     * Returns the rendition:orientation, if any. Note that if the spineItem 
-     * has an override (local value) that is returned, else the package's 
+     * Returns the rendition:orientation, if any. Note that if the spineItem
+     * has an override (local value) that is returned, else the package's
      * value is returned.
      *
      * @method     getRenditionOrientation
-     * @return     {Boolean} 
+     * @return     {Boolean}
      */
     this.getRenditionOrientation = function() {
 
@@ -1587,12 +1587,12 @@ var SpineItem = function(itemData, index, spine){
     };
 
     /**
-     * Returns the rendition:layout, if any. Note that if the spineItem 
-     * has an override (local value) that is returned, else the package's 
+     * Returns the rendition:layout, if any. Note that if the spineItem
+     * has an override (local value) that is returned, else the package's
      * value is returned.
      *
      * @method     getRenditionLayout
-     * @return     {String} 
+     * @return     {String}
      */
     this.getRenditionLayout = function() {
 
@@ -1606,13 +1606,13 @@ var SpineItem = function(itemData, index, spine){
     /**
      * Checks to see if the specified property is set in this spineItem and
      * matches the supplied value.  If the property is NOT set in the spineItem
-     * then the the package is checked. If not set in either place then 
+     * then the the package is checked. If not set in either place then
      * the function returns FALSE.
      *
      * @method     isPropertyValueSetForItemOrPackage
      * @param      {String} propName  The name of the property to be checked
      * @param      {String} propValue The value of the property to be checked
-     * @return     {Boolean} 
+     * @return     {Boolean}
      */
     function isPropertyValueSetForItemOrPackage(propName, propValue) {
 
@@ -1628,11 +1628,11 @@ var SpineItem = function(itemData, index, spine){
     }
 
     /**
-     * Checks if this spineItem or its parent package has its overflow content 
+     * Checks if this spineItem or its parent package has its overflow content
      * layout specified as scrolled-continuous.
      *
      * @method     isFlowScrolledContinuous
-     * @return     {Boolean} 
+     * @return     {Boolean}
      */
     this.isFlowScrolledContinuous = function() {
 
@@ -1640,11 +1640,11 @@ var SpineItem = function(itemData, index, spine){
     };
 
     /**
-     * Checks if this spineItem or its parent package has its overflow content 
+     * Checks if this spineItem or its parent package has its overflow content
      * layout specified as scrolled-doc.
      *
      * @method     isFlowScrolledDoc
-     * @return     {Boolean} 
+     * @return     {Boolean}
      */
     this.isFlowScrolledDoc = function() {
 
@@ -1652,131 +1652,131 @@ var SpineItem = function(itemData, index, spine){
     };
 };
 
-/** 
- * @property RENDITION_LAYOUT_REFLOWABLE 
+/**
+ * @property RENDITION_LAYOUT_REFLOWABLE
  * @type {String}
- * @static 
+ * @static
  */
 SpineItem.RENDITION_LAYOUT_REFLOWABLE = "reflowable";
 
-/** 
- * @property RENDITION_LAYOUT_PREPAGINATED 
+/**
+ * @property RENDITION_LAYOUT_PREPAGINATED
  * @type {String}
- * @static 
+ * @static
  */
 SpineItem.RENDITION_LAYOUT_PREPAGINATED = "pre-paginated";
 
-/** 
- * @property RENDITION_ORIENTATION_LANDSCAPE 
+/**
+ * @property RENDITION_ORIENTATION_LANDSCAPE
  * @type {String}
- * @static 
+ * @static
  */
 SpineItem.RENDITION_ORIENTATION_LANDSCAPE = "landscape";
 
-/** 
- * @property RENDITION_ORIENTATION_PORTRAIT 
+/**
+ * @property RENDITION_ORIENTATION_PORTRAIT
  * @type {String}
- * @static 
+ * @static
  */
 SpineItem.RENDITION_ORIENTATION_PORTRAIT = "portrait";
-/** 
+/**
  * @property RENDITION_ORIENTATION_AUTO
  * @type {String}
- * @static 
+ * @static
  */
 SpineItem.RENDITION_ORIENTATION_AUTO = "auto";
 
-/** 
- * @property SPREAD_LEFT 
+/**
+ * @property SPREAD_LEFT
  * @type {String}
- * @static 
+ * @static
  */
 SpineItem.SPREAD_LEFT = "page-spread-left";
 
-/** 
- * @property SPREAD_RIGHT 
+/**
+ * @property SPREAD_RIGHT
  * @type {String}
- * @static 
+ * @static
  */
 SpineItem.SPREAD_RIGHT = "page-spread-right";
 
-/** 
- * @property SPREAD_CENTER 
+/**
+ * @property SPREAD_CENTER
  * @type {String}
- * @static 
+ * @static
  */
 SpineItem.SPREAD_CENTER = "page-spread-center";
 
-/** 
- * @property RENDITION_SPREAD_NONE 
+/**
+ * @property RENDITION_SPREAD_NONE
  * @type {String}
- * @static 
+ * @static
  */
 SpineItem.RENDITION_SPREAD_NONE = "none";
 
-/** 
- * @property RENDITION_SPREAD_LANDSCAPE 
+/**
+ * @property RENDITION_SPREAD_LANDSCAPE
  * @type {String}
- * @static 
+ * @static
  */
 SpineItem.RENDITION_SPREAD_LANDSCAPE = "landscape";
 
-/** 
- * @property RENDITION_SPREAD_PORTRAIT 
+/**
+ * @property RENDITION_SPREAD_PORTRAIT
  * @type {String}
- * @static 
+ * @static
  */
 SpineItem.RENDITION_SPREAD_PORTRAIT = "portrait";
 
-/** 
- * @property RENDITION_SPREAD_BOTH 
+/**
+ * @property RENDITION_SPREAD_BOTH
  * @type {String}
- * @static 
+ * @static
  */
 SpineItem.RENDITION_SPREAD_BOTH = "both";
 
-/** 
- * @property RENDITION_SPREAD_AUTO 
+/**
+ * @property RENDITION_SPREAD_AUTO
  * @type {String}
- * @static 
+ * @static
  */
 SpineItem.RENDITION_SPREAD_AUTO = "auto";
 
-/** 
- * @property RENDITION_FLOW_PAGINATED 
+/**
+ * @property RENDITION_FLOW_PAGINATED
  * @type {String}
- * @static 
+ * @static
  */
 SpineItem.RENDITION_FLOW_PAGINATED = "paginated";
 
-/** 
- * @property RENDITION_FLOW_SCROLLED_CONTINUOUS 
+/**
+ * @property RENDITION_FLOW_SCROLLED_CONTINUOUS
  * @type {String}
- * @static 
+ * @static
  */
 SpineItem.RENDITION_FLOW_SCROLLED_CONTINUOUS = "scrolled-continuous";
 
-/** 
- * @property RENDITION_FLOW_SCROLLED_DOC 
+/**
+ * @property RENDITION_FLOW_SCROLLED_DOC
  * @type {String}
- * @static 
+ * @static
  */
 SpineItem.RENDITION_FLOW_SCROLLED_DOC = "scrolled-doc";
 
-/** 
- * @property RENDITION_FLOW_AUTO 
+/**
+ * @property RENDITION_FLOW_AUTO
  * @type {String}
- * @static 
+ * @static
  */
 SpineItem.RENDITION_FLOW_AUTO = "auto";
 
 /**
  * Returns the inversion of the spineItem's SPREAD property. i.e
- * if the page-spread is right it returns LEFT and vice versa.  If 
+ * if the page-spread is right it returns LEFT and vice versa.  If
  * the spread is center then it returns CENTER
  *
  * @method     alternateSpread
- * @return     {String} 
+ * @return     {String}
  */
 SpineItem.alternateSpread = function(spread) {
 
@@ -1823,22 +1823,22 @@ SpineItem.alternateSpread = function(spread) {
 //  OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED
 //  OF THE POSSIBILITY OF SUCH DAMAGE.
 define('readium_shared_js/helpers',["./globals", 'underscore', "jquery", "jquerySizes", "./models/spine_item"], function(Globals, _, $, JQuerySizes, SpineItem) {
-    
+
 (function()
 {
 /* jshint strict: true */
 /* jshint -W034 */
     "use strict";
-    
+
     if(window.performance)
     {
         if (window.performance.now)
         {
             return;
         }
-        
+
         var vendors = ['webkitNow', 'mozNow', 'msNow', 'oNow'];
-        
+
         for (var i = 0; i < vendors.length; i++)
         {
             if (vendors[i] in window.performance)
@@ -1851,9 +1851,9 @@ define('readium_shared_js/helpers',["./globals", 'underscore', "jquery", "jquery
     else
     {
         window.performance = {};
-        
+
     }
-    
+
     if(Date.now)
     {
         window.performance.now = function()
@@ -1862,7 +1862,7 @@ define('readium_shared_js/helpers',["./globals", 'underscore', "jquery", "jquery
         };
         return;
     }
-    
+
     window.performance.now = function()
     {
         return +(new Date());
@@ -1914,11 +1914,11 @@ Helpers.getURLQueryParams = function() {
 
 /**
  * @param urlpath: string corresponding a URL without query parameters (i.e. the part before the '?' question mark in index.html?param=value). If undefined/null, the default window.location is used.
- * @param overrides: object that maps query parameter names with values (to be included in the resulting URL, while any other query params in the current window.location are preserved as-is) 
+ * @param overrides: object that maps query parameter names with values (to be included in the resulting URL, while any other query params in the current window.location are preserved as-is)
  * @returns a string corresponding to a URL obtained by concatenating the given URL with the given query parameters (and those already in window.location)
  */
 Helpers.buildUrlQueryParameters = function(urlpath, overrides) {
-    
+
     if (!urlpath) {
         urlpath =
         window.location ? (
@@ -1931,38 +1931,38 @@ Helpers.buildUrlQueryParameters = function(urlpath, overrides) {
     }
 
     var paramsString = "";
-    
+
     for (var key in overrides) {
         if (!overrides.hasOwnProperty(key)) continue;
-        
+
         if (!overrides[key]) continue;
-        
+
         var val = overrides[key].trim();
         if (!val) continue;
-        
+
         console.debug("URL QUERY PARAM OVERRIDE: " + key + " = " + val);
 
         paramsString += (key + "=" + encodeURIComponent(val));
         paramsString += "&";
     }
-    
+
     var urlParams = Helpers.getURLQueryParams();
     for (var key in urlParams) {
         if (!urlParams.hasOwnProperty(key)) continue;
-        
+
         if (!urlParams[key]) continue;
-        
+
         if (overrides[key]) continue;
 
         var val = urlParams[key].trim();
         if (!val) continue;
-        
+
         console.debug("URL QUERY PARAM PRESERVED: " + key + " = " + val);
 
         paramsString += (key + "=" + encodeURIComponent(val));
         paramsString += "&";
     }
-    
+
     return urlpath + "?" + paramsString;
 };
 
@@ -2041,7 +2041,7 @@ Helpers.Rect.fromElement = function ($element) {
  * @param $epubHtml: The html that is to have font attributes added.
  * @param fontSize: The font size that is to be added to the element at all locations.
  * @param fontObj: The font Object containing at minimum the URL, and fontFamilyName (In fields url and fontFamily) respectively. Pass in null's on the object's fields to signal no font.
- * @param callback: function invoked when "done", which means that if there are asynchronous operations such as font-face loading via injected stylesheets, then the UpdateHtmlFontAttributes() function returns immediately but the caller should wait for the callback function call if fully-loaded font-face *stylesheets* are required on the caller's side (note that the caller's side may still need to detect *actual font loading*, via the FontLoader API or some sort of ResizeSensor to indicate that the updated font-family has been used to render the document). 
+ * @param callback: function invoked when "done", which means that if there are asynchronous operations such as font-face loading via injected stylesheets, then the UpdateHtmlFontAttributes() function returns immediately but the caller should wait for the callback function call if fully-loaded font-face *stylesheets* are required on the caller's side (note that the caller's side may still need to detect *actual font loading*, via the FontLoader API or some sort of ResizeSensor to indicate that the updated font-family has been used to render the document).
  */
 
 Helpers.UpdateHtmlFontAttributes = function ($epubHtml, fontSize, fontObj, callback) {
@@ -2056,7 +2056,7 @@ Helpers.UpdateHtmlFontAttributes = function ($epubHtml, fontSize, fontObj, callb
     var changeFontFamily = NOTHING;
 
     var fontLoadCallback = function() {
-            
+
         var perf = false;
 
         // TODO: very slow on Firefox!
@@ -2082,7 +2082,7 @@ Helpers.UpdateHtmlFontAttributes = function ($epubHtml, fontSize, fontObj, callb
                 //fontFamilyStyle = $(style);
             }
         }
-        
+
         // The code below does not work because jQuery $element.css() on html.body somehow "resets" the font: CSS directive by removing it entirely (font-family: works with !important, but unfortunately further deep inside the DOM there may be CSS applied with the font: directive, which somehow seems to take precedence! ... as shown in Chrome's developer tools)
         // ...thus why we use the above routine instead, to insert a new head>style element
         // // var doc = $epubHtml[0].ownerDocument;
@@ -2094,7 +2094,7 @@ Helpers.UpdateHtmlFontAttributes = function ($epubHtml, fontSize, fontObj, callb
         // // });
         // $body.css("font-family", "");
         // if (changeFontFamily == ADD) {
-            
+
         //     var existing = $body.attr("style");
         //     $body[0].setAttribute("style",
         //         existing + " ; font-family: '" + fontObj.fontFamily + "' !important ;" + " ; font: regular 100% '" + fontObj.fontFamily + "' !important ;");
@@ -2119,7 +2119,7 @@ Helpers.UpdateHtmlFontAttributes = function ($epubHtml, fontSize, fontObj, callb
         for (var i = 0; i < $textblocks.length; i++) {
 
             var ele = $textblocks[i];
-            
+
             var fontSizeAttr = ele.getAttribute('data-original-font-size');
             if (fontSizeAttr) {
                 // early exit, original values already set.
@@ -2127,7 +2127,7 @@ Helpers.UpdateHtmlFontAttributes = function ($epubHtml, fontSize, fontObj, callb
             }
 
             var style = win.getComputedStyle(ele);
-            
+
             var originalFontSize = parseInt(style.fontSize);
             ele.setAttribute('data-original-font-size', originalFontSize);
 
@@ -2136,7 +2136,7 @@ Helpers.UpdateHtmlFontAttributes = function ($epubHtml, fontSize, fontObj, callb
             if (originalLineHeight) {
                 ele.setAttribute('data-original-line-height', originalLineHeight);
             }
-            
+
             // var fontFamilyAttr = ele.getAttribute('data-original-font-family');
             // if (!fontFamilyAttr) {
             //     var originalFontFamily = style.fontFamily;
@@ -2149,7 +2149,7 @@ Helpers.UpdateHtmlFontAttributes = function ($epubHtml, fontSize, fontObj, callb
         for (var i = 0; i < $textblocks.length; i++) {
             var ele = $textblocks[i];
 
-            // TODO: group the 3x potential $(ele).css() calls below to avoid multiple jQuery style mutations 
+            // TODO: group the 3x potential $(ele).css() calls below to avoid multiple jQuery style mutations
 
             var fontSizeAttr = ele.getAttribute('data-original-font-size');
             var originalFontSize = Number(fontSizeAttr);
@@ -2160,7 +2160,7 @@ Helpers.UpdateHtmlFontAttributes = function ($epubHtml, fontSize, fontObj, callb
             if (originalLineHeight) {
                 $(ele).css("line-height", (originalLineHeight * factor) + 'px');
             }
-            
+
             // var fontFamilyAttr = ele.getAttribute('data-original-font-family');
             // switch(changeFontFamily){
             //     case NOTHING:
@@ -2176,20 +2176,20 @@ Helpers.UpdateHtmlFontAttributes = function ($epubHtml, fontSize, fontObj, callb
 
         $epubHtml.css("font-size", fontSize + "%");
 
-        
-        
+
+
         if (perf) {
             var time2 = window.performance.now();
-        
+
             // Firefox: 80+
             // Chrome: 4-10
             // Edge: 15-34
             // IE: 10-15
             // https://readium.firebase.com/?epub=..%2Fepub_content%2Faccessible_epub_3&goto=%7B%22idref%22%3A%22id-id2635343%22%2C%22elementCfi%22%3A%22%2F4%2F2%5Bbuilding_a_better_epub%5D%2F10%2F44%2F6%2C%2F1%3A334%2C%2F1%3A335%22%7D
-            
+
             var diff = time2-time1;
             console.log(diff);
-            
+
             // setTimeout(function(){
             //     alert(diff);
             // }, 2000);
@@ -2206,7 +2206,7 @@ Helpers.UpdateHtmlFontAttributes = function ($epubHtml, fontSize, fontObj, callb
             changeFontFamily = ADD;
 
             setTimeout(function(){
-                
+
                 link = $("<link/>", {
                     "id" : FONT_FAMILY_ID,
                     "data-fontfamily" : fontObj.fontFamily,
@@ -2214,7 +2214,7 @@ Helpers.UpdateHtmlFontAttributes = function ($epubHtml, fontSize, fontObj, callb
                     "type" : "text/css"
                 });
                 docHead.append(link);
-                    
+
                 link.attr({
                     "href" : fontObj.url
                 });
@@ -2222,7 +2222,7 @@ Helpers.UpdateHtmlFontAttributes = function ($epubHtml, fontSize, fontObj, callb
         }
         else if(dataFontFamily != fontObj.fontFamily){
             changeFontFamily = ADD;
-        
+
             link.attr({
                 "data-fontfamily" : fontObj.fontFamily,
                 "href" : fontObj.url
@@ -2573,7 +2573,7 @@ Helpers.setStyles = function (styles, $element) {
 
                 stylings.push({selector: style.selector, cssProps: cssProperties});
             }
-            
+
         } else { // HTML element
             if (style.selector) {
                 $(style.selector, $element).css(style.declarations);
@@ -2594,7 +2594,7 @@ Helpers.setStyles = function (styles, $element) {
             // we remove before re-adding from scratch
             doc.head.removeChild(bookStyleElement[0]);
         }
-        
+
         var cssStylesheet = "";
 
         if (stylingGlobal.length > 0) {
@@ -2881,27 +2881,27 @@ return Helpers;
 //
 //  Created by Boris Schneiderman.
 //  Copyright (c) 2014 Readium Foundation and/or its licensees. All rights reserved.
-//  
-//  Redistribution and use in source and binary forms, with or without modification, 
+//
+//  Redistribution and use in source and binary forms, with or without modification,
 //  are permitted provided that the following conditions are met:
-//  1. Redistributions of source code must retain the above copyright notice, this 
+//  1. Redistributions of source code must retain the above copyright notice, this
 //  list of conditions and the following disclaimer.
-//  2. Redistributions in binary form must reproduce the above copyright notice, 
-//  this list of conditions and the following disclaimer in the documentation and/or 
+//  2. Redistributions in binary form must reproduce the above copyright notice,
+//  this list of conditions and the following disclaimer in the documentation and/or
 //  other materials provided with the distribution.
-//  3. Neither the name of the organization nor the names of its contributors may be 
-//  used to endorse or promote products derived from this software without specific 
+//  3. Neither the name of the organization nor the names of its contributors may be
+//  used to endorse or promote products derived from this software without specific
 //  prior written permission.
-//  
-//  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
-//  ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED 
-//  WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. 
-//  IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, 
-//  INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, 
-//  BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, 
-//  DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF 
-//  LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE 
-//  OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED 
+//
+//  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
+//  ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+//  WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
+//  IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT,
+//  INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING,
+//  BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+//  DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+//  LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE
+//  OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED
 //  OF THE POSSIBILITY OF SUCH DAMAGE.
 
 /**
@@ -4652,27 +4652,27 @@ return CfiNavigationLogic;
 
 //  Created by Boris Schneiderman.
 //  Copyright (c) 2014 Readium Foundation and/or its licensees. All rights reserved.
-//  
-//  Redistribution and use in source and binary forms, with or without modification, 
+//
+//  Redistribution and use in source and binary forms, with or without modification,
 //  are permitted provided that the following conditions are met:
-//  1. Redistributions of source code must retain the above copyright notice, this 
+//  1. Redistributions of source code must retain the above copyright notice, this
 //  list of conditions and the following disclaimer.
-//  2. Redistributions in binary form must reproduce the above copyright notice, 
-//  this list of conditions and the following disclaimer in the documentation and/or 
+//  2. Redistributions in binary form must reproduce the above copyright notice,
+//  this list of conditions and the following disclaimer in the documentation and/or
 //  other materials provided with the distribution.
-//  3. Neither the name of the organization nor the names of its contributors may be 
-//  used to endorse or promote products derived from this software without specific 
+//  3. Neither the name of the organization nor the names of its contributors may be
+//  used to endorse or promote products derived from this software without specific
 //  prior written permission.
-//  
-//  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
-//  ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED 
-//  WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. 
-//  IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, 
-//  INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, 
-//  BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, 
-//  DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF 
-//  LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE 
-//  OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED 
+//
+//  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
+//  ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+//  WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
+//  IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT,
+//  INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING,
+//  BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+//  DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+//  LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE
+//  OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED
 //  OF THE POSSIBILITY OF SUCH DAMAGE.
 
 define('readium_shared_js/models/viewer_settings',[], function() {
@@ -4688,20 +4688,20 @@ var ViewerSettings = function(settingsData) {
     /** Set to "auto"
      *
      * @property syntheticSpread
-     * @type 
+     * @type
      */
 
     this.syntheticSpread = "auto";
 
-    /** 
+    /**
      *
      * @property fontSelection
      * @type number
      */
-    
+
     this.fontSelection = 0;
 
-    /** 
+    /**
      *
      * @property fontSize
      * @type number
@@ -4709,15 +4709,15 @@ var ViewerSettings = function(settingsData) {
 
     this.fontSize = 100;
 
-    /** 
+    /**
      *
      * @property columnGap
      * @type number
      */
 
     this.columnGap = 20;
-    
-    /** 
+
+    /**
      *
      * @property columnMaxWidth
      * @type number
@@ -4725,7 +4725,7 @@ var ViewerSettings = function(settingsData) {
 
     this.columnMaxWidth = 700;
 
-    /** 
+    /**
      *
      * @property columnMinWidth
      * @type number
@@ -4733,7 +4733,7 @@ var ViewerSettings = function(settingsData) {
 
     this.columnMinWidth = 400;
 
-    /** 
+    /**
      *
      * @property mediaOverlaysPreservePlaybackWhenScroll
      * @type bool
@@ -4741,7 +4741,7 @@ var ViewerSettings = function(settingsData) {
 
     this.mediaOverlaysPreservePlaybackWhenScroll = false;
 
-    /** 
+    /**
      *
      * @property mediaOverlaysSkipSkippables
      * @type bool
@@ -4749,7 +4749,7 @@ var ViewerSettings = function(settingsData) {
 
     this.mediaOverlaysSkipSkippables = false;
 
-    /** 
+    /**
      *
      * @property mediaOverlaysEscapables
      * @type bool
@@ -4757,15 +4757,15 @@ var ViewerSettings = function(settingsData) {
 
     this.mediaOverlaysEscapeEscapables = true;
 
-    /** 
+    /**
      *
      * @property mediaOverlaysSkippables
      * @type array
      */
 
     this.mediaOverlaysSkippables = [];
-    
-    /** 
+
+    /**
      *
      * @property mediaOverlaysEscapables
      * @type array
@@ -4773,15 +4773,15 @@ var ViewerSettings = function(settingsData) {
 
     this.mediaOverlaysEscapables = [];
 
-    /** 
+    /**
      *
      * @property mediaOverlaysEnableClick
      * @type bool
      */
-    
+
     this.mediaOverlaysEnableClick = true;
 
-    /** 
+    /**
      *
      * @property mediaOverlaysRate
      * @type number
@@ -4789,7 +4789,7 @@ var ViewerSettings = function(settingsData) {
 
     this.mediaOverlaysRate = 1;
 
-    /** 
+    /**
      *
      * @property mediaOverlaysVolume
      * @type number
@@ -4797,47 +4797,47 @@ var ViewerSettings = function(settingsData) {
 
     this.mediaOverlaysVolume = 100;
 
-    /** 
+    /**
      *
      * @property mediaOverlaysSynchronizationGranularity
      * @type string
      */
-    
+
     this.mediaOverlaysSynchronizationGranularity = "";
 
-    /** 
+    /**
      *
      * @property mediaOverlaysAutomaticPageTurn
      * @type bool
-     */    
+     */
 
     this.mediaOverlaysAutomaticPageTurn = true;
 
-    /** 
+    /**
      *
      * @property enableGPUHardwareAccelerationCSS3D
      * @type bool
-     */    
+     */
 
 
     this.enableGPUHardwareAccelerationCSS3D = false;
 
     // -1 ==> disable
     // [0...n] ==> index of transition in pre-defined array
-    
-    /** 
+
+    /**
      *
      * @property pageTransition
      * @type number
-     */        
+     */
 
     this.pageTransition = -1;
- 
-    /** 
+
+    /**
      *
      * @property scroll
      * @type string
-     */        
+     */
 
     this.scroll = "auto";
 
@@ -5319,7 +5319,7 @@ var OnePageView = function (options, classes, enableBookStyleOverrides, reader) 
         _pageTransitions.push(_pageTransition_SWING); // 3
 
         var _disablePageTransitions = opts.disablePageTransitions || false;
-                
+
         // TODO: page transitions are broken, sp we disable them to avoid nasty visual artefacts
         _disablePageTransitions = true;
 
@@ -5480,13 +5480,13 @@ var OnePageView = function (options, classes, enableBookStyleOverrides, reader) 
 
     this.remove = function () {
         this.clear();
-        
+
         _currentSpineItem = undefined;
-        
+
         if (_$el && _$el[0]) {
             _$el.remove();
         }
-        
+
         _$el = undefined;
         _$scaler = undefined;
         _$iframe = undefined;
@@ -5494,7 +5494,7 @@ var OnePageView = function (options, classes, enableBookStyleOverrides, reader) 
 
     this.clear = function () {
         _isIframeLoaded = false;
-        
+
         if (_$iframe && _$iframe[0]) {
             _$iframe[0].src = "";
         }
@@ -5556,7 +5556,7 @@ var OnePageView = function (options, classes, enableBookStyleOverrides, reader) 
                 };
 
                 console.debug("OnePageView content resized ...", newBodySize.width, newBodySize.height, _currentSpineItem.idref);
-                
+
                 if (newBodySize.width != _lastBodySize.width || newBodySize.height != _lastBodySize.height) {
                     _lastBodySize.width = newBodySize.width;
                     _lastBodySize.height = newBodySize.height;
@@ -5566,9 +5566,9 @@ var OnePageView = function (options, classes, enableBookStyleOverrides, reader) 
                     var src = _spine.package.resolveRelativeUrl(_currentSpineItem.href);
 
                     Globals.logEvent("OnePageView.Events.CONTENT_SIZE_CHANGED", "EMIT", "one_page_view.js [ " + _currentSpineItem.href + " -- " + src + " ]");
-                    
+
                     self.emit(OnePageView.Events.CONTENT_SIZE_CHANGED, _$iframe, _currentSpineItem);
-                    
+
                     //updatePagination();
                 } else {
                     console.debug("... ignored (identical dimensions).");
@@ -5576,7 +5576,7 @@ var OnePageView = function (options, classes, enableBookStyleOverrides, reader) 
             });
         }
     }
-    
+
     var _viewSettings = undefined;
     this.setViewSettings = function (settings, docWillChange) {
 
@@ -5754,16 +5754,16 @@ var OnePageView = function (options, classes, enableBookStyleOverrides, reader) 
         if (settings.enableGPUHardwareAccelerationCSS3D) {
             enable3D = true;
         }
-        
+
         if (_$epubBody // not SVG spine item (otherwise fails in Safari OSX)
             && reader.needsFixedLayoutScalerWorkAround()) {
 
             var css1 = Helpers.CSSTransformString({scale: scale, enable3D: enable3D});
-            
-            // See https://github.com/readium/readium-shared-js/issues/285 
+
+            // See https://github.com/readium/readium-shared-js/issues/285
             css1["min-width"] = _meta_size.width;
             css1["min-height"] = _meta_size.height;
-            
+
             _$epubHtml.css(css1);
 
             // Ensures content dimensions matches viewport meta (authors / production tools should do this in their CSS...but unfortunately some don't).
@@ -5794,7 +5794,7 @@ var OnePageView = function (options, classes, enableBookStyleOverrides, reader) 
             //_$epubHtml.css("visibility", "visible");
             _$epubHtml.css("opacity", "1");
         }, 0);
-        
+
         // TODO: the CSS transitions do not work anymore, tested on Firefox and Chrome.
         // The line of code below still needs to be invoked, but the logic in _pageTransitionHandler probably need adjusting to work around the animation timing issue.
         // PS: opacity=1 above seems to interfere with the fade-in transition, probably a browser issue with mixing inner-iframe effects with effects applied to the iframe parent/ancestors.
@@ -5991,7 +5991,7 @@ var OnePageView = function (options, classes, enableBookStyleOverrides, reader) 
 
     function onUnload (spineItem) {
         if (spineItem) {
-            
+
             Globals.logEvent("CONTENT_DOCUMENT_UNLOADED", "EMIT", "one_page_view.js [ " + spineItem.href + " ]");
             self.emit(Globals.Events.CONTENT_DOCUMENT_UNLOADED, _$iframe, spineItem);
         }
@@ -6019,7 +6019,7 @@ var OnePageView = function (options, classes, enableBookStyleOverrides, reader) 
 
             Globals.logEvent("OnePageView.Events.SPINE_ITEM_OPEN_START", "EMIT", "one_page_view.js [ " + spineItem.href + " -- " + src + " ]");
             self.emit(OnePageView.Events.SPINE_ITEM_OPEN_START, _$iframe, _currentSpineItem);
-            
+
             _iframeLoader.loadIframe(_$iframe[0], src, function (success) {
 
                 if (success && callback) {
@@ -6111,7 +6111,7 @@ var OnePageView = function (options, classes, enableBookStyleOverrides, reader) 
             left: 0
         };
     }
-    
+
     function getFrameDimensions() {
         if (reader.needsFixedLayoutScalerWorkAround()) {
             var parentEl = _$el.parent()[0];
@@ -6125,7 +6125,7 @@ var OnePageView = function (options, classes, enableBookStyleOverrides, reader) 
             height: _meta_size.height
         };
     }
-    
+
     this.getNavigator = function () {
         return new CfiNavigationLogic({
             $iframe: _$iframe,
@@ -6289,27 +6289,27 @@ return OnePageView;
 
 //  Created by Boris Schneiderman.
 //  Copyright (c) 2014 Readium Foundation and/or its licensees. All rights reserved.
-//  
-//  Redistribution and use in source and binary forms, with or without modification, 
+//
+//  Redistribution and use in source and binary forms, with or without modification,
 //  are permitted provided that the following conditions are met:
-//  1. Redistributions of source code must retain the above copyright notice, this 
+//  1. Redistributions of source code must retain the above copyright notice, this
 //  list of conditions and the following disclaimer.
-//  2. Redistributions in binary form must reproduce the above copyright notice, 
-//  this list of conditions and the following disclaimer in the documentation and/or 
+//  2. Redistributions in binary form must reproduce the above copyright notice,
+//  this list of conditions and the following disclaimer in the documentation and/or
 //  other materials provided with the distribution.
-//  3. Neither the name of the organization nor the names of its contributors may be 
-//  used to endorse or promote products derived from this software without specific 
+//  3. Neither the name of the organization nor the names of its contributors may be
+//  used to endorse or promote products derived from this software without specific
 //  prior written permission.
-//  
-//  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
-//  ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED 
-//  WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. 
-//  IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, 
-//  INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, 
-//  BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, 
-//  DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF 
-//  LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE 
-//  OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED 
+//
+//  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
+//  ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+//  WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
+//  IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT,
+//  INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING,
+//  BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+//  DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+//  LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE
+//  OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED
 //  OF THE POSSIBILITY OF SUCH DAMAGE.
 
 define('readium_shared_js/models/page_open_request',[],function() {
@@ -6393,14 +6393,14 @@ var PageOpenRequest = function(spineItem, initiator) {
      * Sets the ID of the current element
      *
      * @method     setElementId
-     * @param      {number} elementId 
+     * @param      {number} elementId
      */
 
     this.setElementId = function(elementId) {
         this.reset();
         this.elementId = elementId;
     };
-    
+
     /**
      * Sets the CFI of the current element
      *
@@ -6416,7 +6416,7 @@ var PageOpenRequest = function(spineItem, initiator) {
     // Used by ReflowView to better keep track of the current page
     // using just a bookmark to firstVisibleElement makes the current
     // page gradually shift to the beginning of the chapter. By bookmarking
-    // both the first and last visible elements, we can keep track of the 
+    // both the first and last visible elements, we can keep track of the
     // "middle" of the visible area.
     this.setFirstAndLastVisibleCfi = function(firstVisibleCfi, lastVisibleCfi) {
         this.reset();
@@ -6430,27 +6430,27 @@ return PageOpenRequest;
 });
 //  Created by Boris Schneiderman.
 //  Copyright (c) 2014 Readium Foundation and/or its licensees. All rights reserved.
-//  
-//  Redistribution and use in source and binary forms, with or without modification, 
+//
+//  Redistribution and use in source and binary forms, with or without modification,
 //  are permitted provided that the following conditions are met:
-//  1. Redistributions of source code must retain the above copyright notice, this 
+//  1. Redistributions of source code must retain the above copyright notice, this
 //  list of conditions and the following disclaimer.
-//  2. Redistributions in binary form must reproduce the above copyright notice, 
-//  this list of conditions and the following disclaimer in the documentation and/or 
+//  2. Redistributions in binary form must reproduce the above copyright notice,
+//  this list of conditions and the following disclaimer in the documentation and/or
 //  other materials provided with the distribution.
-//  3. Neither the name of the organization nor the names of its contributors may be 
-//  used to endorse or promote products derived from this software without specific 
+//  3. Neither the name of the organization nor the names of its contributors may be
+//  used to endorse or promote products derived from this software without specific
 //  prior written permission.
-//  
-//  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
-//  ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED 
-//  WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. 
-//  IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, 
-//  INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, 
-//  BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, 
-//  DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF 
-//  LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE 
-//  OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED 
+//
+//  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
+//  ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+//  WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
+//  IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT,
+//  INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING,
+//  BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+//  DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+//  LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE
+//  OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED
 //  OF THE POSSIBILITY OF SUCH DAMAGE.
 
 define ('readium_shared_js/views/fixed_view',["../globals", "jquery", "underscore", "eventEmitter", "../models/bookmark_data", "../models/current_pages_info",
@@ -6504,7 +6504,7 @@ var FixedView = function(options, reader){
 
 
         pageView.on(OnePageView.Events.SPINE_ITEM_OPEN_START, function($iframe, spineItem) {
-            
+
             Globals.logEvent("OnePageView.Events.SPINE_ITEM_OPEN_START", "ON", "fixed_view.js [ " + spineItem.href + " ]");
 
             Globals.logEvent("CONTENT_DOCUMENT_LOAD_START", "EMIT", "fixed_view.js [ " + spineItem.href + " ]");
@@ -6529,7 +6529,7 @@ var FixedView = function(options, reader){
     this.setZoom = function(zoom){
         _zoom = zoom;
 
-        resizeBook(false); 
+        resizeBook(false);
     }
 
     this.render = function(){
@@ -6539,9 +6539,9 @@ var FixedView = function(options, reader){
         _$el = $(template);
 
         Helpers.CSSTransition(_$el, "all 0 ease 0");
-        
+
         _$el.css("overflow", "hidden");
-        
+
         // Removed, see one_page_view@render()
         // var settings = reader.viewerSettings();
         // if (!settings || typeof settings.enableGPUHardwareAccelerationCSS3D === "undefined")
@@ -6554,7 +6554,7 @@ var FixedView = function(options, reader){
         //     // This fixes rendering issues with WebView (native apps), which crops content embedded in iframes unless GPU hardware acceleration is enabled for CSS rendering.
         //     _$el.css("transform", "translateZ(0)");
         // }
-        
+
         _$viewport.append(_$el);
 
         self.applyStyles();
@@ -6569,9 +6569,9 @@ var FixedView = function(options, reader){
 
 
     this.setViewSettings = function(settings, docWillChange) {
-        
+
         _viewSettings = settings;
-        
+
         _spread.setSyntheticSpread(Helpers.deduceSyntheticSpread(_$viewport, getFirstVisibleItem(), _viewSettings) == true); // force boolean value (from truthy/falsey return value)
 
         var views = getDisplayingViews();
@@ -6612,10 +6612,10 @@ var FixedView = function(options, reader){
                 redraw(p1, p2);
             }
             else {
-                
+
                 if(context.isElementAdded) {
                     //self.applyStyles();
-                    
+
                     Helpers.setStyles(_userStyles.getStyles(), _$el.parent());
                     updateBookMargins();
                     // updateContentMetaSize() and resizeBook() are invoked in onPagesLoaded below
@@ -6648,13 +6648,13 @@ var FixedView = function(options, reader){
         //     views[i].updatePageSwitchDir(dir, hasChanged);
         // }
     };
-    
+
 
     this.applyStyles = function() {
 
         Helpers.setStyles(_userStyles.getStyles(), _$el.parent());
         updateBookMargins();
-        
+
         updateContentMetaSize();
         resizeBook();
     };
@@ -6683,12 +6683,12 @@ var FixedView = function(options, reader){
     }
 
     function onPagesLoaded(initiator, paginationRequest_spineItem, paginationRequest_elementId) {
-        
+
         updateContentMetaSize();
         resizeBook();
-        
+
         window.setTimeout(function () {
-            
+
             Globals.logEvent("InternalEvents.CURRENT_VIEW_PAGINATION_CHANGED", "EMIT", "fixed_view.js");
             self.emit(Globals.InternalEvents.CURRENT_VIEW_PAGINATION_CHANGED, {
                 paginationInfo: self.getPaginationInfo(),
@@ -6750,7 +6750,7 @@ var FixedView = function(options, reader){
     function resizeBook(viewportIsResizing) {
 
         updatePageSwitchDir(0, false);
-        
+
         if(!isContentRendered()) {
             return;
         }
@@ -6776,9 +6776,9 @@ var FixedView = function(options, reader){
 
         var horScale = potentialContentSize.width / _contentMetaSize.width;
         var verScale = potentialContentSize.height / _contentMetaSize.height;
-        
+
         _$viewport.css("overflow", "auto");
-            
+
         var scale;
         if (_zoom.style == 'fit-width'){
             scale = horScale;
@@ -6813,7 +6813,7 @@ var FixedView = function(options, reader){
 
         if(bookLeft < 0) bookLeft = 0;
         if(bookTop < 0) bookTop = 0;
-        
+
         _$el.css("left", bookLeft + "px");
         _$el.css("top", bookTop + "px");
         _$el.css("width", targetElementSize.width + "px");
@@ -6844,7 +6844,7 @@ var FixedView = function(options, reader){
 
             _centerPageView[transFunc](scale, left, top);
         }
-        
+
         Globals.logEvent("FXL_VIEW_RESIZED", "EMIT", "fixed_view.js");
         self.emit(Globals.Events.FXL_VIEW_RESIZED);
     }
@@ -6932,13 +6932,13 @@ var FixedView = function(options, reader){
         var isSyntheticSpread = Helpers.deduceSyntheticSpread(_$viewport, paginationRequest.spineItem, _viewSettings) == true; // force boolean value (from truthy/falsey return value)
         _spread.setSyntheticSpread(isSyntheticSpread);
         _spread.openItem(paginationRequest.spineItem);
-        
+
         var hasChanged = leftItem !== _spread.leftItem || rightItem !== _spread.rightItem || centerItem !== _spread.centerItem;
-        
+
         if (dir === null || typeof dir === "undefined") dir = 0;
-        
+
         updatePageSwitchDir(dir === 0 ? 0 : (_spread.spine.isRightToLeft() ? (dir === 1 ? 2 : 1) : dir), hasChanged);
-        
+
         redraw(paginationRequest.initiator, paginationRequest);
     };
 
@@ -6946,18 +6946,18 @@ var FixedView = function(options, reader){
     this.openPagePrev = function(initiator) {
 
         _spread.openPrev();
-        
+
         updatePageSwitchDir(_spread.spine.isRightToLeft() ? 2 : 1, true);
-        
+
         redraw(initiator, undefined);
     };
 
     this.openPageNext = function(initiator) {
 
         _spread.openNext();
-        
+
         updatePageSwitchDir(_spread.spine.isRightToLeft() ? 1 : 2, true);
-        
+
         redraw(initiator, undefined);
     };
 
@@ -6976,11 +6976,11 @@ var FixedView = function(options, reader){
 
             //if(pageView.isDisplaying()) { // always DO (no iframe reuse, as this creates problems with BlobURIs, and navigator history ... just like the reflowable view, we re-create an iframe from the template whenever needed for a new spine item URI)
             pageView.remove();
-            
+
             //if(!pageView.isDisplaying()) { // always TRUE
             _$el.append(pageView.render().element());
             context.isElementAdded = true;
-        
+
 
             pageView.loadSpineItem(item, function(success, $iframe, spineItem, isNewContentDocumentLoaded, context){
 
@@ -7098,7 +7098,7 @@ var FixedView = function(options, reader){
             return view.getElementByCfi(spineItemIdref, cfi, classBlacklist, elementBlacklist, idBlacklist);
         });
     };
-    
+
     this.getFirstVisibleMediaOverlayElement = function() {
 
         var views = getDisplayingViews();
@@ -7116,20 +7116,20 @@ var FixedView = function(options, reader){
         //TODO: during zoom+pan, playing element might not actually be visible
 
     };
-    
+
     this.getElements = function(spineItemIdref, selector) {
 
         return callOnPageView(spineItemIdref, function (view) {
             return view.getElements(spineItemIdref, selector);
         });
     };
-    
+
     this.isElementVisible = function($element){
 
         //for now we assume that for fixed layouts, elements are always visible
         return true;
     };
-    
+
     this.getVisibleElementsWithFilter = function(filterFunction, includeSpineItems) {
 
         var elements = [];
@@ -7167,7 +7167,7 @@ var FixedView = function(options, reader){
         //for now we assume that for fixed layouts, elements are always visible
         return true;
     };
-    
+
     this.isVisibleSpineItemElementCfi = function (spineItemIdref, partialCfi) {
 
         return callOnPageView(spineItemIdref, function (view) {
@@ -7324,27 +7324,27 @@ var FixedView = function(options, reader){
 //  Created by Boris Schneiderman.
 // Modified by Daniel Weck
 //  Copyright (c) 2014 Readium Foundation and/or its licensees. All rights reserved.
-//  
-//  Redistribution and use in source and binary forms, with or without modification, 
+//
+//  Redistribution and use in source and binary forms, with or without modification,
 //  are permitted provided that the following conditions are met:
-//  1. Redistributions of source code must retain the above copyright notice, this 
+//  1. Redistributions of source code must retain the above copyright notice, this
 //  list of conditions and the following disclaimer.
-//  2. Redistributions in binary form must reproduce the above copyright notice, 
-//  this list of conditions and the following disclaimer in the documentation and/or 
+//  2. Redistributions in binary form must reproduce the above copyright notice,
+//  this list of conditions and the following disclaimer in the documentation and/or
 //  other materials provided with the distribution.
-//  3. Neither the name of the organization nor the names of its contributors may be 
-//  used to endorse or promote products derived from this software without specific 
+//  3. Neither the name of the organization nor the names of its contributors may be
+//  used to endorse or promote products derived from this software without specific
 //  prior written permission.
-//  
-//  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
-//  ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED 
-//  WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. 
-//  IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, 
-//  INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, 
-//  BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, 
-//  DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF 
-//  LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE 
-//  OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED 
+//
+//  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
+//  ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+//  WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
+//  IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT,
+//  INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING,
+//  BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+//  DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+//  LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE
+//  OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED
 //  OF THE POSSIBILITY OF SUCH DAMAGE.
 
 define('readium_shared_js/views/iframe_loader',["jquery", "underscore"], function($, _) {
@@ -7385,19 +7385,19 @@ var IFrameLoader = function() {
             }
             console.error("!iframe.baseURI => " + iframe.baseURI);
         }
-    
+
         console.log("EPUB doc iframe src:");
         console.log(src);
         console.log("EPUB doc iframe base URI:");
         console.log(iframe.baseURI);
-        
+
         iframe.setAttribute("data-baseUri", iframe.baseURI);
         iframe.setAttribute("data-src", src);
 
         var loadedDocumentUri = new URI(src).absoluteTo(iframe.baseURI).search('').hash('').toString();
 
         self._loadIframeWithUri(iframe, attachedData, loadedDocumentUri, function () {
-            
+
             callback.call(context, true, attachedData);
         });
     };
@@ -7410,35 +7410,35 @@ var IFrameLoader = function() {
             $('svg', doc).on("load", function(){
                 console.log('SVG loaded');
             });
-            
+
             self.updateIframeEvents(iframe);
 
             var mathJax = iframe.contentWindow.MathJax;
             if (mathJax) {
-                
+
                 console.log("MathJax VERSION: " + mathJax.cdnVersion + " // " + mathJax.fileversion + " // " + mathJax.version);
-    
+
                 var useFontCache = true; // default in MathJax
-                
+
                 // Firefox fails to render SVG otherwise
                 if (mathJax.Hub.Browser.isFirefox) {
                     useFontCache = false;
                 }
-                
+
                 // Chrome 49+ fails to render SVG otherwise
                 // https://github.com/readium/readium-js/issues/138
                 if (mathJax.Hub.Browser.isChrome) {
                     useFontCache = false;
                 }
-                
+
                 // Edge fails to render SVG otherwise
                 // https://github.com/readium/readium-js-viewer/issues/394#issuecomment-185382196
                 if (window.navigator.userAgent.indexOf("Edge") > 0) {
                     useFontCache = false;
                 }
-                
+
                 mathJax.Hub.Config({showMathMenu:false, messageStyle: "none", showProcessingMessages: true, SVG:{useFontCache:useFontCache}});
-                
+
                 // If MathJax is being used, delay the callback until it has completed rendering
                 var mathJaxCallback = _.once(callback);
                 try {
@@ -7463,27 +7463,27 @@ return IFrameLoader;
 });
 
 //  Copyright (c) 2014 Readium Foundation and/or its licensees. All rights reserved.
-// 
-//  Redistribution and use in source and binary forms, with or without modification, 
+//
+//  Redistribution and use in source and binary forms, with or without modification,
 //  are permitted provided that the following conditions are met:
-//  1. Redistributions of source code must retain the above copyright notice, this 
+//  1. Redistributions of source code must retain the above copyright notice, this
 //  list of conditions and the following disclaimer.
-//  2. Redistributions in binary form must reproduce the above copyright notice, 
-//  this list of conditions and the following disclaimer in the documentation and/or 
+//  2. Redistributions in binary form must reproduce the above copyright notice,
+//  this list of conditions and the following disclaimer in the documentation and/or
 //  other materials provided with the distribution.
-//  3. Neither the name of the organization nor the names of its contributors may be 
-//  used to endorse or promote products derived from this software without specific 
+//  3. Neither the name of the organization nor the names of its contributors may be
+//  used to endorse or promote products derived from this software without specific
 //  prior written permission.
-//  
-//  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
-//  ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED 
-//  WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. 
-//  IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, 
-//  INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, 
-//  BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, 
-//  DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF 
-//  LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE 
-//  OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED 
+//
+//  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
+//  ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+//  WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
+//  IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT,
+//  INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING,
+//  BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+//  DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+//  LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE
+//  OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED
 //  OF THE POSSIBILITY OF SUCH DAMAGE.
 
 define('readium_shared_js/views/internal_links_support',['jquery', '../helpers', 'readium_cfi_js'], function($, Helpers, epubCfi) {
@@ -7580,7 +7580,7 @@ var InternalLinksSupport = function(reader) {
 
     function readOpfFile(path, callback) {
 
-        //TODO: this should use readium-js resource fetcher (file / URI access abstraction layer), as right now this fails with packed EPUBs  
+        //TODO: this should use readium-js resource fetcher (file / URI access abstraction layer), as right now this fails with packed EPUBs
         $.ajax({
             // encoding: "UTF-8",
             // mimeType: "text/plain; charset=UTF-8",
@@ -7619,9 +7619,9 @@ var InternalLinksSupport = function(reader) {
         //reference to another file
         if(fileName) {
             var normalizedUri = new URI(hrefUri, spineItem.href);
-            
+
             var pathname = decodeURIComponent(normalizedUri.pathname());
-            
+
             var newSpineItem = reader.spine().getItemByHref(pathname);
 
             if(!newSpineItem) {
@@ -7649,7 +7649,7 @@ var InternalLinksSupport = function(reader) {
             // Check for both href and xlink:href attribute and get value
             var href;
             if (clickEvent.currentTarget.attributes["xlink:href"]) {
-                
+
                 href = clickEvent.currentTarget.attributes["xlink:href"].value;
             }
             else {
@@ -7695,33 +7695,33 @@ return InternalLinksSupport;
 //  Created by Boris Schneiderman.
 //  Modified by Daniel Weck
 //  Copyright (c) 2016 Readium Foundation and/or its licensees. All rights reserved.
-//  
-//  Redistribution and use in source and binary forms, with or without modification, 
+//
+//  Redistribution and use in source and binary forms, with or without modification,
 //  are permitted provided that the following conditions are met:
-//  1. Redistributions of source code must retain the above copyright notice, this 
+//  1. Redistributions of source code must retain the above copyright notice, this
 //  list of conditions and the following disclaimer.
-//  2. Redistributions in binary form must reproduce the above copyright notice, 
-//  this list of conditions and the following disclaimer in the documentation and/or 
+//  2. Redistributions in binary form must reproduce the above copyright notice,
+//  this list of conditions and the following disclaimer in the documentation and/or
 //  other materials provided with the distribution.
-//  3. Neither the name of the organization nor the names of its contributors may be 
-//  used to endorse or promote products derived from this software without specific 
+//  3. Neither the name of the organization nor the names of its contributors may be
+//  used to endorse or promote products derived from this software without specific
 //  prior written permission.
-//  
-//  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
-//  ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED 
-//  WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. 
-//  IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, 
-//  INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, 
-//  BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, 
-//  DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF 
-//  LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE 
-//  OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED 
+//
+//  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
+//  ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+//  WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
+//  IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT,
+//  INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING,
+//  BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+//  DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+//  LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE
+//  OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED
 //  OF THE POSSIBILITY OF SUCH DAMAGE.
 define ('readium_shared_js/models/smil_iterator',["jquery", "../helpers"], function($, Helpers) {
 /**
- * Wrapper of a smil iterator object. 
- * A smil iterator is used by the media overlay player, to move along text areas which have an audio overlay. 
- * Such areas are specified in the smil model via parallel smil nodes (text + audio).  
+ * Wrapper of a smil iterator object.
+ * A smil iterator is used by the media overlay player, to move along text areas which have an audio overlay.
+ * Such areas are specified in the smil model via parallel smil nodes (text + audio).
  *
  * @class  Models.SmilIterator
  * @constructor
@@ -7743,11 +7743,11 @@ var SmilIterator = function(smil) {
      * @property currentPar
      * @type object
      */
-     
+
     this.currentPar = undefined;
 
     /**
-     * Resets the iterator. 
+     * Resets the iterator.
      * In practice, looks for the first parallel smil node in the smil model
      *
      * @method     reset
@@ -7778,14 +7778,14 @@ var SmilIterator = function(smil) {
 //            this.next();
 //        }
 //    };
-    
+
     /**
-     * Looks for a text smil node identified by the id parameter 
+     * Looks for a text smil node identified by the id parameter
      * Returns true if the id param identifies a text smil node.
      *
      * @method     findTextId
      * @param      {Number} id A smil node identifier
-     * @return     {Boolean} 
+     * @return     {Boolean}
      */
     this.findTextId = function(id)
     {
@@ -7840,7 +7840,7 @@ var SmilIterator = function(smil) {
     /**
      * Looks for the next parallel smil node
      *
-     * @method     next 
+     * @method     next
      */
 
     this.next = function() {
@@ -7892,11 +7892,11 @@ var SmilIterator = function(smil) {
     }
 
     /**
-     * Moves to the parallel smil node given as a parameter. 
+     * Moves to the parallel smil node given as a parameter.
      *
      * @method     goToPar
      * @param      {Containter} par A parallel smil node
-     * @return     {Boolean} 
+     * @return     {Boolean}
      */
 
     this.goToPar =  function(par) {
@@ -7917,7 +7917,7 @@ var SmilIterator = function(smil) {
      * @param      {Number} startIndex Start index inside the container
      * @param      {Models.SMilModel} container The smil model
      * @param      {Boolean} previous True if  search among previous nodes
-     * @return     {Smil.ParNode} 
+     * @return     {Smil.ParNode}
      */
 
     function findParNode(startIndex, container, previous) {
@@ -7953,27 +7953,27 @@ return SmilIterator;
 });
 
 //  Copyright (c) 2014 Readium Foundation and/or its licensees. All rights reserved.
-//  
-//  Redistribution and use in source and binary forms, with or without modification, 
+//
+//  Redistribution and use in source and binary forms, with or without modification,
 //  are permitted provided that the following conditions are met:
-//  1. Redistributions of source code must retain the above copyright notice, this 
+//  1. Redistributions of source code must retain the above copyright notice, this
 //  list of conditions and the following disclaimer.
-//  2. Redistributions in binary form must reproduce the above copyright notice, 
-//  this list of conditions and the following disclaimer in the documentation and/or 
+//  2. Redistributions in binary form must reproduce the above copyright notice,
+//  this list of conditions and the following disclaimer in the documentation and/or
 //  other materials provided with the distribution.
-//  3. Neither the name of the organization nor the names of its contributors may be 
-//  used to endorse or promote products derived from this software without specific 
+//  3. Neither the name of the organization nor the names of its contributors may be
+//  used to endorse or promote products derived from this software without specific
 //  prior written permission.
-//  
-//  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
-//  ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED 
-//  WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. 
-//  IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, 
-//  INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, 
-//  BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, 
-//  DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF 
-//  LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE 
-//  OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED 
+//
+//  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
+//  ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+//  WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
+//  IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT,
+//  INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING,
+//  BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+//  DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+//  LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE
+//  OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED
 //  OF THE POSSIBILITY OF SUCH DAMAGE.
 
 define ('readium_shared_js/views/media_overlay_data_injector',["jquery", "underscore", "../helpers", "../models/smil_iterator", "rangy", 'readium_cfi_js'], function($, _, Helpers, SmilIterator, rangy, epubCfi) {
@@ -8008,7 +8008,7 @@ var MediaOverlayDataInjector = function (mediaOverlay, mediaOverlayPlayer) {
                 var touchClickMOEventHandler = function (event)
                 {
                     //console.debug("MO TOUCH-DOWN: "+event.type);
-                    
+
                     var elem = $(this)[0]; // body
                     elem = event.target; // body descendant
 
@@ -8041,7 +8041,7 @@ var MediaOverlayDataInjector = function (mediaOverlay, mediaOverlayPlayer) {
                             break;
                         }
                     }
-                    
+
                     if (data && (data.par || data.pars))
                     {
                         if (el !== elem)
@@ -8068,28 +8068,28 @@ console.log("MO CLICKED LINK");
                         if (data.pars && (typeof rangy !== "undefined"))
                         {
                             var wasPaused = false;
-                            
+
                             // To remove highlight which may have altered DOM (and break CFI expressions)
                             if (mediaOverlayPlayer.isPlayingCfi())
                             {
                                 wasPaused = true;
                                 mediaOverlayPlayer.pause();
                             }
-                         
+
                             // /////////////////////
-                            // 
+                            //
                             // var p = {x: event.pageX, y: event.pageY};
                             // if (webkitConvertPointFromPageToNode)
                             // {
                             //     p = webkitConvertPointFromPageToNode(elem.ownerDocument.body, new WebKitPoint(event.pageX, event.pageY));
                             // }
-                            // 
+                            //
                             // var div = elem.ownerDocument.getElementById("CLICKED");
                             // if (div)
                             // {
                             //     div.parentNode.removeChild(div);
                             // }
-                            // 
+                            //
                             // div = elem.ownerDocument.createElementNS("http://www.w3.org/1999/xhtml", 'div');
                             // div.setAttribute("style", "background-color: red; position: absolute; z-index: 999; width: 50px; height: 50px; left: " + p.x + "px; top: " + p.y + "px;");
                             // div.id = "CLICKED";
@@ -8097,7 +8097,7 @@ console.log("MO CLICKED LINK");
                             // var divTxt = elem.ownerDocument.createTextNode(" ");
                             // div.appendChild(divTxt);
                             // elem.ownerDocument.body.appendChild(div);
-                            //                          
+                            //
                             // /////////////////////
 
 
@@ -8115,7 +8115,7 @@ console.log("MO CLICKED LINK");
 //                                     r = elem.ownerDocument.createRange();
 //                                     range.setStart(event.rangeParent, event.rangeOffset);
 //                                 }
-//                                 
+//
 // console.log("------ 1");
 // console.log(elem.ownerDocument);
 // console.log(event.pageX);
@@ -8131,7 +8131,7 @@ console.log("MO CLICKED LINK");
 // console.log("------");
 
                                 par = undefined;
-                                
+
                                 for (var iPar = 0; iPar < data.pars.length; iPar++)
                                 {
                                     var p = data.pars[iPar];
@@ -8155,13 +8155,13 @@ console.log("MO CLICKED LINK");
                                         infoStart.textNode, infoStart.textOffset,
                                         infoEnd.textNode, infoEnd.textOffset
                                     );
-        
+
                                     if (range.isPointInRange(pos.node, pos.offset))
                                     {
 // console.log(p.cfi.partialStartCfi);
 // console.log(p.cfi.partialEndCfi);
                                         // DOUBLE CHECK WITH getClientRects ??
-                                        
+
                                         par = p;
                                         break;
                                     }
@@ -8171,7 +8171,7 @@ console.log("MO CLICKED LINK");
                             {
                                 console.error(e);
                             }
-                            
+
                             if (!par)
                             {
                                 if (wasPaused)
@@ -8220,7 +8220,7 @@ console.debug("MO readaloud attr: " + readaloud);
                 };
 
                 var touchClickMOEventHandler_ = _.debounce(touchClickMOEventHandler, 200);
-                
+
                 if ('ontouchstart' in document.documentElement)
                 {
                   $body[0].addEventListener("touchstart", touchClickMOEventHandler_, false);
@@ -8242,32 +8242,32 @@ console.debug("MO readaloud attr: " + readaloud);
         var traverseSmilSeqs = function(root)
         {
             if (!root) return;
-            
+
             if (root.nodeType && root.nodeType === "seq")
             {
                // if (root.element)
                // {
                //     console.error("WARN: seq.element already set: " + root.textref);
                // }
-                   
+
                if (root.textref)
                {
                    var parts = root.textref.split('#');
                    var file = parts[0];
                    var fragmentId = (parts.length === 2) ? parts[1] : "";
-                   // 
+                   //
                    // console.debug(root.textref);
                    // console.debug(fragmentId);
                    // console.log("---- SHOULD BE EQUAL:");
                    // console.debug(file);
                    // console.debug(par.text.srcFile);
-                   // 
+                   //
                    // if (file !== par.text.srcFile)
                    // {
                    //     console.error("adjustParToSeqSyncGranularity textref.file !== par.text.srcFile ???");
                    //     return par;
                    // }
-                   // 
+                   //
                    // if (!fragmentId)
                    // {
                    //     console.error("adjustParToSeqSyncGranularity !fragmentId ???");
@@ -8279,9 +8279,9 @@ console.debug("MO readaloud attr: " + readaloud);
                        var textRelativeRef = Helpers.ResolveContentRef(file, smil.href);
                        var same = textRelativeRef === spineItem.href;
                        if (same)
-                       {                       
+                       {
                            root.element = $iframe[0].contentDocument.getElementById(fragmentId);
-                   
+
                            if (!root.element)
                            {
                                console.error("seq.textref !element? " + root.textref);
@@ -8297,7 +8297,7 @@ console.debug("MO readaloud attr: " + readaloud);
                    }
                }
             }
-            
+
             if (root.children && root.children.length)
             {
                 for (var i = 0; i < root.children.length; i++)
@@ -8312,10 +8312,10 @@ console.debug("MO readaloud attr: " + readaloud);
 //console.debug("[[MO ATTACH]] " + spineItem.idref + " /// " + spineItem.media_overlay_id + " === " + smil.id);
 
         var iter = new SmilIterator(smil);
-        
+
         var fakeOpfRoot = "/99!";
         var epubCfiPrefix = "epubcfi";
-        
+
         while (iter.currentPar) {
             iter.currentPar.element = undefined;
             iter.currentPar.cfi = undefined;
@@ -8336,7 +8336,7 @@ console.debug("MO readaloud attr: " + readaloud);
                         if (iter.currentPar.text.srcFragmentId.indexOf(epubCfiPrefix) === 0)
                         {
                             var partial = iter.currentPar.text.srcFragmentId.substr(epubCfiPrefix.length + 1, iter.currentPar.text.srcFragmentId.length - epubCfiPrefix.length - 2);
-                            
+
                             if (partial.indexOf(fakeOpfRoot) === 0)
                             {
                                 partial = partial.substr(fakeOpfRoot.length, partial.length - fakeOpfRoot.length);
@@ -8370,14 +8370,14 @@ console.debug("MO readaloud attr: " + readaloud);
                                         partialRangeCfi: partial,
                                         partialStartCfi: partialStartCfi,
                                         partialEndCfi: partialEndCfi,
-                                        
+
                                         cfiTextParent: cfiTextParent
-                                        
+
                                         // textNode becomes invalid after highlighting! (dynamic span insertion/removal changes DOM)
                                         // cfiRangeStart: infoStart,
                                         // cfiRangeEnd: infoEnd
                                     };
-                                    
+
                                     // TODO: not just start textNode, but all of them between start and end...
                                     // ...that being said, CFI text ranges likely to be used only within a single common parent,
                                     // so this is an acceptable implementation shortcut for this CFI experimentation (word-level text/audio synchronisation).
@@ -8444,7 +8444,7 @@ console.debug("MO readaloud attr: " + readaloud);
                                 }
                             }
                         }
-                        else 
+                        else
                         {
                             console.error("SMIL text@src CFI fragment identifier scheme not supported: " + iter.currentPar.text.srcFragmentId);
                         }
@@ -8521,27 +8521,27 @@ return MediaOverlayDataInjector;
 //  Created by Boris Schneiderman.
 // Modified by Daniel Weck, Andrey Kavarma
 //  Copyright (c) 2014 Readium Foundation and/or its licensees. All rights reserved.
-//  
-//  Redistribution and use in source and binary forms, with or without modification, 
+//
+//  Redistribution and use in source and binary forms, with or without modification,
 //  are permitted provided that the following conditions are met:
-//  1. Redistributions of source code must retain the above copyright notice, this 
+//  1. Redistributions of source code must retain the above copyright notice, this
 //  list of conditions and the following disclaimer.
-//  2. Redistributions in binary form must reproduce the above copyright notice, 
-//  this list of conditions and the following disclaimer in the documentation and/or 
+//  2. Redistributions in binary form must reproduce the above copyright notice,
+//  this list of conditions and the following disclaimer in the documentation and/or
 //  other materials provided with the distribution.
-//  3. Neither the name of the organization nor the names of its contributors may be 
-//  used to endorse or promote products derived from this software without specific 
+//  3. Neither the name of the organization nor the names of its contributors may be
+//  used to endorse or promote products derived from this software without specific
 //  prior written permission.
-//  
-//  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
-//  ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED 
-//  WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. 
-//  IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, 
-//  INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, 
-//  BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, 
-//  DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF 
-//  LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE 
-//  OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED 
+//
+//  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
+//  ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+//  WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
+//  IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT,
+//  INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING,
+//  BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+//  DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+//  LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE
+//  OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED
 //  OF THE POSSIBILITY OF SUCH DAMAGE.
 
 
@@ -8567,7 +8567,7 @@ define('readium_shared_js/views/audio_player',['jquery'],function($) {
         var DEBUG = false;
 
         var _audioElement = new Audio();
-        
+
         if (DEBUG)
         {
             _audioElement.addEventListener("load", function()
@@ -8656,11 +8656,11 @@ define('readium_shared_js/views/audio_player',['jquery'],function($) {
         }
 
         var self = this;
-     
+
         //_audioElement.setAttribute("preload", "auto");
-    
+
         var _currentEpubSrc = undefined;
-    
+
         var _currentSmilSrc = undefined;
         this.currentSmilSrc = function() {
             return _currentSmilSrc;
@@ -8678,7 +8678,7 @@ define('readium_shared_js/views/audio_player',['jquery'],function($) {
             {
                 _rate = 4.0;
             }
-    
+
             _audioElement.playbackRate = _rate;
         }
         self.setRate(_rate);
@@ -8686,8 +8686,8 @@ define('readium_shared_js/views/audio_player',['jquery'],function($) {
         {
             return _rate;
         }
-    
-    
+
+
         var _volume = 1.0;
         this.setVolume = function(volume)
         {
@@ -8707,57 +8707,57 @@ define('readium_shared_js/views/audio_player',['jquery'],function($) {
         {
             return _volume;
         }
-    
+
         this.play = function()
         {
             if (DEBUG)
             {
                 console.error("this.play()");
             }
-    
+
             if(!_currentEpubSrc)
             {
                 return false;
             }
-    
+
             startTimer();
-    
+
             self.setVolume(_volume);
             self.setRate(_rate);
-    
+
             _audioElement.play();
-    
+
             return true;
         };
-    
+
         this.pause = function()
         {
             if (DEBUG)
             {
                 console.error("this.pause()");
             }
-    
+
             stopTimer();
-    
+
             _audioElement.pause();
         };
-    
+
         _audioElement.addEventListener('play', onPlay, false);
         _audioElement.addEventListener('pause', onPause, false);
         _audioElement.addEventListener('ended', onEnded, false);
-    
+
         function onPlay()
         {
             onStatusChanged({isPlaying: true});
             onAudioPlay();
         }
-    
+
         function onPause()
         {
             onAudioPause();
             onStatusChanged({isPlaying: false});
         }
-    
+
         function onEnded()
         {
             if (_audioElement.moSeeking)
@@ -8766,18 +8766,18 @@ define('readium_shared_js/views/audio_player',['jquery'],function($) {
                 {
                     console.debug("onEnded() skipped (still seeking...)");
                 }
-    
+
                 return;
             }
-    
+
             stopTimer();
-    
+
             onAudioEnded();
             onStatusChanged({isPlaying: false});
         }
-        
+
         var _intervalTimerSkips = 0;
-        
+
         var _intervalTimer = undefined;
         function startTimer()
         {
@@ -8785,7 +8785,7 @@ define('readium_shared_js/views/audio_player',['jquery'],function($) {
             {
                 return;
             }
-    
+
             _intervalTimer = setInterval(
                 function()
                 {
@@ -8795,7 +8795,7 @@ define('readium_shared_js/views/audio_player',['jquery'],function($) {
                         {
 //console.debug("interval timer skipped (still seeking...)");
                         }
-                                         
+
                         _intervalTimerSkips++;
                         if (_intervalTimerSkips > 1000)
                         {
@@ -8804,7 +8804,7 @@ define('readium_shared_js/views/audio_player',['jquery'],function($) {
                         }
                         return;
                     }
-                    
+
                     var currentTime = undefined;
                     try
                     {
@@ -8814,19 +8814,19 @@ define('readium_shared_js/views/audio_player',['jquery'],function($) {
                     {
                         console.error(ex.message);
                     }
-    
+
     //                if (DEBUG)
     //                {
     //                    console.debug("currentTime: " + currentTime);
     //                }
-    
+
                     if (currentTime)
                     {
                         onPositionChanged(currentTime, 1);
                     }
                 }, 20);
         }
-    
+
         function stopTimer()
         {
             if (_intervalTimer)
@@ -8835,32 +8835,32 @@ define('readium_shared_js/views/audio_player',['jquery'],function($) {
             }
             _intervalTimer = undefined;
         }
-    
+
         this.isPlaying = function()
         {
             return _intervalTimer !== undefined;
         };
-    
+
         this.reset = function()
         {
             if (DEBUG)
             {
                 console.error("this.reset()");
             }
-    
+
             this.pause();
-    
+
             _audioElement.moSeeking = undefined;
-    
+
             _currentSmilSrc = undefined;
             _currentEpubSrc = undefined;
-    
+
             setTimeout(function()
             {
                 _audioElement.setAttribute("src", "");
             }, 1);
         };
-    
+
 
         _audioElement.addEventListener("loadstart", function()
             {
@@ -8874,24 +8874,24 @@ define('readium_shared_js/views/audio_player',['jquery'],function($) {
             {
                 return false;
             }
-    
+
             if (_touchInited)
             {
                 return false;
             }
-    
+
             _touchInited = true;
-    
+
             _audioElement.setAttribute("src", "touch/init/html5/audio.mp3");
             _audioElement.load();
-    
+
             return true;
         };
-    
+
         var _playId = 0;
-    
+
         var _seekQueuing = 0;
-        
+
         this.playFile = function(smilSrc, epubSrc, seekBegin) //element
         {
             _playId++;
@@ -8899,9 +8899,9 @@ define('readium_shared_js/views/audio_player',['jquery'],function($) {
             {
                 _playId = 0;
             }
-    
+
             var playId = _playId;
-    
+
             if (_audioElement.moSeeking)
             {
                 _seekQueuing++;
@@ -8910,107 +8910,107 @@ define('readium_shared_js/views/audio_player',['jquery'],function($) {
                     _seekQueuing = 0;
                     return;
                 }
-                
+
                 if (DEBUG)
                 {
                     console.debug("this.playFile(" + epubSrc + ")" + " @" + seekBegin + " (POSTPONE, SEEKING...)");
                 }
-    
+
                 setTimeout(function()
                 {
                     self.playFile(smilSrc, epubSrc, seekBegin);
                 }, 20);
-                
+
                 return;
             }
-    
+
             _audioElement.moSeeking = {};
-    
+
             if (DEBUG)
             {
                 console.debug("this.playFile(" + epubSrc + ")" + " @" + seekBegin + " #" + playId);
             }
-    
+
             var audioNeedsNewSrc = !_currentEpubSrc || _currentEpubSrc !== epubSrc;
-    
+
             if (!audioNeedsNewSrc)
             {
                 if (DEBUG)
                 {
                     console.debug("this.playFile() SAME SRC");
                 }
-    
+
                 this.pause();
-    
+
                 _currentSmilSrc = smilSrc;
                 _currentEpubSrc = epubSrc;
-    
+
                 playSeekCurrentTime(seekBegin, playId, false);
-    
+
                 return;
             }
-    
+
             if (DEBUG)
             {
                 console.debug("this.playFile() NEW SRC");
                 console.debug("_currentEpubSrc: " + _currentEpubSrc);
                 console.debug("epubSrc: " + epubSrc);
             }
-    
+
             this.reset();
             _audioElement.moSeeking = {};
-    
+
             _currentSmilSrc = smilSrc;
             _currentEpubSrc = epubSrc;
-    
+
             //element.parentNode.insertBefore(_audioElement, element); //element.parentNode.childNodes[0]);
-            
+
             if (!_Android)
             {
                 _audioElement.addEventListener('play', onPlayToForcePreload, false);
             }
-    
+
             $(_audioElement).on(_readyEvent, {seekBegin: seekBegin, playId: playId}, onReadyToSeek);
-            
+
             setTimeout(function()
             {
                    _audioElement.setAttribute("src", _currentEpubSrc);
                    // _audioElement.src = _currentEpubSrc;
                    // $(_audioElement).attr("src", _currentEpubSrc);
-    
+
                    // if (_Android)
                    // {
                    //     _audioElement.addEventListener('loadstart', onReadyToPlayToForcePreload, false);
                    // }
-                   
+
                    _audioElement.load();
-    
+
                    if (!_Android)
                    {
                        playToForcePreload();
                    }
             }, 1);
         };
-    
+
         // var onReadyToPlayToForcePreload = function ()
         // {
         //     _audioElement.removeEventListener('loadstart', onReadyToPlayToForcePreload, false);
-        //     
+        //
         //     if (DEBUG)
         //     {
         //         console.debug("onReadyToPlayToForcePreload");
         //     }
-        //     
+        //
         //     playToForcePreload();
         // };
-        
+
         var playToForcePreload = function()
         {
             if (DEBUG)
             {
                 console.debug("playToForcePreload");
             }
-            
+
             //_audioElement.volume = 0;
             //_audioElement.play();
             var vol = _volume;
@@ -9018,18 +9018,18 @@ define('readium_shared_js/views/audio_player',['jquery'],function($) {
             self.play();
             _volume = vol;
         };
-    
+
         var onPlayToForcePreload = function ()
         {
             _audioElement.removeEventListener('play', onPlayToForcePreload, false);
-            
+
             if (DEBUG)
             {
                 console.debug("onPlayToForcePreload");
             }
             _audioElement.pause(); // note: interval timer continues (immediately follows self.play())
         };
-    
+
         var _readyEvent = _Android ? "canplaythrough" : "canplay";
         function onReadyToSeek_(event)
         {
@@ -9042,7 +9042,7 @@ define('readium_shared_js/views/audio_player',['jquery'],function($) {
         function onReadyToSeek(event)
         {
             $(_audioElement).off(_readyEvent, onReadyToSeek);
-            
+
             if (!_Android)
             {
                 onReadyToSeek_(event);
@@ -9053,51 +9053,51 @@ define('readium_shared_js/views/audio_player',['jquery'],function($) {
                 {
                     console.debug("onReadyToSeek ANDROID ... waiting a bit ... #" + event.data.playId);
                 }
-                
+
                 //self.play();
                 playToForcePreload();
-                
+
                 setTimeout(function() {
                     onReadyToSeek_(event);
                 }, 1000);
             }
         }
-    
+
         function playSeekCurrentTime(newCurrentTime, playId, isNewSrc)
         {
             if (DEBUG)
             {
                 console.debug("playSeekCurrentTime() #" + playId);
             }
-    
+
             if (newCurrentTime == 0)
             {
                 newCurrentTime = 0.01;
             }
-    
+
             if(Math.abs(newCurrentTime - _audioElement.currentTime) < 0.3)
             {
                 if (DEBUG)
                 {
                     console.debug("playSeekCurrentTime() CONTINUE");
                 }
-    
+
                 _audioElement.moSeeking = undefined;
                 self.play();
                 return;
             }
-    
+
             var ev = isNewSrc ? _seekedEvent1 : _seekedEvent2;
-    
+
             if (DEBUG)
             {
                 console.debug("playSeekCurrentTime() NEED SEEK, EV: " + ev);
             }
-    
+
             self.pause();
-    
+
             $(_audioElement).on(ev, {newCurrentTime: newCurrentTime, playId: playId, isNewSrc: isNewSrc}, onSeeked);
-    
+
             try
             {
                 _audioElement.currentTime = newCurrentTime;
@@ -9105,7 +9105,7 @@ define('readium_shared_js/views/audio_player',['jquery'],function($) {
             catch (ex)
             {
                 console.error(ex.message);
-    
+
                 setTimeout(function()
                 {
                     try
@@ -9119,29 +9119,29 @@ define('readium_shared_js/views/audio_player',['jquery'],function($) {
                 }, 5);
             }
         }
-        
+
         var MAX_SEEK_RETRIES = 10;
         var _seekedEvent1 = _iOS ? "canplaythrough" : "seeked"; //"progress"
         var _seekedEvent2 = _iOS ? "timeupdate" : "seeked";
         function onSeeked(event)
         {
             var ev = event.data.isNewSrc ? _seekedEvent1 : _seekedEvent2;
-    
+
             var notRetry = event.data.seekRetries == undefined;
-    
+
             if (notRetry || event.data.seekRetries == MAX_SEEK_RETRIES) // first retry
             {
                 $(_audioElement).off(ev, onSeeked);
             }
-    
+
             if (DEBUG)
             {
                 console.debug("onSeeked() #" + event.data.playId + " FIRST? " + notRetry + " EV: " + ev);
             }
-    
+
             var curTime = _audioElement.currentTime;
             var diff = Math.abs(event.data.newCurrentTime - curTime);
-    
+
             if((notRetry || event.data.seekRetries >= 0) &&
                 diff >= 1)
             {
@@ -9149,35 +9149,35 @@ define('readium_shared_js/views/audio_player',['jquery'],function($) {
                 {
                     console.debug("onSeeked() time diff: " + event.data.newCurrentTime + " vs. " + curTime + " ("+diff+")");
                 }
-                
+
                 if (notRetry)
                 {
                     event.data.seekRetries = MAX_SEEK_RETRIES;
-    
+
                     // if (DEBUG)
                     // {
                     //     console.debug("onSeeked() fail => first retry, EV: " + _seekedEvent2);
                     // }
-    
+
                     event.data.isNewSrc = false;
                     //$(_audioElement).on(_seekedEvent2, event.data, onSeeked);
                 }
-                
+
                 //else
                 {
                     event.data.seekRetries--;
-    
+
                     if (DEBUG)
                     {
                         console.debug("onSeeked() FAIL => retry again (timeout)");
                     }
-    
+
                     setTimeout(function()
                     {
                         onSeeked(event);
                     }, _Android ? 1000 : 200);
                 }
-    
+
                 setTimeout(function()
                 {
                     _audioElement.pause();
@@ -9188,7 +9188,7 @@ define('readium_shared_js/views/audio_player',['jquery'],function($) {
                     catch (ex)
                     {
                         console.error(ex.message);
-    
+
                         setTimeout(function()
                         {
                             try
@@ -9212,25 +9212,25 @@ define('readium_shared_js/views/audio_player',['jquery'],function($) {
                     console.debug(event.data.seekRetries);
                     console.debug(diff);
                 }
-    
+
                 if (diff >= 1)
                 {
                     if (DEBUG)
                     {
                         console.debug("onSeeked() ABORT, TRY AGAIN FROM SCRATCH!");
                     }
-                    
+
                     var smilSrc = _currentSmilSrc;
                     var epubSrc = _currentEpubSrc;
                     var seekBegin = event.data.newCurrentTime;
-                    
+
                     self.reset();
-                    
+
                     setTimeout(function()
                     {
                         self.playFile(smilSrc, epubSrc, seekBegin);
                     }, 10);
-                    
+
                     return;
                 }
 
@@ -9238,11 +9238,11 @@ define('readium_shared_js/views/audio_player',['jquery'],function($) {
                 {
                     console.debug("onSeeked() OKAY => play!");
                 }
-                
+
                 event.data.seekRetries = undefined;
-    
+
                 self.play();
-    
+
                 _audioElement.moSeeking = undefined;
             }
         }
@@ -9256,27 +9256,27 @@ define('readium_shared_js/views/audio_player',['jquery'],function($) {
 //  Created by Boris Schneiderman.
 // Modified by Daniel Weck
 //  Copyright (c) 2014 Readium Foundation and/or its licensees. All rights reserved.
-//  
-//  Redistribution and use in source and binary forms, with or without modification, 
+//
+//  Redistribution and use in source and binary forms, with or without modification,
 //  are permitted provided that the following conditions are met:
-//  1. Redistributions of source code must retain the above copyright notice, this 
+//  1. Redistributions of source code must retain the above copyright notice, this
 //  list of conditions and the following disclaimer.
-//  2. Redistributions in binary form must reproduce the above copyright notice, 
-//  this list of conditions and the following disclaimer in the documentation and/or 
+//  2. Redistributions in binary form must reproduce the above copyright notice,
+//  this list of conditions and the following disclaimer in the documentation and/or
 //  other materials provided with the distribution.
-//  3. Neither the name of the organization nor the names of its contributors may be 
-//  used to endorse or promote products derived from this software without specific 
+//  3. Neither the name of the organization nor the names of its contributors may be
+//  used to endorse or promote products derived from this software without specific
 //  prior written permission.
-//  
-//  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
-//  ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED 
-//  WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. 
-//  IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, 
-//  INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, 
-//  BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, 
-//  DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF 
-//  LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE 
-//  OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED 
+//
+//  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
+//  ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+//  WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
+//  IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT,
+//  INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING,
+//  BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+//  DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+//  LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE
+//  OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED
 //  OF THE POSSIBILITY OF SUCH DAMAGE.
 
 define('readium_shared_js/views/media_overlay_element_highlighter',['jquery', 'rangy', 'readium_cfi_js'], function($, rangy, epubCfi) {
@@ -9291,7 +9291,7 @@ var MediaOverlayElementHighlighter = function(reader) {
 
     var DEFAULT_MO_ACTIVE_CLASS = "mo-active-default";
     var DEFAULT_MO_SUB_SYNC_CLASS = "mo-sub-sync";
-    
+
     //var BACK_COLOR = "#99CCCC";
 
     var _highlightedElementPar = undefined;
@@ -9299,7 +9299,7 @@ var MediaOverlayElementHighlighter = function(reader) {
     {
         return _highlightedElementPar && par === _highlightedElementPar;
     };
-    
+
     var _highlightedCfiPar = undefined;
     this.isCfiHighlighted = function(par)
     {
@@ -9310,21 +9310,21 @@ var MediaOverlayElementHighlighter = function(reader) {
     var _playbackActiveClass = "";
 
     var _reader = reader;
-    
+
     var USE_RANGY = true && (typeof rangy !== "undefined");
     var _rangyCSS = undefined;
     var _rangyRange = undefined;
-    
+
     var HIGHLIGHT_ID = "MO_SPEAK";
-    
+
     var self = this;
 
     var $userStyle = undefined;
-    
+
     this.reDo = function()
     {
         //this.reset();
-        
+
         if ($userStyle)
         {
             $userStyle.remove();
@@ -9335,7 +9335,7 @@ var MediaOverlayElementHighlighter = function(reader) {
         var hc = _highlightedCfiPar;
         var c1 = _activeClass;
         var c2 = _playbackActiveClass;
-        
+
         if (_highlightedElementPar)
         {
             this.reset();
@@ -9363,7 +9363,7 @@ var MediaOverlayElementHighlighter = function(reader) {
             }
             catch (e)
             {
-                
+
             }
         }
 
@@ -9373,9 +9373,9 @@ var MediaOverlayElementHighlighter = function(reader) {
         $userStyle = $("<style type='text/css'> </style>");
 
         $userStyle.append("." + DEFAULT_MO_ACTIVE_CLASS + " {");
-        
+
         var fallbackUserStyle = "background-color: yellow !important; color: black !important; border-radius: 0.4em;";
-        
+
         var style = overrideWithUserStyle; //_reader.userStyles().findStyle("." + DEFAULT_MO_ACTIVE_CLASS);
         if (style)
         {
@@ -9390,7 +9390,7 @@ var MediaOverlayElementHighlighter = function(reader) {
                 atLeastOne = true;
                 $userStyle.append(prop + ": " + style.declarations[prop] + "; ");
             }
-            
+
             if (!atLeastOne && !hasAuthorStyle)
             {
                 $userStyle.append(fallbackUserStyle);
@@ -9400,19 +9400,19 @@ var MediaOverlayElementHighlighter = function(reader) {
         {
             $userStyle.append(fallbackUserStyle);
         }
-        
+
         $userStyle.append("}");
-        
-        
+
+
         // ---- CFI
         //$userStyle.append(" .highlight {background-color: blue; border: 2x solid green;}"); //.hover-highlight
-        
-        
+
+
         $userStyle.appendTo($head);
 
 //console.debug($userStyle[0].textContent);
     };
-    
+
     this.highlightElement = function(par, activeClass, playbackActiveClass) {
 
         if(!par || par === _highlightedElementPar) {
@@ -9423,13 +9423,13 @@ var MediaOverlayElementHighlighter = function(reader) {
 
         _highlightedElementPar = par;
         _highlightedCfiPar = undefined;
-        
+
         _activeClass = activeClass;
         _playbackActiveClass = playbackActiveClass;
 
         var seq = this.adjustParToSeqSyncGranularity(_highlightedElementPar);
         var element = seq.element;
-        
+
         if (_playbackActiveClass && _playbackActiveClass !== "")
         {
             //console.debug("MO playbackActiveClass: " + _playbackActiveClass);
@@ -9443,7 +9443,7 @@ var MediaOverlayElementHighlighter = function(reader) {
         var overrideWithUserStyle = _reader.userStyles().findStyle("." + DEFAULT_MO_ACTIVE_CLASS);
 
         ensureUserStyle($hel, hasAuthorStyle, overrideWithUserStyle);
-                
+
         if (overrideWithUserStyle || !hasAuthorStyle)
         {
             //console.debug("MO active NO CLASS: " + _activeClass);
@@ -9452,7 +9452,7 @@ var MediaOverlayElementHighlighter = function(reader) {
             {
                 $hel.addClass(_activeClass);
             }
-            
+
             $hel.addClass(DEFAULT_MO_ACTIVE_CLASS);
 
             //$(element).css("background", BACK_COLOR);
@@ -9462,12 +9462,12 @@ var MediaOverlayElementHighlighter = function(reader) {
             //console.debug("MO activeClass: " + _activeClass);
             $hel.addClass(_activeClass);
         }
-        
+
         if (this.includeParWhenAdjustingToSeqSyncGranularity || _highlightedElementPar !== seq)
         {
             $(_highlightedElementPar.element).addClass(DEFAULT_MO_SUB_SYNC_CLASS);
         }
-        
+
 // ---- CFI
 //         try
 //         {
@@ -9476,27 +9476,27 @@ var MediaOverlayElementHighlighter = function(reader) {
 //             // if(cfi[0] == "!") {
 //             //     cfi = cfi.substring(1);
 //             // }
-// 
+//
 // //console.log(element);
-//         
+//
 //             var firstTextNode = getFirstTextNode(element);
 //             var txtFirst = firstTextNode.textContent;
 // //console.log(txtFirst);
-// 
+//
 //             var lastTextNode = getLastTextNode(element);
 //             var txtLast = lastTextNode.textContent;
 // //console.log(txtLast);
-//         
+//
 //             var cfi = EPUBcfi.Generator.generateCharOffsetRangeComponent(
-//                     firstTextNode, 
-//                     0, 
-//                     lastTextNode, 
+//                     firstTextNode,
+//                     0,
+//                     lastTextNode,
 //                     txtLast.length,
 //                     ["cfi-marker"],
 //                     [],
 //                     ["MathJax_Message"]
 //                     );
-//             
+//
 //             var id = $hel.data("mediaOverlayData").par.getSmil().spineItemId;
 //             _reader.addHighlight(id, cfi, HIGHLIGHT_ID,
 //             "highlight", //"underline"
@@ -9506,11 +9506,11 @@ var MediaOverlayElementHighlighter = function(reader) {
 //         catch(error)
 //         {
 //             console.error(error);
-//         
+//
 //             removeHighlight();
 //         }
     };
-    
+
     this.highlightCfi = function(par, activeClass, playbackActiveClass) {
 
         if(!par || par === _highlightedCfiPar) {
@@ -9521,7 +9521,7 @@ var MediaOverlayElementHighlighter = function(reader) {
 
         _highlightedElementPar = undefined;
         _highlightedCfiPar = par;
-        
+
         _activeClass = activeClass;
         _playbackActiveClass = playbackActiveClass;
 
@@ -9553,28 +9553,28 @@ var MediaOverlayElementHighlighter = function(reader) {
                 [],
                 ["MathJax_Message"]);
 //console.log(infoEnd);
-            
+
             _rangyRange.setStartAndEnd(
                 infoStart.textNode, infoStart.textOffset,
                 infoEnd.textNode, infoEnd.textOffset
             );
-            
+
             if (false && // we use CssClassApplier instead, because surroundContents() has no trivial undoSurroundContents() function (inc. text nodes normalisation, etc.)
                 _rangyRange.canSurroundContents())
             {
                 _rangyRange.MO_createCssClassApplier = false;
-                
+
                 var span = doc.createElementNS("http://www.w3.org/1999/xhtml", 'span');
                 span.id = HIGHLIGHT_ID;
                 span.setAttribute("id", span.id);
                 span.setAttribute("class", clazz + " mo-cfi-highlight");
-            
+
                 _rangyRange.surroundContents(span);
             }
             else
             {
                 _rangyRange.MO_createCssClassApplier = true;
-                
+
                 if (!_rangyCSS || _rangyCSS.cssClass !== clazz)
                 {
                     _rangyCSS = rangy.createCssClassApplier(clazz,
@@ -9624,9 +9624,9 @@ var MediaOverlayElementHighlighter = function(reader) {
             }
         }
     };
-    
+
 // ---- CFI
-//     
+//
 //     function getFirstTextNode(node)
 //     {
 //         if (node.nodeType === Node.TEXT_NODE)
@@ -9634,7 +9634,7 @@ var MediaOverlayElementHighlighter = function(reader) {
 //             if (node.textContent.trim().length > 0)
 //                 return node;
 //         }
-//         
+//
 //         for (var i = 0; i < node.childNodes.length; i++)
 //         {
 //             var child = node.childNodes[i];
@@ -9644,10 +9644,10 @@ var MediaOverlayElementHighlighter = function(reader) {
 //                 return first;
 //             }
 //         }
-//         
+//
 //         return undefined;
 //     }
-//     
+//
 //     function getLastTextNode(node)
 //     {
 //         if (node.nodeType === Node.TEXT_NODE)
@@ -9655,7 +9655,7 @@ var MediaOverlayElementHighlighter = function(reader) {
 //             if (node.textContent.trim().length > 0)
 //                 return node;
 //         }
-//         
+//
 //         for (var i = node.childNodes.length-1; i >= 0; i--)
 //         {
 //             var child = node.childNodes[i];
@@ -9665,13 +9665,13 @@ var MediaOverlayElementHighlighter = function(reader) {
 //                 return last;
 //             }
 //         }
-//         
+//
 //         return undefined;
 //     }
-//     
+//
 
     this.reset = function() {
-        
+
         if (_highlightedCfiPar)
         {
             var doc = _highlightedCfiPar.cfi.cfiTextParent.ownerDocument;
@@ -9688,12 +9688,12 @@ var MediaOverlayElementHighlighter = function(reader) {
                     {
                         var txt = toRemove.textContent; // TODO: innerHTML? or better: hasChildNodes loop + detach and re-attach
                         var txtNode = doc.createTextNode(txt);
-                        
+
                         toRemove.parentNode.replaceChild(txtNode, toRemove);
                         txtNode.parentNode.normalize();
                     }
                 }
-        
+
                 //_rangyCSS = undefined;
                 _rangyRange = undefined;
             }
@@ -9702,7 +9702,7 @@ var MediaOverlayElementHighlighter = function(reader) {
                 try
                 {
                     _reader.plugins.highlights.removeHighlight(HIGHLIGHT_ID);
-        
+
                     var toRemove = undefined;
                     while ((toRemove = doc.getElementById("start-" + HIGHLIGHT_ID)) !== null)
                     {
@@ -9727,7 +9727,7 @@ var MediaOverlayElementHighlighter = function(reader) {
                 try
                 {
                     _reader.plugins.annotations.removeHighlight(HIGHLIGHT_ID);
-        
+
                     var toRemove = undefined;
                     while ((toRemove = doc.getElementById("start-" + HIGHLIGHT_ID)) !== null)
                     {
@@ -9747,12 +9747,12 @@ var MediaOverlayElementHighlighter = function(reader) {
                     console.error(error);
                 }
             }
-            
+
             _highlightedCfiPar = undefined;
         }
-        
-        
-        
+
+
+
 
         if(_highlightedElementPar) {
 
@@ -9762,7 +9762,7 @@ var MediaOverlayElementHighlighter = function(reader) {
             {
                 $(_highlightedElementPar.element).removeClass(DEFAULT_MO_SUB_SYNC_CLASS);
             }
-            
+
             if (_playbackActiveClass && _playbackActiveClass !== "")
             {
                 //console.debug("MO RESET playbackActiveClass: " + _playbackActiveClass);
@@ -9791,7 +9791,7 @@ var MediaOverlayElementHighlighter = function(reader) {
     this.adjustParToSeqSyncGranularity = function(par)
     {
         if (!par) return undefined;
-        
+
         var sync = _reader.viewerSettings().mediaOverlaysSynchronizationGranularity;
         if (sync && sync.length > 0)
         {
@@ -9808,7 +9808,7 @@ var MediaOverlayElementHighlighter = function(reader) {
                 return seq;
             }
         }
-        
+
         return par;
     };
 };
@@ -9867,7 +9867,7 @@ var ScrollView = function (options, isContinuousScroll, reader) {
     } catch(err) {
         console.error(err);
     }
-    
+
     $.extend(this, new EventEmitter());
 
     var SCROLL_MARGIN_TO_SHOW_LAST_VISBLE_LINE = 5;
@@ -10320,7 +10320,7 @@ var ScrollView = function (options, isContinuousScroll, reader) {
 
     this.restoreCurrentPosition = function() {
         if (_currentPageRequest) {
-            this.openPageInternal(_currentPageRequest);            
+            this.openPageInternal(_currentPageRequest);
         }
     };
 
@@ -10337,7 +10337,7 @@ var ScrollView = function (options, isContinuousScroll, reader) {
     };
 
     function createPageViewForSpineItem(aSpineItem, isTemporaryView) {
-        
+
         options.disablePageTransitions = true; // force
 
         var enableBookStyleOverrides = true;
@@ -10352,7 +10352,7 @@ var ScrollView = function (options, isContinuousScroll, reader) {
             reader);
 
         pageView.on(OnePageView.Events.SPINE_ITEM_OPEN_START, function($iframe, spineItem) {
-            
+
             Globals.logEvent("OnePageView.Events.SPINE_ITEM_OPEN_START", "ON", "scroll_view.js [ " + spineItem.href + " ]");
 
             Globals.logEvent("CONTENT_DOCUMENT_LOAD_START", "EMIT", "scroll_view.js [ " + spineItem.href + " ]");
@@ -10371,7 +10371,7 @@ var ScrollView = function (options, isContinuousScroll, reader) {
             onPaginationChanged(self);
             updateTransientViews();
             if (_currentPageRequest && !_deferredPageRequest) {
-                self.restoreCurrentPosition();                
+                self.restoreCurrentPosition();
             }
         }
         var updatePageViewSizeAndPagination = _.debounce(updatePageViewSizeAndPagination_, 100);
@@ -10380,7 +10380,7 @@ var ScrollView = function (options, isContinuousScroll, reader) {
         // is notified when the size of the content of the view changes, because
         // the font or the viewport size has changed
         pageView.on(OnePageView.Events.CONTENT_SIZE_CHANGED, function($iframe, spineItem) {
-            
+
             Globals.logEvent("OnePageView.Events.CONTENT_SIZE_CHANGED", "ON", "scroll_view.js [ " + spineItem.href + " ]");
             updatePageViewSizeAndPagination();
         });
@@ -10648,12 +10648,12 @@ var ScrollView = function (options, isContinuousScroll, reader) {
             pageRange = getPageViewRange(pageView);
             sfiNav = pageView.getNavigator();
 
-            var domRange = sfiNav.getDomRangeFromRangeCfi(pageRequest.elementCfi);            
+            var domRange = sfiNav.getDomRangeFromRangeCfi(pageRequest.elementCfi);
             if (!domRange) {
                 console.warn("Range for cfi=" + pageRequest.elementCfi + " not found!");
                 return;
             }
-            
+
             var domRangeAsRange = getDomRangeAsRange(pageView, domRange);
             if (isRangeIsVisibleOnScreen(domRangeAsRange, 60)) {
                 //TODO refactoring required
@@ -10708,7 +10708,7 @@ var ScrollView = function (options, isContinuousScroll, reader) {
     }
 
     function onPaginationChanged(initiator, paginationRequest_spineItem, paginationRequest_elementId) {
-        
+
         Globals.logEvent("InternalEvents.CURRENT_VIEW_PAGINATION_CHANGED", "EMIT", "scroll_view.js");
         self.emit(Globals.InternalEvents.CURRENT_VIEW_PAGINATION_CHANGED, {
             paginationInfo: self.getPaginationInfo(),
@@ -10806,7 +10806,7 @@ var ScrollView = function (options, isContinuousScroll, reader) {
 
         var el = pageView.element();
         var pos = el.position();
-        
+
         if (_jQueryPositionNeedsFix) {
             var offsetParent = el.offsetParent();
             pos.top -= offsetParent.scrollTop();
@@ -10856,7 +10856,7 @@ var ScrollView = function (options, isContinuousScroll, reader) {
     };
 
     this.bookmarkCurrentPage = function () {
-        
+
         return self.getFirstVisibleCfi();
     };
 
@@ -11072,7 +11072,7 @@ var ScrollView = function (options, isContinuousScroll, reader) {
 
         return elementRange;
     }
-    
+
     function getDomRangeAsRange(pageView, domRange) {
 
         var pageRange = getPageViewRange(pageView);
@@ -11167,7 +11167,7 @@ var ScrollView = function (options, isContinuousScroll, reader) {
             return pageView.isVisibleSpineItemElementCfi(spineIdRef, partialCfi);
         }
     };
-    
+
     function getFirstOrLastVisibleCfi(pickerFunc) {
         var pageViews = getVisiblePageViews();
         var selectedPageView = pickerFunc(pageViews);
@@ -11184,27 +11184,27 @@ var ScrollView = function (options, isContinuousScroll, reader) {
         if (pageViewTopOffset >= 0) {
             height = height - pageViewTopOffset;
         }
-        
+
         frameDimensions = {
             width: selectedPageView.element().width(),
             height: height
         };
-        
+
         var cfiFunctions = [
             selectedPageView.getFirstVisibleCfi,
             selectedPageView.getLastVisibleCfi
         ];
-        
+
         return pickerFunc(cfiFunctions)(visibleContentOffsets, frameDimensions);
     }
-    
+
     this.getFirstVisibleCfi = function () {
-        
+
         return getFirstOrLastVisibleCfi(_.first);
     };
 
     this.getLastVisibleCfi = function () {
-        
+
         return getFirstOrLastVisibleCfi(_.last);
     };
 
@@ -11285,27 +11285,27 @@ return ScrollView;
 //  Created by Boris Schneiderman.
 // Modified by Daniel Weck
 //  Copyright (c) 2014 Readium Foundation and/or its licensees. All rights reserved.
-//  
-//  Redistribution and use in source and binary forms, with or without modification, 
+//
+//  Redistribution and use in source and binary forms, with or without modification,
 //  are permitted provided that the following conditions are met:
-//  1. Redistributions of source code must retain the above copyright notice, this 
+//  1. Redistributions of source code must retain the above copyright notice, this
 //  list of conditions and the following disclaimer.
-//  2. Redistributions in binary form must reproduce the above copyright notice, 
-//  this list of conditions and the following disclaimer in the documentation and/or 
+//  2. Redistributions in binary form must reproduce the above copyright notice,
+//  this list of conditions and the following disclaimer in the documentation and/or
 //  other materials provided with the distribution.
-//  3. Neither the name of the organization nor the names of its contributors may be 
-//  used to endorse or promote products derived from this software without specific 
+//  3. Neither the name of the organization nor the names of its contributors may be
+//  used to endorse or promote products derived from this software without specific
 //  prior written permission.
-//  
-//  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
-//  ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED 
-//  WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. 
-//  IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, 
-//  INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, 
-//  BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, 
-//  DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF 
-//  LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE 
-//  OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED 
+//
+//  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
+//  ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+//  WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
+//  IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT,
+//  INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING,
+//  BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+//  DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+//  LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE
+//  OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED
 //  OF THE POSSIBILITY OF SUCH DAMAGE.
 
 define('readium_shared_js/views/media_overlay_player',["../globals", "jquery", "../helpers", "./audio_player", "./media_overlay_element_highlighter", "../models/smil_iterator", "rangy", 'readium_cfi_js', './scroll_view'],
@@ -11326,7 +11326,7 @@ var MediaOverlayPlayer = function(reader, onStatusChanged) {
     var _ttsIsPlaying = false;
     var _currentTTS = undefined;
     var _enableHTMLSpeech = true && typeof window.speechSynthesis !== "undefined" && speechSynthesis != null; // set to false to force "native" platform TTS engine, rather than HTML Speech API
-    
+
     var _SpeechSynthesisUtterance = undefined;
     //var _skipTTSEndEvent = false;
     var TOKENIZE_TTS = false;
@@ -11348,7 +11348,7 @@ var MediaOverlayPlayer = function(reader, onStatusChanged) {
 
     reader.on(Globals.Events.READER_VIEW_DESTROYED, function(){
         Globals.logEvent("READER_VIEW_DESTROYED", "ON", "media_overlay_player.js");
-        
+
         self.reset();
     });
 
@@ -11374,9 +11374,9 @@ var MediaOverlayPlayer = function(reader, onStatusChanged) {
         _audioPlayer.setVolume(_settings.mediaOverlaysVolume / 100.0);
     };
     self.onSettingsApplied();
-    
+
     reader.on(Globals.Events.SETTINGS_APPLIED, function() {
-        
+
         Globals.logEvent("SETTINGS_APPLIED", "ON", "media_overlay_player.js");
         this.onSettingsApplied();
     }, this);
@@ -11391,11 +11391,11 @@ var MediaOverlayPlayer = function(reader, onStatusChanged) {
         // 1) Globals.Events.CONTENT_DOCUMENT_LOAD_START
         // (maybe 2-page fixed-layout or reflowable spread == 2 documents == 2x events)
         // MOPLayer.onDocLoad()
-        
+
         // 2) Globals.Events.CONTENT_DOCUMENT_LOADED
         // (maybe 2-page fixed-layout or reflowable spread == 2 documents == 2x events)
         //_mediaOverlayDataInjector.attachMediaOverlayData($iframe, spineItem, _viewerSettings);
-        
+
         // 3) Globals.Events.PAGINATION_CHANGED (layout finished, notified before rest of app, just once)
         // MOPLayer.onPageChanged()
 
@@ -11406,16 +11406,16 @@ var MediaOverlayPlayer = function(reader, onStatusChanged) {
             self.pause();
         }
     };
-    
+
     var _lastPaginationData = undefined;
-    
+
     this.onPageChanged = function(paginationData) {
-        
+
         _lastPaginationData = paginationData;
-        
+
         var wasPausedBecauseNoAutoNextSmil = _wasPausedBecauseNoAutoNextSmil;
         _wasPausedBecauseNoAutoNextSmil = false;
-        
+
         var wasPlayingAtDocLoadStart = _wasPlayingAtDocLoadStart;
         _wasPlayingAtDocLoadStart = false;
 
@@ -11439,10 +11439,10 @@ var MediaOverlayPlayer = function(reader, onStatusChanged) {
 
         var element = undefined;
         var isCfiTextRange = false;
-        
+
         var fakeOpfRoot = "/99!";
         var epubCfiPrefix = "epubcfi";
-        
+
         if (paginationData.elementId || paginationData.initiator == self)
         {
             var spineItems = reader.getLoadedSpineItems();
@@ -11456,13 +11456,13 @@ var MediaOverlayPlayer = function(reader, onStatusChanged) {
                 {
                     continue;
                 }
-                
+
                 if (paginationData.elementId && paginationData.elementId.indexOf(epubCfiPrefix) === 0)
                 {
                     _elementHighlighter.reset(); // ensure clean DOM (no CFI span markers)
-                    
+
                     var partial = paginationData.elementId.substr(epubCfiPrefix.length + 1, paginationData.elementId.length - epubCfiPrefix.length - 2);
-                    
+
                     if (partial.indexOf(fakeOpfRoot) === 0)
                     {
                         partial = partial.substr(fakeOpfRoot.length, partial.length - fakeOpfRoot.length);
@@ -11504,7 +11504,7 @@ var MediaOverlayPlayer = function(reader, onStatusChanged) {
                 ["cfi-marker", "mo-cfi-highlight"],
                 [],
                 ["MathJax_Message"]);
-                                
+
                             element = ($element && $element.length > 0) ? $element[0] : undefined;
                             if (element)
                             {
@@ -11535,7 +11535,7 @@ var MediaOverlayPlayer = function(reader, onStatusChanged) {
                         element = ($element && $element.length > 0) ? $element[0] : undefined;
                         //("#" + Globals.Helpers.escapeJQuerySelector(paginationData.elementId))
                     }
-                    
+
                     if (element)
                     {
                         /*
@@ -11607,7 +11607,7 @@ var MediaOverlayPlayer = function(reader, onStatusChanged) {
                 for (var iPar = 0; iPar < moData.pars.length; iPar++)
                 {
                     var p = moData.pars[iPar];
-                    
+
                     if (paginationData.elementId === p.cfi.smilTextSrcCfi)
                     {
                         parToPlay = p;
@@ -11615,7 +11615,7 @@ var MediaOverlayPlayer = function(reader, onStatusChanged) {
                     }
                 }
             }
-            
+
             playPar(parToPlay);
             return;
         }
@@ -11673,7 +11673,7 @@ var MediaOverlayPlayer = function(reader, onStatusChanged) {
             {
                 paginationData.elementIdResolved = element;
             }
-            
+
             self.toggleMediaOverlayRefresh(paginationData);
         }
     };
@@ -11734,7 +11734,7 @@ var MediaOverlayPlayer = function(reader, onStatusChanged) {
 
     function playCurrentPar() {
         _wasPlayingScrolling = false;
-        
+
         if (!_smilIterator || !_smilIterator.currentPar)
         {
             console.error("playCurrentPar !_smilIterator || !_smilIterator.currentPar ???");
@@ -11797,7 +11797,7 @@ var MediaOverlayPlayer = function(reader, onStatusChanged) {
                     $(_currentEmbedded).on("ended", self.onEmbeddedEnd);
 
                     _embeddedIsPlaying = true;
-                    
+
                     // gives the audio player some dispatcher time to raise the onPause event
                     setTimeout(function(){
                         onStatusChanged({isPlaying: true});
@@ -11824,7 +11824,7 @@ var MediaOverlayPlayer = function(reader, onStatusChanged) {
                     }
                 }
             }
-            
+
             var cfi = _smilIterator.currentPar.cfi;
             if (cfi)
             {
@@ -11833,7 +11833,7 @@ var MediaOverlayPlayer = function(reader, onStatusChanged) {
                 self.resetBlankPage();
 
                 _elementHighlighter.reset(); // ensure clean DOM (no CFI span markers)
-                
+
                 var doc = cfi.cfiTextParent.ownerDocument;
 
                 var startCFI = "epubcfi(" + cfi.partialStartCfi + ")";
@@ -11976,7 +11976,7 @@ var MediaOverlayPlayer = function(reader, onStatusChanged) {
         }
 
         var parFrom = _smilIterator.currentPar;
-        
+
         var audio = _smilIterator.currentPar.audio;
 
         //var TOLERANCE = 0.05;
@@ -12009,14 +12009,14 @@ var MediaOverlayPlayer = function(reader, onStatusChanged) {
         {
             //var iPage = _lastPaginationData.paginationInfo.isRightToLeft ? _lastPaginationData.paginationInfo.openPages.length - 1 : 0;
             var iPage = 0;
-            
+
             var openPage = _lastPaginationData.paginationInfo.openPages[iPage];
             if (spineItemIdRef === openPage.idref)
             {
                 doNotNextSmil = false;
             }
         }
-        
+
         if (goNext)
         {
             _smilIterator.next();
@@ -12044,7 +12044,7 @@ var MediaOverlayPlayer = function(reader, onStatusChanged) {
             //        }
 
 //console.debug("NEXT SMIL ON AUDIO POS");
-        
+
             if (doNotNextSmil)
             {
                 _wasPausedBecauseNoAutoNextSmil = true;
@@ -12064,7 +12064,7 @@ var MediaOverlayPlayer = function(reader, onStatusChanged) {
             self.pause();
             return;
         }
-        
+
         if(_settings.mediaOverlaysSkipSkippables)
         {
             var skip = false;
@@ -12123,11 +12123,11 @@ var MediaOverlayPlayer = function(reader, onStatusChanged) {
                             {
                                 nextSmil(goNext);
                             }
-                            
+
                             return;
                         }
                     }
-                    
+
 //console.debug("ADJUSTED: " + _smilIterator.currentPar.text.srcFragmentId);
                     if (!goNext)
                     {
@@ -12135,7 +12135,7 @@ var MediaOverlayPlayer = function(reader, onStatusChanged) {
                         if (landed && landed !== _smilIterator.currentPar)
                         {
                             var backup = _smilIterator.currentPar;
-                    
+
                             var innerPar = undefined;
                             do
                             {
@@ -12143,23 +12143,23 @@ var MediaOverlayPlayer = function(reader, onStatusChanged) {
                                 _smilIterator.previous();
                             }
                             while (_smilIterator.currentPar && _smilIterator.currentPar.hasAncestor(landed));
-                        
+
                             if (_smilIterator.currentPar)
                             {
                                 _smilIterator.next();
-                                
+
                                 if (!_smilIterator.currentPar.hasAncestor(landed))
                                 {
                                     console.error("adjustParToSeqSyncGranularity !_smilIterator.currentPar.hasAncestor(landed) ???");
                                 }
-                                //assert 
+                                //assert
                             }
                             else
                             {
 //console.debug("adjustParToSeqSyncGranularity reached begin");
 
                                 _smilIterator.reset();
-                                
+
                                 if (_smilIterator.currentPar !== innerPar)
                                 {
                                     console.error("adjustParToSeqSyncGranularity _smilIterator.currentPar !=== innerPar???");
@@ -12171,14 +12171,14 @@ var MediaOverlayPlayer = function(reader, onStatusChanged) {
                                 console.error("adjustParToSeqSyncGranularity !_smilIterator.currentPar ?????");
                                 _smilIterator.goToPar(backup);
                             }
-                            
+
 //console.debug("ADJUSTED PREV: " + _smilIterator.currentPar.text.srcFragmentId);
                         }
                     }
                 }
             }
         }
-        
+
         if(_audioPlayer.isPlaying()
             && _smilIterator.currentPar.audio.src
             && _smilIterator.currentPar.audio.src == _audioPlayer.currentSmilSrc()
@@ -12366,7 +12366,7 @@ var MediaOverlayPlayer = function(reader, onStatusChanged) {
             setTimeout(function(){
                 onStatusChanged({isPlaying: true});
             }, 80);
-            
+
             _ttsIsPlaying = true;
 
             if (TOKENIZE_TTS && element)
@@ -12413,16 +12413,16 @@ var MediaOverlayPlayer = function(reader, onStatusChanged) {
                     {
                         _SpeechSynthesisUtterance.onend({forceSkipEnd: true, target: _SpeechSynthesisUtterance});
                     }
-                    
+
                     _SpeechSynthesisUtterance.tokenData = undefined;
-                    
+
                     _SpeechSynthesisUtterance.onboundary = undefined;
     //                 _SpeechSynthesisUtterance.onboundary = function(event)
     //                 {
     // console.debug("OLD TTS boundary");
-    //                 
+    //
     //                         event.target.tokenData = undefined;
-    //  
+    //
     //                 };
                 }
 
@@ -12435,7 +12435,7 @@ var MediaOverlayPlayer = function(reader, onStatusChanged) {
 //                         event.target.tokenData = undefined;
 //                     }
 //                 };
-                
+
                 _SpeechSynthesisUtterance.onerror = undefined;
 //                 _SpeechSynthesisUtterance.onerror = function(event)
 //                 {
@@ -12455,7 +12455,7 @@ var MediaOverlayPlayer = function(reader, onStatusChanged) {
 //            {
 //                _skipTTSEndEvent = true;
 //            }
-            
+
 console.debug("paused: "+window.speechSynthesis.paused);
 console.debug("speaking: "+window.speechSynthesis.speaking);
 console.debug("pending: "+window.speechSynthesis.pending);
@@ -12465,7 +12465,7 @@ console.debug("pending: "+window.speechSynthesis.pending);
 // console.debug("TTS pause before speak");
 //                 window.speechSynthesis.pause();
 //             }
-            
+
             function cancelTTS(first)
             {
                 if (first || window.speechSynthesis.pending)
@@ -12484,7 +12484,7 @@ console.debug("pending: "+window.speechSynthesis.pending);
                 }
             }
             cancelTTS(true);
-            
+
             function updateTTS()
             {
             // setTimeout(function()
@@ -12495,7 +12495,7 @@ console.debug("pending: "+window.speechSynthesis.pending);
                 if (TOKENIZE_TTS && tokenData)
                 {
                     _SpeechSynthesisUtterance.tokenData = tokenData;
-                
+
                     _SpeechSynthesisUtterance.onboundary = function(event)
                     //_SpeechSynthesisUtterance.addEventListener("boundary", function(event)
                     {
@@ -12684,7 +12684,7 @@ console.debug("TTS resume");
         if (wasPlaying) {
             onStatusChanged({isPlaying: false});
         }
-        
+
         _ttsIsPlaying = false;
 
         if (!_enableHTMLSpeech)
@@ -12848,9 +12848,9 @@ console.debug("TTS resume");
                         reader.insureElementVisibility(_smilIterator.currentPar.getSmil().spineItemId, _smilIterator.currentPar.element, self);
                     }
                 }
-            
+
                 return;
-            
+
             } else if (_smilIterator.currentPar.cfi) {
 
                 if (!_elementHighlighter.isCfiHighlighted(_smilIterator.currentPar))
@@ -12862,18 +12862,18 @@ console.debug("TTS resume");
                         reader.insureElementVisibility(_smilIterator.currentPar.getSmil().spineItemId, _smilIterator.currentPar.cfi.cfiTextParent, self);
                     }
                 }
-                
+
                 return;
             }
         }
-        
+
         // body (not FRAG ID)
         if (_smilIterator.currentPar.element) {
             return;
         }
-        
+
         //else: single SMIL per multiple XHTML? ==> open new spine item
-        
+
         /*
         var textRelativeRef = Globals.Helpers.ResolveContentRef(_smilIterator.currentPar.text.srcFile, _smilIterator.smil.href);
 console.debug("textRelativeRef: " + textRelativeRef);
@@ -12895,7 +12895,7 @@ console.debug("textAbsoluteRef: " + textAbsoluteRef);
     }
 
     this.escape = function() {
-        
+
         if(!_smilIterator || !_smilIterator.currentPar) {
 
             this.toggleMediaOverlay();
@@ -12954,9 +12954,9 @@ console.debug("textAbsoluteRef: " + textAbsoluteRef);
                 var findFirstPar = function(smilNode)
                 {
                     if (smilNode.nodeType && smilNode.nodeType === "par") return smilNode;
-                    
+
                     if (!smilNode.children || smilNode.children.length <= 0) return undefined;
-                    
+
                     for (var i = 0; i < smilNode.children.length; i++)
                     {
                         var child = smilNode.children[i];
@@ -12980,11 +12980,11 @@ console.debug("textAbsoluteRef: " + textAbsoluteRef);
 
     this.resetBlankPage = function() {
         var wasPlaying = false;
-        
+
         if (_blankPagePlayer)
         {
             wasPlaying = true;
-            
+
             var timer = _blankPagePlayer;
             _blankPagePlayer = undefined;
             clearTimeout(timer);
@@ -12998,14 +12998,14 @@ console.debug("textAbsoluteRef: " + textAbsoluteRef);
 
     this.resetEmbedded = function() {
         var wasPlaying = _embeddedIsPlaying;
-        
+
         if (_currentEmbedded)
         {
             $(_currentEmbedded).off("ended", self.onEmbeddedEnd);
             _currentEmbedded.pause();
         }
         _currentEmbedded = undefined;
-        
+
         if (wasPlaying) {
             onStatusChanged({isPlaying: false});
         }
@@ -13058,7 +13058,7 @@ console.debug("textAbsoluteRef: " + textAbsoluteRef);
     this.pause = function()
     {
         _wasPlayingScrolling = false;
-        
+
         if (_blankPagePlayer)
         {
             this.resetBlankPage();
@@ -13134,7 +13134,7 @@ console.debug("textAbsoluteRef: " + textAbsoluteRef);
 
         onAudioPositionChanged(position, 6);
         // setTimeout(function(){
-        //     
+        //
         // }, 1);
 
         //self.play();
@@ -13245,11 +13245,11 @@ console.debug("textAbsoluteRef: " + textAbsoluteRef);
                 _wasPlayingScrolling = true;
                 return;
             }
-            
+
             playingPar = _smilIterator.currentPar;
             self.pause();
         }
-        
+
         _wasPlayingScrolling = false;
 
         //paginationData && paginationData.elementId
@@ -13267,7 +13267,7 @@ console.debug("textAbsoluteRef: " + textAbsoluteRef);
             {
                 console.error("[WARN] id did not resolve to element?");
             }
-            
+
             for(var i = (rtl ? (spineItems.length - 1) : 0); (rtl && i >=0) || (!rtl && i < spineItems.length); i += (rtl ? -1: 1))
             {
                 var spineItem = spineItems[i];
@@ -13276,7 +13276,7 @@ console.debug("textAbsoluteRef: " + textAbsoluteRef);
                     console.error("spineItems[i] is undefined??");
                     continue;
                 }
-            
+
                 if (paginationData && paginationData.spineItem && paginationData.spineItem != spineItem)
                 {
                     continue;
@@ -13294,7 +13294,7 @@ console.debug("textAbsoluteRef: " + textAbsoluteRef);
                     {
                         // openPages are sorted by spineItem index, so the smallest index on display is the one we need to play (page on the left in LTR, or page on the right in RTL progression)
                         var index = 0; // !paginationData.paginationInfo.isRightToLeft ? 0 : paginationData.paginationInfo.openPages.length - 1;
-                    
+
                         if (paginationData.paginationInfo.openPages[index] && paginationData.paginationInfo.openPages[index].idref && paginationData.paginationInfo.openPages[index].idref === spineItem.idref)
                         {
                             var $element = reader.getElement(spineItem.idref, "body");
@@ -13336,7 +13336,7 @@ console.debug("textAbsoluteRef: " + textAbsoluteRef);
                 for (var i = 0; i < elements.length; i++)
                 {
                     if (element === elements[i]) foundMe = true;
-                    
+
                     if (foundMe)
                     {
                         var d = $(elements[i]).data("mediaOverlayData");
@@ -13388,15 +13388,15 @@ console.debug("textAbsoluteRef: " + textAbsoluteRef);
         {
             _smilIterator.reset();
         }
-        
+
         _smilIterator.goToPar(zPar);
-        
+
         if (!_smilIterator.currentPar && id)
         {
             _smilIterator.reset();
             _smilIterator.findTextId(id);
         }
-        
+
         if (!_smilIterator.currentPar)
         {
             self.reset();
@@ -13418,7 +13418,7 @@ console.debug("textAbsoluteRef: " + textAbsoluteRef);
     {
         return _smilIterator && _smilIterator.currentPar && _smilIterator.currentPar.cfi;
     };
-    
+
     var _wasPausedBecauseNoAutoNextSmil = false;
     var _autoNextSmil = true;
     this.setAutomaticNextSmil = function(autoNext)
@@ -13431,27 +13431,27 @@ console.debug("textAbsoluteRef: " + textAbsoluteRef);
 
 //  Created by Boris Schneiderman.
 //  Copyright (c) 2016 Readium Foundation and/or its licensees. All rights reserved.
-//  
-//  Redistribution and use in source and binary forms, with or without modification, 
+//
+//  Redistribution and use in source and binary forms, with or without modification,
 //  are permitted provided that the following conditions are met:
-//  1. Redistributions of source code must retain the above copyright notice, this 
+//  1. Redistributions of source code must retain the above copyright notice, this
 //  list of conditions and the following disclaimer.
-//  2. Redistributions in binary form must reproduce the above copyright notice, 
-//  this list of conditions and the following disclaimer in the documentation and/or 
+//  2. Redistributions in binary form must reproduce the above copyright notice,
+//  this list of conditions and the following disclaimer in the documentation and/or
 //  other materials provided with the distribution.
-//  3. Neither the name of the organization nor the names of its contributors may be 
-//  used to endorse or promote products derived from this software without specific 
+//  3. Neither the name of the organization nor the names of its contributors may be
+//  used to endorse or promote products derived from this software without specific
 //  prior written permission.
-//  
-//  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
-//  ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED 
-//  WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. 
-//  IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, 
-//  INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, 
-//  BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, 
-//  DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF 
-//  LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE 
-//  OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED 
+//
+//  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
+//  ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+//  WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
+//  IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT,
+//  INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING,
+//  BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+//  DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+//  LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE
+//  OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED
 //  OF THE POSSIBILITY OF SUCH DAMAGE.
 
 define('readium_shared_js/models/spine',["./spine_item", "../helpers", "URIjs"], function(SpineItem, Helpers, URI) {
@@ -13460,7 +13460,7 @@ define('readium_shared_js/models/spine',["./spine_item", "../helpers", "URIjs"],
  *
  * @class  Models.Spine
  * @constructor
- * @param {Models.Package} epubPackage Parent package properties 
+ * @param {Models.Package} epubPackage Parent package properties
  * @param {Object} spineDTO Spine data object, container for spine properties
  */
 var Spine = function(epubPackage, spineDTO) {
@@ -13487,7 +13487,7 @@ var Spine = function(epubPackage, spineDTO) {
     /**
      * The container for parent package properties
      *
-     * @property package  
+     * @property package
      * @type Models.Package
      *
      */
@@ -13510,14 +13510,14 @@ var Spine = function(epubPackage, spineDTO) {
     }
 
     /**
-     * Checks if a spine item is linear. 
+     * Checks if a spine item is linear.
      *
      * @method     isValidLinearItem
      * @param      {Number} index  index of a spine item
      * @return     {Boolean} TRUE if the app does not handle linear items or if the item is linear.
     */
     this.isValidLinearItem = function(index) {
-        
+
         if(!isValidIndex(index)) {
             return undefined;
         }
@@ -13529,7 +13529,7 @@ var Spine = function(epubPackage, spineDTO) {
      * Checks if the page progression direction is right to left.
      *
      * @method     isRightToLeft
-     * @return     {Boolean} 
+     * @return     {Boolean}
      */
     this.isRightToLeft = function() {
 
@@ -13548,7 +13548,7 @@ var Spine = function(epubPackage, spineDTO) {
     };
 
     /**
-     * Checks if an spine item index is valid. 
+     * Checks if an spine item index is valid.
      *
      * @method     isValidIndex
      * @param      {Number} index  the index of the expected spine item
@@ -13575,7 +13575,7 @@ var Spine = function(epubPackage, spineDTO) {
     }
 
     /**
-     * Looks for the previous spine item. 
+     * Looks for the previous spine item.
      *
      * @method     prevItem
      * @param      {Models.SpineItem} item  a spine item
@@ -13602,7 +13602,7 @@ var Spine = function(epubPackage, spineDTO) {
     }
 
     /**
-     * Looks for the next spine item. 
+     * Looks for the next spine item.
      *
      * @method     nextItem
      * @param      {Models.SpineItem} item  a spine item
@@ -13614,7 +13614,7 @@ var Spine = function(epubPackage, spineDTO) {
     };
 
     /**
-     * Gets the relative URL of a spine item. 
+     * Gets the relative URL of a spine item.
      *
      * @method     getItemUrl
      * @param      {Models.SpineItem} item  the spine item
@@ -13627,7 +13627,7 @@ var Spine = function(epubPackage, spineDTO) {
     };
 
     /**
-     * Returns the first spine item. 
+     * Returns the first spine item.
      *
      * @method     first
      * @return     {Models.SpineItem} the first spine item.
@@ -13638,7 +13638,7 @@ var Spine = function(epubPackage, spineDTO) {
     };
 
     /**
-     * Returns the last spine item. 
+     * Returns the last spine item.
      *
      * @method     last
      * @return     {Models.SpineItem} the last spine item.
@@ -13649,7 +13649,7 @@ var Spine = function(epubPackage, spineDTO) {
     };
 
     /**
-     * Checks if a spine item is the first in the spine. 
+     * Checks if a spine item is the first in the spine.
      *
      * @method     isFirstItem
      * @param      {Models.SpineItem} item  a spine item
@@ -13661,7 +13661,7 @@ var Spine = function(epubPackage, spineDTO) {
     };
 
     /**
-     * Checks if a spine item is the last in the spine. 
+     * Checks if a spine item is the last in the spine.
      *
      * @method     isLastItem
      * @param      {Models.SpineItem} item  a spine item
@@ -13673,17 +13673,17 @@ var Spine = function(epubPackage, spineDTO) {
     };
 
     /**
-     * Returns a spine item by its index. 
+     * Returns a spine item by its index.
      *
      * @method     item
      * @param      {Number} index  the index of the expected spine item
      * @return     {Models.SpineItem} the expected spine item or undefined.
     */
    this.item = function(index) {
-        
+
         if (isValidIndex(index))
             return self.items[index];
-            
+
         return undefined;
     };
 
@@ -13716,15 +13716,15 @@ var Spine = function(epubPackage, spineDTO) {
      * @return     {Models.SpineItem} the expected spine item or undefined.
      */
     this.getItemByHref = function(href) {
-        
+
         var href1 = new URI(self.package.resolveRelativeUrl(href)).normalizePathname().pathname();
-        
+
         var length = self.items.length;
 
         for(var i = 0; i < length; i++) {
-            
+
             var href2 = new URI(self.package.resolveRelativeUrl(self.items[i].href)).normalizePathname().pathname();
-            
+
             if(href1 == href2) {
                 return self.items[i];
             }
@@ -13783,27 +13783,27 @@ var Spine = function(epubPackage, spineDTO) {
 //  Created by Boris Schneiderman.
 // Modified by Daniel Weck
 //  Copyright (c) 2014 Readium Foundation and/or its licensees. All rights reserved.
-//  
-//  Redistribution and use in source and binary forms, with or without modification, 
+//
+//  Redistribution and use in source and binary forms, with or without modification,
 //  are permitted provided that the following conditions are met:
-//  1. Redistributions of source code must retain the above copyright notice, this 
+//  1. Redistributions of source code must retain the above copyright notice, this
 //  list of conditions and the following disclaimer.
-//  2. Redistributions in binary form must reproduce the above copyright notice, 
-//  this list of conditions and the following disclaimer in the documentation and/or 
+//  2. Redistributions in binary form must reproduce the above copyright notice,
+//  this list of conditions and the following disclaimer in the documentation and/or
 //  other materials provided with the distribution.
-//  3. Neither the name of the organization nor the names of its contributors may be 
-//  used to endorse or promote products derived from this software without specific 
+//  3. Neither the name of the organization nor the names of its contributors may be
+//  used to endorse or promote products derived from this software without specific
 //  prior written permission.
-//  
-//  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
-//  ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED 
-//  WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. 
-//  IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, 
-//  INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, 
-//  BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, 
-//  DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF 
-//  LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE 
-//  OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED 
+//
+//  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
+//  ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+//  WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
+//  IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT,
+//  INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING,
+//  BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+//  DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+//  LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE
+//  OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED
 //  OF THE POSSIBILITY OF SUCH DAMAGE.
 define ('readium_shared_js/models/smil_model',["../helpers"], function(Helpers) {
 
@@ -13820,15 +13820,15 @@ var Smil = {};
 Smil.SmilNode = function(parent) {
 
     this.parent = parent;
-    
+
     this.id = "";
-    
+
     /**
      * Finds the smil model object, i.e. the root node of the smil tree
      *
      * @method     getSmil
      * @return     {Smil.SmilModel} node The smil model object
-     */    
+     */
     this.getSmil = function() {
 
         var node = this;
@@ -13839,7 +13839,7 @@ Smil.SmilNode = function(parent) {
         return node;
     };
     /**
-     * Checks if the node given as a parameter is an ancestor of the current node 
+     * Checks if the node given as a parameter is an ancestor of the current node
      *
      * @method     hasAncestor
      * @param      {Smil.SmilNode} node The checked node
@@ -13866,7 +13866,7 @@ Smil.SmilNode = function(parent) {
 //TimeContainerNode
 
 /**
- * Wrapper of a time container (smil) node 
+ * Wrapper of a time container (smil) node
  *
  * @class      Smil.TimeContainerNode
  * @constructor
@@ -13881,9 +13881,9 @@ Smil.TimeContainerNode = function(parent) {
      * @property parent
      * @type Smil.SmilNode
      */
-    
+
     this.parent = parent;
-    
+
     /**
      * The children nodes
      *
@@ -13892,7 +13892,7 @@ Smil.TimeContainerNode = function(parent) {
      */
 
     this.children = undefined;
-    
+
     /**
      * The index
      *
@@ -13901,7 +13901,7 @@ Smil.TimeContainerNode = function(parent) {
      */
 
     this.index = undefined;
-    
+
     /**
      * The epub type
      *
@@ -13917,7 +13917,7 @@ Smil.TimeContainerNode = function(parent) {
      *
      * @method     isEscapable
      * @param      {Array} userEscapables
-     * @return     {Bool} true if the smil node is escapable 
+     * @return     {Bool} true if the smil node is escapable
      */
 
     this.isEscapable = function(userEscapables)
@@ -13964,7 +13964,7 @@ Smil.TimeContainerNode = function(parent) {
         {
             return false;
         }
-        
+
         var smilModel = this.getSmil();
         if (!smilModel.mo)
         {
@@ -14013,7 +14013,7 @@ Smil.MediaNode = function(parent) {
      */
 
     this.parent = parent;
-    
+
     /**
      * The source locator
      *
@@ -14074,12 +14074,12 @@ Smil.SeqNode = function(parent) {
      */
 
     this.textref = "";
-    
+
     /**
-     * Calculates the total duration of audio clips 
+     * Calculates the total duration of audio clips
      *
      * @method     durationMilliseconds
-     * @return     {Number} 
+     * @return     {Number}
      */
 
     this.durationMilliseconds = function()
@@ -14088,7 +14088,7 @@ Smil.SeqNode = function(parent) {
         var smilData = this.getSmil();
 
         var total = 0;
-        
+
         for (var i = 0; i < this.children.length; i++)
         {
             var container = this.children[i];
@@ -14102,7 +14102,7 @@ Smil.SeqNode = function(parent) {
                 {
                     continue;
                 }
-                
+
                 var clipDur = container.audio.clipDurationMilliseconds();
                 total += clipDur;
             }
@@ -14114,21 +14114,21 @@ Smil.SeqNode = function(parent) {
 
         return total;
     };
-    
+
    /**
      * Looks for a given parallel node in the current sequence node and its children.
-     *  Returns true if found. 
+     *  Returns true if found.
      *
      * @method     clipOffset
      * @param      {Number} offset
      * @param      {Smil.ParNode} par The reference parallel smil node
-     * @return     {Boolean} 
-     */ 
+     * @return     {Boolean}
+     */
 
     this.clipOffset = function(offset, par)
     {
         var smilData = this.getSmil();
-        
+
         for (var i = 0; i < this.children.length; i++)
         {
             var container = this.children[i];
@@ -14167,18 +14167,18 @@ Smil.SeqNode = function(parent) {
 
 
    /**
-     * Checks if a parallel smil node exists at a given timecode in the smil sequence node. 
+     * Checks if a parallel smil node exists at a given timecode in the smil sequence node.
      * Returns the node or undefined.
      *
      * @method     parallelAt
      * @param      {Number} timeMilliseconds
      * @return     {Smil.ParNode}
-     */ 
+     */
 
     this.parallelAt = function(timeMilliseconds)
     {
         var smilData = this.getSmil();
-        
+
         var offset = 0;
 
         for (var i = 0; i < this.children.length; i++)
@@ -14186,7 +14186,7 @@ Smil.SeqNode = function(parent) {
             var timeAdjusted = timeMilliseconds - offset;
 
             var container = this.children[i];
-            
+
             // looks for a winning parallel smil node in a child parallel smil node
             if (container.nodeType === "par")
             {
@@ -14200,7 +14200,7 @@ Smil.SeqNode = function(parent) {
                 {
                     continue;
                 }
-                // and the timecode given as a parameter must correspond to the audio clip time range  
+                // and the timecode given as a parameter must correspond to the audio clip time range
                 var clipDur = container.audio.clipDurationMilliseconds();
 
                 if (clipDur > 0 && timeAdjusted <= clipDur)
@@ -14232,15 +14232,15 @@ Smil.SeqNode = function(parent) {
      * @method     nthParallel
      * @param      {Number} index
      * @param      {Number} count
-     * @return     {Smil.ParNode} 
-     */    
+     * @return     {Smil.ParNode}
+     */
 
     this.nthParallel = function(index, count)
     {
         for (var i = 0; i < this.children.length; i++)
         {
             var container = this.children[i];
-            
+
             if (container.nodeType === "par")
             {
                 count.count++;
@@ -14262,7 +14262,7 @@ Smil.SeqNode = function(parent) {
 
         return undefined;
     };
-    
+
 };
 
 Smil.SeqNode.prototype = new Smil.TimeContainerNode();
@@ -14289,7 +14289,7 @@ Smil.ParNode = function(parent) {
      */
 
     this.parent = parent;
-    
+
     /**
      * The children files
      *
@@ -14298,7 +14298,7 @@ Smil.ParNode = function(parent) {
      */
 
     this.children = [];
-    
+
     /**
      * The Node Type
      *
@@ -14311,28 +14311,28 @@ Smil.ParNode = function(parent) {
     /**
      * Some text
      *
-     * @property text 
+     * @property text
      * @type String
      */
     this.text = undefined;
-    
+
     /**
      * Some audio
      *
-     * @property audio 
+     * @property audio
      * @type unknown
      */
-    
+
     this.audio = undefined;
 
     /**
      * An element of the epub archive
      *
-     * @property element 
+     * @property element
      * @type unknown
      */
-    
-    this.element = undefined;    
+
+    this.element = undefined;
 
     /**
      * Gets the first ancestor sequence with a given epub type, or undefined.
@@ -14340,12 +14340,12 @@ Smil.ParNode = function(parent) {
      * @method     getFirstSeqAncestorWithEpubType
      * @param      {String} epubtype
      * @param      {Boolean} includeSelf
-     * @return     {Smil.SmilNode} 
-     */       
+     * @return     {Smil.SmilNode}
+     */
 
     this.getFirstSeqAncestorWithEpubType = function(epubtype, includeSelf) {
         if (!epubtype) return undefined;
-        
+
         var parent = includeSelf ? this : this.parent;
         while (parent)
         {
@@ -14353,10 +14353,10 @@ Smil.ParNode = function(parent) {
             {
                 return parent; // assert(parent.nodeType === "seq")
             }
-            
+
             parent = parent.parent;
         }
-        
+
         return undefined;
     };
 };
@@ -14390,7 +14390,7 @@ Smil.TextNode = function(parent) {
      * The node type, set to "text"
      *
      * @property nodeType
-     * @type String 
+     * @type String
      */
 
     this.nodeType = "text";
@@ -14401,9 +14401,9 @@ Smil.TextNode = function(parent) {
      * @property srcFile
      * @type String
      */
-    
+
     this.srcFile = "";
-    
+
     /**
      * A fragment of the source file ID
      *
@@ -14412,35 +14412,35 @@ Smil.TextNode = function(parent) {
      */
 
     this.srcFragmentId = "";
-    
+
     /**
      * The ID of the manifest for the current item
      *
      * @property manifestItemId
      * @type Number
      */
-    
+
     this.manifestItemId = undefined;
-    
+
     /**
      * Updates the ID of the manifest for the current media
      *
-     * @method     updateMediaManifestItemId 
-     */  
+     * @method     updateMediaManifestItemId
+     */
 
     this.updateMediaManifestItemId = function() {
 
         var smilData = this.getSmil();
-        
+
         if (!smilData.href || !smilData.href.length)
         {
             return; // Blank MO page placeholder, no real SMIL
         }
-        
+
         // var srcParts = item.src.split('#');
 //         item.srcFile = srcParts[0];
 //         item.srcFragmentId = (srcParts.length === 2) ? srcParts[1] : "";
-        
+
         var src = this.srcFile ? this.srcFile : this.src;
 // console.log("src: " + src);
 // console.log("smilData.href: " + smilData.href);
@@ -14462,12 +14462,12 @@ Smil.TextNode = function(parent) {
                 return;
             }
         }
-        
+
         console.error("Cannot set the Media ManifestItemId? " + this.src + " && " + smilData.href);
-        
+
 //        throw "BREAK";
     };
-    
+
 };
 
 Smil.TextNode.prototype = new Smil.MediaNode();
@@ -14497,7 +14497,7 @@ Smil.AudioNode = function(parent) {
     /**
      * The node type, set to "audio"
      *
-     * @property nodeType 
+     * @property nodeType
      * @type String
      */
 
@@ -14506,7 +14506,7 @@ Smil.AudioNode = function(parent) {
     /**
      * The clip begin timecode
      *
-     * @property clipBegin 
+     * @property clipBegin
      * @type Number
      */
 
@@ -14515,12 +14515,12 @@ Smil.AudioNode = function(parent) {
     /**
      * The max duration of the audio clip which is almost infinite
      *
-     * @property MAX 
+     * @property MAX
      * @type Number
      */
 
     this.MAX = 1234567890.1; //Number.MAX_VALUE - 0.1; //Infinity;
-    
+
     /**
      * The clip end timecode
      *
@@ -14529,26 +14529,26 @@ Smil.AudioNode = function(parent) {
      */
 
     this.clipEnd = this.MAX;
-    
+
     /**
      * Returns the duration of the audio clip
      *
      * @method     clipDurationMilliseconds
-     * @return     {Number} 
-     */  
+     * @return     {Number}
+     */
 
     this.clipDurationMilliseconds = function()
     {
         var _clipBeginMilliseconds = this.clipBegin * 1000;
         var _clipEndMilliseconds = this.clipEnd * 1000;
-        
+
         if (this.clipEnd >= this.MAX || _clipEndMilliseconds <= _clipBeginMilliseconds)
         {
             return 0;
         }
 
         return _clipEndMilliseconds - _clipBeginMilliseconds;
-    };  
+    };
 };
 
 Smil.AudioNode.prototype = new Smil.MediaNode();
@@ -14573,16 +14573,16 @@ var SmilModel = function() {
      */
 
     this.parent = undefined;
-    
+
     /**
      * The smil model children, i.e. a collection of seq or par smil nodes
      *
      * @property children
      * @type Array
      */
-    
-    this.children = []; 
-    
+
+    this.children = [];
+
     /**
      * The manifest item ID
      *
@@ -14590,7 +14590,7 @@ var SmilModel = function() {
      * @type Number
      */
 
-    this.id = undefined; 
+    this.id = undefined;
 
     /**
      * The href of the .smil source file
@@ -14599,8 +14599,8 @@ var SmilModel = function() {
      * @type String
      */
 
-    this.href = undefined; 
-    
+    this.href = undefined;
+
     /**
      * The duration of the audio clips
      *
@@ -14620,14 +14620,14 @@ var SmilModel = function() {
     this.mo = undefined;
 
     /**
-     * Checks if a parallel smil node exists at a given timecode in the smil model. 
+     * Checks if a parallel smil node exists at a given timecode in the smil model.
      * Returns the node or undefined.
      *
      * @method     parallelAt
-     * @param      {Number} timeMillisecond 
+     * @param      {Number} timeMillisecond
      * @return     {Smil.ParNode}
      */
-    
+
     this.parallelAt = function(timeMilliseconds)
     {
         return this.children[0].parallelAt(timeMilliseconds);
@@ -14638,7 +14638,7 @@ var SmilModel = function() {
      *
      * @method     nthParallel
      * @param      {Number} index
-     * @return     {Smil.ParNode} 
+     * @return     {Smil.ParNode}
      */
 
     this.nthParallel = function(index)
@@ -14649,7 +14649,7 @@ var SmilModel = function() {
 
     /**
      * Looks for a given parallel node in the current smil model.
-     *  Returns its offset if found. 
+     *  Returns its offset if found.
      *
      * @method     clipOffset
      * @param      {Smil.ParNode} par The reference parallel smil node
@@ -14670,7 +14670,7 @@ var SmilModel = function() {
     /**
      * Calculates the total audio duration of the smil model
      *
-     * @method     durationMilliseconds_Calculated    
+     * @method     durationMilliseconds_Calculated
      * @return     {Number}
      */
 
@@ -14678,10 +14678,10 @@ var SmilModel = function() {
     {
         return this.children[0].durationMilliseconds();
     };
-    
+
 
     var _epubtypeSyncs = [];
-    // 
+    //
     // this.clearSyncs = function()
     // {
     //     _epubtypeSyncs = [];
@@ -14697,7 +14697,7 @@ var SmilModel = function() {
                 return true;
             }
         }
-        
+
         return false;
     };
 
@@ -14706,7 +14706,7 @@ var SmilModel = function() {
      * Note: any use of the _epubtypeSyncs array?
      *
      * @method     addSync
-     * @param      {String} epubtypes    
+     * @param      {String} epubtypes
      */
 
     this.addSync = function(epubtypes)
@@ -14724,7 +14724,7 @@ var SmilModel = function() {
             }
         }
     };
-    
+
 };
 
 /**
@@ -14759,16 +14759,16 @@ SmilModel.fromSmilDTO = function(smilDTO, mo) {
     smilModel.id = smilDTO.id;
     smilModel.spineItemId = smilDTO.spineItemId;
     smilModel.href = smilDTO.href;
-    
+
     smilModel.smilVersion = smilDTO.smilVersion;
-    
+
     smilModel.duration = smilDTO.duration;
     if (smilModel.duration && smilModel.duration.length && smilModel.duration.length > 0)
     {
         console.error("SMIL duration is string, parsing float... (" + smilModel.duration + ")");
         smilModel.duration = parseFloat(smilModel.duration);
     }
-    
+
     smilModel.mo = mo; //Models.MediaOverlay
 
     if (smilModel.mo.DEBUG)
@@ -14824,7 +14824,7 @@ SmilModel.fromSmilDTO = function(smilDTO, mo) {
             {
                 node.getSmil().addSync(node.epubtype);
             }
-            
+
             indent++;
             copyChildren(nodeDTO, node);
             indent--;
@@ -14849,7 +14849,7 @@ SmilModel.fromSmilDTO = function(smilDTO, mo) {
             indent++;
             copyChildren(nodeDTO, node);
             indent--;
-            
+
             for(var i = 0, count = node.children.length; i < count; i++) {
                 var child = node.children[i];
 
@@ -14893,7 +14893,7 @@ SmilModel.fromSmilDTO = function(smilDTO, mo) {
             safeCopyProperty("srcFile", nodeDTO, node, true);
             safeCopyProperty("srcFragmentId", nodeDTO, node, false);
             safeCopyProperty("id", nodeDTO, node);
-            
+
             node.updateMediaManifestItemId();
         }
         else if (nodeDTO.nodeType == "audio") {
@@ -14937,8 +14937,8 @@ SmilModel.fromSmilDTO = function(smilDTO, mo) {
                 }
                 node.clipEnd = node.MAX;
             }
-            
-            //node.updateMediaManifestItemId(); ONLY XHTML SPINE ITEMS 
+
+            //node.updateMediaManifestItemId(); ONLY XHTML SPINE ITEMS
         }
         else {
             console.error("Unexpected smil node type: " + nodeDTO.nodeType);
@@ -14976,27 +14976,27 @@ return SmilModel;
 //  Created by Boris Schneiderman.
 // Modified by Daniel Weck
 //  Copyright (c) 2014 Readium Foundation and/or its licensees. All rights reserved.
-//  
-//  Redistribution and use in source and binary forms, with or without modification, 
+//
+//  Redistribution and use in source and binary forms, with or without modification,
 //  are permitted provided that the following conditions are met:
-//  1. Redistributions of source code must retain the above copyright notice, this 
+//  1. Redistributions of source code must retain the above copyright notice, this
 //  list of conditions and the following disclaimer.
-//  2. Redistributions in binary form must reproduce the above copyright notice, 
-//  this list of conditions and the following disclaimer in the documentation and/or 
+//  2. Redistributions in binary form must reproduce the above copyright notice,
+//  this list of conditions and the following disclaimer in the documentation and/or
 //  other materials provided with the distribution.
-//  3. Neither the name of the organization nor the names of its contributors may be 
-//  used to endorse or promote products derived from this software without specific 
+//  3. Neither the name of the organization nor the names of its contributors may be
+//  used to endorse or promote products derived from this software without specific
 //  prior written permission.
-//  
-//  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
-//  ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED 
-//  WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. 
-//  IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, 
-//  INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, 
-//  BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, 
-//  DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF 
-//  LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE 
-//  OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED 
+//
+//  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
+//  ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+//  WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
+//  IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT,
+//  INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING,
+//  BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+//  DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+//  LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE
+//  OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED
 //  OF THE POSSIBILITY OF SUCH DAMAGE.
 
 define('readium_shared_js/models/media_overlay',["./smil_model"], function(SmilModel) {
@@ -15009,33 +15009,33 @@ define('readium_shared_js/models/media_overlay',["./smil_model"], function(SmilM
  * @param {Models.Package} package EPUB package
 */
 
-var MediaOverlay = function(package) {
+var MediaOverlay = function(Package) {
 
     /**
      * The parent package object
      *
      * @property package
      * @type Models.Package
-     */    
-    this.package = package;
+     */
+    this.package = Package;
 
     /**
-     * Checks if a parallel smil node exists at a given timecode. 
+     * Checks if a parallel smil node exists at a given timecode.
      * Returns the first corresponding node found in a smil model found, or undefined.
      *
      * @method     parallelAt
      * @param      {number} timeMilliseconds
-     * @return     {Smil.ParNode}  
+     * @return     {Smil.ParNode}
      */
 
     this.parallelAt = function(timeMilliseconds)
     {
         var offset = 0;
-        
+
         for (var i = 0; i < this.smil_models.length; i++)
         {
             var smilData = this.smil_models[i];
-            
+
             var timeAdjusted = timeMilliseconds - offset;
 
             var para = smilData.parallelAt(timeAdjusted);
@@ -15049,7 +15049,7 @@ var MediaOverlay = function(package) {
 
         return undefined;
     };
-    
+
     /**
      * Calculates a timecode corresponding to a percent of the total audio duration (the function parameters smilData, par, and milliseconds are objects with a single field using the same name)
      *
@@ -15066,7 +15066,7 @@ var MediaOverlay = function(package) {
         {
             percent = 0.0;
         }
-            
+
         var total = this.durationMilliseconds_Calculated();
 
         var timeMs = total * (percent / 100.0);
@@ -15076,15 +15076,15 @@ var MediaOverlay = function(package) {
         {
             return;
         }
-        
+
         var smilDataPar = par.par.getSmil();
         if (!smilDataPar)
         {
             return;
         }
-        
+
         var smilDataOffset = 0;
-        
+
         for (var i = 0; i < this.smil_models.length; i++)
         {
             smilData.smilData = this.smil_models[i];
@@ -15102,23 +15102,23 @@ var MediaOverlay = function(package) {
      * Calculates the accumulated audio duration of each smil overlay
      *
      * @method     durationMilliseconds_Calculated
-     * @return     {Number} total duration 
+     * @return     {Number} total duration
      */
 
     this.durationMilliseconds_Calculated = function()
     {
         var total = 0;
-        
+
         for (var i = 0; i < this.smil_models.length; i++)
         {
             var smilData = this.smil_models[i];
 
             total += smilData.durationMilliseconds_Calculated();
         }
-        
+
         return total;
     };
-    
+
     /**
      * Returns the smil overlay at the given index
      *
@@ -15133,23 +15133,23 @@ var MediaOverlay = function(package) {
         {
             return undefined;
         }
-        
+
         return this.smil_models[smilIndex];
     }
-    
+
     /**
      * Calculates a percent of the total audio duration corresponding to a timecode
-     * 
+     *
      * @method     positionToPercent
      * @param      {Number} smilIndex Index of a smil model
      * @param      {Number} parIndex
      * @param      {Number} milliseconds
-     * @return     {Number} percent 
+     * @return     {Number} percent
      */
 
     this.positionToPercent = function(smilIndex, parIndex, milliseconds)
     {
-           
+
         if (smilIndex >= this.smil_models.length)
         {
             return -1.0;
@@ -15161,7 +15161,7 @@ var MediaOverlay = function(package) {
             var sd = this.smil_models[i];
             smilDataOffset += sd.durationMilliseconds_Calculated();
         }
-        
+
         var smilData = this.smil_models[smilIndex];
 
         var par = smilData.nthParallel(parIndex);
@@ -15171,11 +15171,11 @@ var MediaOverlay = function(package) {
         }
 
         var offset = smilDataOffset + smilData.clipOffset(par) + milliseconds;
-        
+
         var total = this.durationMilliseconds_Calculated();
 
         var percent = (offset / total) * 100;
-        
+
         return percent;
       };
 
@@ -15196,7 +15196,7 @@ var MediaOverlay = function(package) {
      */
 
     this.skippables = [];
-    
+
     /**
      * List of the escapable smil items
      *
@@ -15250,7 +15250,7 @@ var MediaOverlay = function(package) {
      *
      * @method     getSmilBySpineItem
      * @param      {Models.SpineItem} spineItem
-     * @return     {Models.SmilModel} 
+     * @return     {Models.SmilModel}
      */
 
     this.getSmilBySpineItem = function (spineItem) {
@@ -15291,7 +15291,7 @@ var MediaOverlay = function(package) {
      *
      * @method     getNextSmil
      * @param      {Models.SmilModel} smil The current smil model
-     * @return     {Models.SmilModel} 
+     * @return     {Models.SmilModel}
      */
 
     this.getNextSmil = function(smil) {
@@ -15309,7 +15309,7 @@ var MediaOverlay = function(package) {
      *
      * @method     getPreviousSmil
      * @param      {Models.SmilModel} smil The current smil model
-     * @return     {Models.SmilModel} 
+     * @return     {Models.SmilModel}
      */
 
     this.getPreviousSmil = function(smil) {
@@ -15400,27 +15400,27 @@ return MediaOverlay;
 
 //  Created by Boris Schneiderman.
 //  Copyright (c) 2016 Readium Foundation and/or its licensees. All rights reserved.
-//  
-//  Redistribution and use in source and binary forms, with or without modification, 
+//
+//  Redistribution and use in source and binary forms, with or without modification,
 //  are permitted provided that the following conditions are met:
-//  1. Redistributions of source code must retain the above copyright notice, this 
+//  1. Redistributions of source code must retain the above copyright notice, this
 //  list of conditions and the following disclaimer.
-//  2. Redistributions in binary form must reproduce the above copyright notice, 
-//  this list of conditions and the following disclaimer in the documentation and/or 
+//  2. Redistributions in binary form must reproduce the above copyright notice,
+//  this list of conditions and the following disclaimer in the documentation and/or
 //  other materials provided with the distribution.
-//  3. Neither the name of the organization nor the names of its contributors may be 
-//  used to endorse or promote products derived from this software without specific 
+//  3. Neither the name of the organization nor the names of its contributors may be
+//  used to endorse or promote products derived from this software without specific
 //  prior written permission.
-//  
-//  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
-//  ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED 
-//  WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. 
-//  IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, 
-//  INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, 
-//  BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, 
-//  DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF 
-//  LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE 
-//  OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED 
+//
+//  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
+//  ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+//  WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
+//  IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT,
+//  INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING,
+//  BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+//  DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+//  LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE
+//  OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED
 //  OF THE POSSIBILITY OF SUCH DAMAGE.
 
 
@@ -15438,7 +15438,7 @@ var PackageData = {
     /**
      * The Url of the package file
      *
-     * @property rootUrl 
+     * @property rootUrl
      * @type {String}
      *
      */
@@ -15446,7 +15446,7 @@ var PackageData = {
     /**
      * The Url of the package file, to prefix Media Overlays SMIL audio references
      *
-     * @property rootUrlMO 
+     * @property rootUrlMO
      * @type {String}
      *
      */
@@ -15454,7 +15454,7 @@ var PackageData = {
     /**
      * The rendering layout; expected values are "reflowable"|"pre-paginated"
      *
-     * @property rendering_layout 
+     * @property rendering_layout
      * @type {String}
      */
     rendering_layout: "",
@@ -15462,7 +15462,7 @@ var PackageData = {
     /**
      * The spine properties
      *
-     * @property spine 
+     * @property spine
      * @type {Object}
      */
     spine: {
@@ -15483,27 +15483,27 @@ return PackageData;
 });
 //  Created by Boris Schneiderman.
 //  Copyright (c) 2016 Readium Foundation and/or its licensees. All rights reserved.
-//  
-//  Redistribution and use in source and binary forms, with or without modification, 
+//
+//  Redistribution and use in source and binary forms, with or without modification,
 //  are permitted provided that the following conditions are met:
-//  1. Redistributions of source code must retain the above copyright notice, this 
+//  1. Redistributions of source code must retain the above copyright notice, this
 //  list of conditions and the following disclaimer.
-//  2. Redistributions in binary form must reproduce the above copyright notice, 
-//  this list of conditions and the following disclaimer in the documentation and/or 
+//  2. Redistributions in binary form must reproduce the above copyright notice,
+//  this list of conditions and the following disclaimer in the documentation and/or
 //  other materials provided with the distribution.
-//  3. Neither the name of the organization nor the names of its contributors may be 
-//  used to endorse or promote products derived from this software without specific 
+//  3. Neither the name of the organization nor the names of its contributors may be
+//  used to endorse or promote products derived from this software without specific
 //  prior written permission.
-//  
-//  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
-//  ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED 
-//  WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. 
-//  IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, 
-//  INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, 
-//  BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, 
-//  DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF 
-//  LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE 
-//  OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED 
+//
+//  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
+//  ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+//  WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
+//  IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT,
+//  INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING,
+//  BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+//  DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+//  LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE
+//  OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED
 //  OF THE POSSIBILITY OF SUCH DAMAGE.
 define('readium_shared_js/models/package',['../helpers','./spine_item','./spine','./media_overlay', './package_data', 'URIjs'], function (Helpers, SpineItem, Spine, MediaOverlay, PackageData, URI) {
 
@@ -15512,12 +15512,12 @@ define('readium_shared_js/models/package',['../helpers','./spine_item','./spine'
  *
  * @class  Models.Package
  * @constructor
- * @param {Models.PackageData} packageData container for package properties 
+ * @param {Models.PackageData} packageData container for package properties
  */
 var Package = function(packageData){
 
     var self = this;
-    
+
     /**
      * The associated spine object
      *
@@ -15537,64 +15537,64 @@ var Package = function(packageData){
     /**
      * The root URL of the package file, to prefix Media Overlays SMIL audio references
      *
-     * @property rootUrlMO 
+     * @property rootUrlMO
      * @type     String
      *
      */
     this.rootUrlMO = undefined;
- 
+
     /**
      * The Media Overlays object
      *
-     * @property media_overlay 
+     * @property media_overlay
      * @type     Models.MediaOverlay
      *
-     */   
+     */
     this.media_overlay = undefined;
-    
+
     /**
      * The rendition viewport (as per the EPUB3 specification)
      *
-     * @property rendition_viewport 
+     * @property rendition_viewport
      * @type     String
      *
-     */   
+     */
     this.rendition_viewport = undefined;
-    
+
     /**
      * The rendition flow (as per the EPUB3 specification)
      *
-     * @property rendition_flow 
+     * @property rendition_flow
      * @type     String
      *
-     */   
+     */
     this.rendition_flow = undefined;
-    
+
     /**
      * The rendition layout (as per the EPUB3 specification)
      *
-     * @property rendition_layout 
+     * @property rendition_layout
      * @type     String
      *
-     */   
+     */
     this.rendition_layout = undefined;
 
     /**
      * The rendition spread (as per the EPUB3 specification)
      *
-     * @property rendition_spread 
+     * @property rendition_spread
      * @type     String
      *
-     */   
+     */
     this.rendition_spread = undefined;
 
     /**
      * The rendition orientation (as per the EPUB3 specification)
      *
-     * @property rendition_orientation 
+     * @property rendition_orientation
      * @type     String
      *
-     */   
+     */
     this.rendition_orientation = undefined;
 
     /**
@@ -15605,7 +15605,7 @@ var Package = function(packageData){
      * @return     {String} the resolved relative URL.
      */
     this.resolveRelativeUrlMO = function(relativeUrl) {
-        
+
         var relativeUrlUri = undefined;
         try {
             relativeUrlUri = new URI(relativeUrl);
@@ -15619,7 +15619,7 @@ var Package = function(packageData){
         if(self.rootUrlMO && self.rootUrlMO.length > 0) {
 
             var url = self.rootUrlMO;
-            
+
             try {
                 //url = new URI(relativeUrl).absoluteTo(url).search('').hash('').toString();
                 url = new URI(url).search('').hash('').toString();
@@ -15627,7 +15627,7 @@ var Package = function(packageData){
                 console.error(err);
                 console.log(url);
             }
-            
+
             if(Helpers.EndsWith(url, "/")){
                 return url + relativeUrl;
             }
@@ -15657,11 +15657,11 @@ var Package = function(packageData){
         }
         if (relativeUrlUri && relativeUrlUri.is("absolute")) return relativeUrl; //relativeUrlUri.scheme() == "http://", "https://", "data:", etc.
 
-        
+
         if(self.rootUrl) {
 
             var url = self.rootUrl;
-            
+
             try {
                 //url = new URI(relativeUrl).absoluteTo(url).search('').hash('').toString();
                 url = new URI(url).search('').hash('').toString();
@@ -15669,7 +15669,7 @@ var Package = function(packageData){
                 console.error(err);
                 console.log(url);
             }
-            
+
             if(Helpers.EndsWith(url, "/")){
                 return url + relativeUrl;
             }
@@ -15700,9 +15700,9 @@ var Package = function(packageData){
     this.isReflowable = function() {
         return !self.isFixedLayout();
     };
-    
+
     if(packageData) {
-        
+
         this.rootUrl = packageData.rootUrl;
         this.rootUrlMO = packageData.rootUrlMO;
 
@@ -15713,7 +15713,7 @@ var Package = function(packageData){
         this.rendition_flow = packageData.rendition_flow;
         this.rendition_orientation = packageData.rendition_orientation;
         this.rendition_spread = packageData.rendition_spread;
-        
+
         this.spine = new Spine(this, packageData.spine);
 
         this.media_overlay = MediaOverlay.fromDTO(packageData.media_overlay, this);
@@ -15944,7 +15944,7 @@ var ReflowableView = function(options, reader){
         _paginationInfo.columnGap = settings.columnGap;
         _paginationInfo.columnMaxWidth = settings.columnMaxWidth;
         _paginationInfo.columnMinWidth = settings.columnMinWidth;
-        
+
         _fontSize = settings.fontSize;
         _fontSelection = settings.fontSelection;
 
@@ -15956,7 +15956,7 @@ var ReflowableView = function(options, reader){
             updateHtmlFontInfo();
         }
     };
-    
+
     function getFrameDimensions() {
         return {
             width: _$iframe[0].clientWidth,
@@ -16033,14 +16033,14 @@ var ReflowableView = function(options, reader){
             _paginationInfo.currentSpreadIndex = 0;
             _paginationInfo.currentPageIndex = 0;
             _currentSpineItem = spineItem;
-            
+
             // TODO: this is a dirty hack!!
-            _currentSpineItem.paginationInfo = _paginationInfo; 
-            
+            _currentSpineItem.paginationInfo = _paginationInfo;
+
             _isWaitingFrameRender = true;
 
             var src = _spine.package.resolveRelativeUrl(spineItem.href);
-            
+
             Globals.logEvent("CONTENT_DOCUMENT_LOAD_START", "EMIT", "reflowable_view.js [ " + spineItem.href + " -- " + src + " ]");
             self.emit(Globals.Events.CONTENT_DOCUMENT_LOAD_START, _$iframe, spineItem);
 
@@ -16051,7 +16051,7 @@ var ReflowableView = function(options, reader){
     }
 
     function updateHtmlFontInfo() {
-    
+
         if(_$epubHtml) {
             var i = _fontSelection;
             var useDefault = !reader.fonts || !reader.fonts.length || i <= 0 || (i-1) >= reader.fonts.length;
@@ -16157,7 +16157,7 @@ var ReflowableView = function(options, reader){
             _htmlBodyIsLTRWritingMode = false;
         }
 
-        _paginationInfo.isVerticalWritingMode = _htmlBodyIsVerticalWritingMode; 
+        _paginationInfo.isVerticalWritingMode = _htmlBodyIsVerticalWritingMode;
 
         hideBook();
         _$iframe.css("opacity", "1");
@@ -16364,7 +16364,7 @@ var ReflowableView = function(options, reader){
     function updateViewportSize() {
 
         var newWidth = _$contentFrame.width();
-        
+
         // Ensure that the new viewport width is always even numbered
         // this is to prevent a rendering inconsistency between browsers when odd-numbered bounds are used for CSS columns
         // See https://github.com/readium/readium-shared-js/issues/37
@@ -16385,7 +16385,7 @@ var ReflowableView = function(options, reader){
     function onPaginationChanged_(initiator, paginationRequest_spineItem, paginationRequest_elementId) {
         _paginationInfo.currentPageIndex = _paginationInfo.currentSpreadIndex * _paginationInfo.visibleColumnCount;
         _paginationInfo.pageOffset = (_paginationInfo.columnWidth + _paginationInfo.columnGap) * _paginationInfo.visibleColumnCount * _paginationInfo.currentSpreadIndex;
-        
+
         redraw();
 
         _.defer(function () {
@@ -16393,7 +16393,7 @@ var ReflowableView = function(options, reader){
             if (_lastPageRequest == undefined) {
                 self.saveCurrentPosition();
             }
-            
+
             Globals.logEvent("InternalEvents.CURRENT_VIEW_PAGINATION_CHANGED", "EMIT", "reflowable_view.js");
             self.emit(Globals.InternalEvents.CURRENT_VIEW_PAGINATION_CHANGED, {
                 paginationInfo: self.getPaginationInfo(),
@@ -16495,33 +16495,33 @@ var ReflowableView = function(options, reader){
 
         // "borderLeft" is the blank vertical strip (e.g. 40px wide) where the left-arrow button resides, i.e. previous page command
         var borderLeft = parseInt(_$viewport.css("border-left-width"));
-        
+
         // The "columnGap" separates two consecutive columns in a 2-page synthetic spread (e.g. 60px wide).
         // This middle gap (blank vertical strip) actually corresponds to the left page's right-most margin, combined with the right page's left-most margin.
-        // So, "adjustedGapLeft" is half of the center strip... 
+        // So, "adjustedGapLeft" is half of the center strip...
         var adjustedGapLeft = _paginationInfo.columnGap/2;
-        // ...but we include the "borderLeft" strip to avoid wasting valuable rendering real-estate:  
+        // ...but we include the "borderLeft" strip to avoid wasting valuable rendering real-estate:
         adjustedGapLeft = Math.max(0, adjustedGapLeft-borderLeft);
         // Typically, "adjustedGapLeft" is zero because the space available for the 'previous page' button is wider than half of the column gap!
 
         // "borderRight" is the blank vertical strip (e.g. 40px wide) where the right-arrow button resides, i.e. next page command
         var borderRight = parseInt(_$viewport.css("border-right-width"));
-        
+
         // The "columnGap" separates two consecutive columns in a 2-page synthetic spread (e.g. 60px wide).
         // This middle gap (blank vertical strip) actually corresponds to the left page's right-most margin, combined with the right page's left-most margin.
-        // So, "adjustedGapRight" is half of the center strip... 
+        // So, "adjustedGapRight" is half of the center strip...
         var adjustedGapRight = _paginationInfo.columnGap/2;
         // ...but we include the "borderRight" strip to avoid wasting valuable rendering real-estate:
         adjustedGapRight = Math.max(0, adjustedGapRight-borderRight);
         // Typically, "adjustedGapRight" is zero because the space available for the 'next page' button is wider than half of the column gap! (in other words, the right-most and left-most page margins are fully included in the strips reserved for the arrow buttons)
 
-        // Note that "availableWidth" does not contain "borderLeft" and "borderRight" (.width() excludes the padding and border and margin in the CSS box model of div#epub-reader-frame)  
+        // Note that "availableWidth" does not contain "borderLeft" and "borderRight" (.width() excludes the padding and border and margin in the CSS box model of div#epub-reader-frame)
         var availableWidth = _$viewport.width();
-        
+
         // ...So, we substract the page margins and button spacing to obtain the width available for actual text:
         var textWidth = availableWidth - adjustedGapLeft - adjustedGapRight;
-        
-        // ...and if we have 2 pages / columns, then we split the text width in half: 
+
+        // ...and if we have 2 pages / columns, then we split the text width in half:
         if (isDoublePageSyntheticSpread)
         {
             textWidth = (textWidth - _paginationInfo.columnGap) * 0.5;
@@ -16529,13 +16529,13 @@ var ReflowableView = function(options, reader){
 
         var filler = 0;
 
-        // Now, if the resulting width actually available for document content is greater than the maximum allowed value, we create even more left+right blank space to "compress" the horizontal run of text.  
+        // Now, if the resulting width actually available for document content is greater than the maximum allowed value, we create even more left+right blank space to "compress" the horizontal run of text.
         if (textWidth > MAXW)
         {
             var eachPageColumnReduction = textWidth - MAXW;
-            
+
             // if we have a 2-page synthetic spread, then we "trim" left and right sides by adding "eachPageColumnReduction" blank space.
-            // if we have a single page / column, then this loss of text real estate is shared between right and left sides  
+            // if we have a single page / column, then this loss of text real estate is shared between right and left sides
             filler = Math.floor(eachPageColumnReduction * (isDoublePageSyntheticSpread ? 1 : 0.5));
         }
 
@@ -16551,9 +16551,9 @@ var ReflowableView = function(options, reader){
                 filler = Math.floor((textWidth - MAXW) * 0.5);
             }
         }
-        
+
         _$el.css({"left": (filler+adjustedGapLeft + "px"), "right": (filler+adjustedGapRight + "px")});
-        
+
         updateViewportSize(); //_$contentFrame ==> _lastViewPortSize
 
         var resultingColumnWidth = _$el.width();
@@ -16564,7 +16564,7 @@ var ReflowableView = function(options, reader){
         if ((resultingColumnWidth-1) > MAXW) {
             console.debug("resultingColumnWidth > MAXW ! " + resultingColumnWidth + " > " + MAXW);
         }
-        
+
 
         _$iframe.css("width", _lastViewPortSize.width + "px");
         _$iframe.css("height", _lastViewPortSize.height + "px");
@@ -16647,15 +16647,15 @@ var ReflowableView = function(options, reader){
 
             // we get here on resizing the viewport
             if (_lastPageRequest) {
-                // Make sure we stay on the same page after the content or the viewport 
+                // Make sure we stay on the same page after the content or the viewport
                 // has been resized
                 _paginationInfo.currentPageIndex = 0; // current page index is not stable, reset it
                 self.restoreCurrentPosition();
             } else {
-                onPaginationChanged(self, _currentSpineItem); // => redraw() => showBook(), so the trick below is not needed                
+                onPaginationChanged(self, _currentSpineItem); // => redraw() => showBook(), so the trick below is not needed
             }
 
-            //onPaginationChanged(self, _currentSpineItem); // => redraw() => showBook(), so the trick below is not needed 
+            //onPaginationChanged(self, _currentSpineItem); // => redraw() => showBook(), so the trick below is not needed
 
             // //We do this to force re-rendering of the document in the iframe.
             // //There is a bug in WebView control with right to left columns layout - after resizing the window html document
@@ -16687,18 +16687,18 @@ var ReflowableView = function(options, reader){
         _lastBodySize.height = $(bodyElement).height();
 
         bodyElement.resizeSensor = new ResizeSensor(bodyElement, function() {
-            
+
             var newBodySize = {
                 width: $(bodyElement).width(),
                 height: $(bodyElement).height()
             };
 
             console.debug("ReflowableView content resized ...", newBodySize.width, newBodySize.height, _currentSpineItem.idref);
-            
+
             if (newBodySize.width != _lastBodySize.width || newBodySize.height != _lastBodySize.height) {
                 _lastBodySize.width = newBodySize.width;
                 _lastBodySize.height = newBodySize.height;
-                
+
                 console.debug("... updating pagination.");
 
                 updatePagination();
@@ -16707,7 +16707,7 @@ var ReflowableView = function(options, reader){
             }
         });
     }
-    
+
 //    function shiftBookOfScreen() {
 //
 //        if(_spine.isLeftToRight()) {
@@ -17006,27 +17006,27 @@ var ReflowableView = function(options, reader){
 
 //  Created by Boris Schneiderman.
 //  Copyright (c) 2014 Readium Foundation and/or its licensees. All rights reserved.
-//  
-//  Redistribution and use in source and binary forms, with or without modification, 
+//
+//  Redistribution and use in source and binary forms, with or without modification,
 //  are permitted provided that the following conditions are met:
-//  1. Redistributions of source code must retain the above copyright notice, this 
+//  1. Redistributions of source code must retain the above copyright notice, this
 //  list of conditions and the following disclaimer.
-//  2. Redistributions in binary form must reproduce the above copyright notice, 
-//  this list of conditions and the following disclaimer in the documentation and/or 
+//  2. Redistributions in binary form must reproduce the above copyright notice,
+//  this list of conditions and the following disclaimer in the documentation and/or
 //  other materials provided with the distribution.
-//  3. Neither the name of the organization nor the names of its contributors may be 
-//  used to endorse or promote products derived from this software without specific 
+//  3. Neither the name of the organization nor the names of its contributors may be
+//  used to endorse or promote products derived from this software without specific
 //  prior written permission.
-//  
-//  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
-//  ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED 
-//  WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. 
-//  IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, 
-//  INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, 
-//  BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, 
-//  DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF 
-//  LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE 
-//  OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED 
+//
+//  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
+//  ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+//  WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
+//  IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT,
+//  INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING,
+//  BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+//  DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+//  LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE
+//  OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED
 //  OF THE POSSIBILITY OF SUCH DAMAGE.
 
 define('readium_shared_js/models/style',[], function() {
@@ -17042,7 +17042,7 @@ var Style = function(selector, declarations) {
      * Initializing the selector
      *
      * @property selector
-     * @type 
+     * @type
      */
 
     this.selector = selector;
@@ -17051,7 +17051,7 @@ var Style = function(selector, declarations) {
      * Initializing the declarations
      *
      * @property selector
-     * @type 
+     * @type
      */
 
     this.declarations = declarations;
@@ -17078,27 +17078,27 @@ var Style = function(selector, declarations) {
 
     //  Created by Boris Schneiderman.
 //  Copyright (c) 2014 Readium Foundation and/or its licensees. All rights reserved.
-//  
-//  Redistribution and use in source and binary forms, with or without modification, 
+//
+//  Redistribution and use in source and binary forms, with or without modification,
 //  are permitted provided that the following conditions are met:
-//  1. Redistributions of source code must retain the above copyright notice, this 
+//  1. Redistributions of source code must retain the above copyright notice, this
 //  list of conditions and the following disclaimer.
-//  2. Redistributions in binary form must reproduce the above copyright notice, 
-//  this list of conditions and the following disclaimer in the documentation and/or 
+//  2. Redistributions in binary form must reproduce the above copyright notice,
+//  this list of conditions and the following disclaimer in the documentation and/or
 //  other materials provided with the distribution.
-//  3. Neither the name of the organization nor the names of its contributors may be 
-//  used to endorse or promote products derived from this software without specific 
+//  3. Neither the name of the organization nor the names of its contributors may be
+//  used to endorse or promote products derived from this software without specific
 //  prior written permission.
-//  
-//  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
-//  ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED 
-//  WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. 
-//  IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, 
-//  INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, 
-//  BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, 
-//  DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF 
-//  LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE 
-//  OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED 
+//
+//  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
+//  ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+//  WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
+//  IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT,
+//  INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING,
+//  BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+//  DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+//  LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE
+//  OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED
 //  OF THE POSSIBILITY OF SUCH DAMAGE.
 
 define('readium_shared_js/models/style_collection',["./style"], function(Style) {
@@ -17177,7 +17177,7 @@ var StyleCollection = function() {
      */
 
     this.removeStyle = function(selector) {
-        
+
         var count = _styles.length;
 
         for(var i = 0; i < count; i++) {
@@ -17231,32 +17231,32 @@ var StyleCollection = function() {
 //
 //  Created by Boris Schneiderman.
 //  Copyright (c) 2014 Readium Foundation and/or its licensees. All rights reserved.
-//  
-//  Redistribution and use in source and binary forms, with or without modification, 
+//
+//  Redistribution and use in source and binary forms, with or without modification,
 //  are permitted provided that the following conditions are met:
-//  1. Redistributions of source code must retain the above copyright notice, this 
+//  1. Redistributions of source code must retain the above copyright notice, this
 //  list of conditions and the following disclaimer.
-//  2. Redistributions in binary form must reproduce the above copyright notice, 
-//  this list of conditions and the following disclaimer in the documentation and/or 
+//  2. Redistributions in binary form must reproduce the above copyright notice,
+//  this list of conditions and the following disclaimer in the documentation and/or
 //  other materials provided with the distribution.
-//  3. Neither the name of the organization nor the names of its contributors may be 
-//  used to endorse or promote products derived from this software without specific 
+//  3. Neither the name of the organization nor the names of its contributors may be
+//  used to endorse or promote products derived from this software without specific
 //  prior written permission.
-//  
-//  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
-//  ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED 
-//  WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. 
-//  IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, 
-//  INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, 
-//  BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, 
-//  DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF 
-//  LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE 
-//  OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED 
+//
+//  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
+//  ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+//  WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
+//  IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT,
+//  INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING,
+//  BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+//  DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+//  LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE
+//  OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED
 //  OF THE POSSIBILITY OF SUCH DAMAGE.
 define('readium_shared_js/models/switches',["jquery", "underscore"], function($, _) {
-/** 
+/**
  * Switches in the epub publication.
- * 
+ *
  * @class Models.Switches
  * @constructor
  */
@@ -17270,7 +17270,7 @@ var Switches = function() {
 /**
  *
  * Static Switches.apply method.
- * 
+ *
  * @method Switches.apply
  * @param dom
  */
@@ -17330,27 +17330,27 @@ Switches.apply = function(dom) {
 //
 //  Created by Boris Schneiderman.
 //  Copyright (c) 2014 Readium Foundation and/or its licensees. All rights reserved.
-//  
-//  Redistribution and use in source and binary forms, with or without modification, 
+//
+//  Redistribution and use in source and binary forms, with or without modification,
 //  are permitted provided that the following conditions are met:
-//  1. Redistributions of source code must retain the above copyright notice, this 
+//  1. Redistributions of source code must retain the above copyright notice, this
 //  list of conditions and the following disclaimer.
-//  2. Redistributions in binary form must reproduce the above copyright notice, 
-//  this list of conditions and the following disclaimer in the documentation and/or 
+//  2. Redistributions in binary form must reproduce the above copyright notice,
+//  this list of conditions and the following disclaimer in the documentation and/or
 //  other materials provided with the distribution.
-//  3. Neither the name of the organization nor the names of its contributors may be 
-//  used to endorse or promote products derived from this software without specific 
+//  3. Neither the name of the organization nor the names of its contributors may be
+//  used to endorse or promote products derived from this software without specific
 //  prior written permission.
-//  
-//  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
-//  ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED 
-//  WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. 
-//  IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, 
-//  INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, 
-//  BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, 
-//  DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF 
-//  LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE 
-//  OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED 
+//
+//  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
+//  ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+//  WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
+//  IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT,
+//  INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING,
+//  BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+//  DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+//  LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE
+//  OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED
 //  OF THE POSSIBILITY OF SUCH DAMAGE.
 
 define('readium_shared_js/models/trigger',["jquery", "../helpers"], function($, Helpers) {
@@ -17365,7 +17365,7 @@ define('readium_shared_js/models/trigger',["jquery", "../helpers"], function($, 
 var Trigger = function(domNode) {
 
     var $el = $(domNode);
-    
+
     /**
      * epub trigger action
      *
@@ -17374,7 +17374,7 @@ var Trigger = function(domNode) {
      */
 
     this.action     = $el.attr("action");
-    
+
     /**
      * epub trigger ref
      *
@@ -17383,7 +17383,7 @@ var Trigger = function(domNode) {
      */
 
     this.ref         = $el.attr("ref");
-    
+
     /**
      * epub trigger event
      *
@@ -17392,7 +17392,7 @@ var Trigger = function(domNode) {
      */
 
     this.event         = $el.attr("ev:event");
-    
+
     /**
      * epub trigger observer
      *
@@ -17425,7 +17425,7 @@ Trigger.register = function(dom) {
  */
 
 Trigger.prototype.subscribe = function(dom) {
-    
+
     var selector = "#" + this.observer;
     var that = this;
     $(selector, dom).on(this.event, function() {
@@ -17760,27 +17760,27 @@ define('readium_shared_js/views/external_agent_support',["../globals", "undersco
 //  Created by Boris Schneiderman.
 // Modified by Daniel Weck
 //  Copyright (c) 2014 Readium Foundation and/or its licensees. All rights reserved.
-//  
-//  Redistribution and use in source and binary forms, with or without modification, 
+//
+//  Redistribution and use in source and binary forms, with or without modification,
 //  are permitted provided that the following conditions are met:
-//  1. Redistributions of source code must retain the above copyright notice, this 
+//  1. Redistributions of source code must retain the above copyright notice, this
 //  list of conditions and the following disclaimer.
-//  2. Redistributions in binary form must reproduce the above copyright notice, 
-//  this list of conditions and the following disclaimer in the documentation and/or 
+//  2. Redistributions in binary form must reproduce the above copyright notice,
+//  this list of conditions and the following disclaimer in the documentation and/or
 //  other materials provided with the distribution.
-//  3. Neither the name of the organization nor the names of its contributors may be 
-//  used to endorse or promote products derived from this software without specific 
+//  3. Neither the name of the organization nor the names of its contributors may be
+//  used to endorse or promote products derived from this software without specific
 //  prior written permission.
-//  
-//  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
-//  ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED 
-//  WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. 
-//  IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, 
-//  INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, 
-//  BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, 
-//  DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF 
-//  LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE 
-//  OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED 
+//
+//  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
+//  ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+//  WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
+//  IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT,
+//  INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING,
+//  BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+//  DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+//  LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE
+//  OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED
 //  OF THE POSSIBILITY OF SUCH DAMAGE.
 
 define('readium_shared_js/views/reader_view',["../globals", "jquery", "underscore", "eventEmitter", "./fixed_view", "../helpers", "./iframe_loader", "./internal_links_support",
@@ -17990,7 +17990,7 @@ var ReaderView = function (options) {
 
 
         _currentView = self.createViewForType(desiredViewType, viewCreationParams);
-        
+
         Globals.logEvent("READER_VIEW_CREATED", "EMIT", "reader_view.js");
         self.emit(Globals.Events.READER_VIEW_CREATED, desiredViewType);
 
@@ -18022,13 +18022,13 @@ var ReaderView = function (options) {
         });
 
         _currentView.on(Globals.Events.CONTENT_DOCUMENT_UNLOADED, function ($iframe, spineItem) {
-            
+
             Globals.logEvent("CONTENT_DOCUMENT_UNLOADED", "EMIT", "reader_view.js [ " + spineItem.href + " ]");
             self.emit(Globals.Events.CONTENT_DOCUMENT_UNLOADED, $iframe, spineItem);
         });
 
         _currentView.on(Globals.InternalEvents.CURRENT_VIEW_PAGINATION_CHANGED, function (pageChangeData) {
-            
+
             Globals.logEvent("InternalEvents.CURRENT_VIEW_PAGINATION_CHANGED", "ON", "reader_view.js");
 
             //we call on onPageChanged explicitly instead of subscribing to the Globals.Events.PAGINATION_CHANGED by
@@ -18039,7 +18039,7 @@ var ReaderView = function (options) {
             _.defer(function () {
                 Globals.logEvent("PAGINATION_CHANGED", "EMIT", "reader_view.js");
                 self.emit(Globals.Events.PAGINATION_CHANGED, pageChangeData);
-                
+
                 if (!pageChangeData.spineItem) return;
                 _.defer(function () {
                     _externalAgentSupport.updateContentDocument(pageChangeData.spineItem);
@@ -18092,7 +18092,7 @@ var ReaderView = function (options) {
 
         Globals.logEvent("InternalEvents.CURRENT_VIEW_PAGINATION_CHANGED", "OFF", "reader_view.js");
         _currentView.off(Globals.InternalEvents.CURRENT_VIEW_PAGINATION_CHANGED);
-        
+
         _currentView.remove();
         _currentView = undefined;
     }
@@ -18395,7 +18395,7 @@ var ReaderView = function (options) {
                     Globals.logEvent("SETTINGS_APPLIED 1 (view update)", "EMIT", "reader_view.js");
                     self.emit(Globals.Events.SETTINGS_APPLIED);
                 });
-                
+
                 return;
             }
         }
@@ -18798,38 +18798,38 @@ var ReaderView = function (options) {
 
         var DEBUG = true; // change this to visualize the CFI range
         if (!DEBUG) return;
-            
+
         var paginationInfo = this.getPaginationInfo();
         console.log(JSON.stringify(paginationInfo));
-        
+
         if (paginationInfo.isFixedLayout) return;
-    
+
         try {
             ReadiumSDK._DEBUG_CfiNavigationLogic.clearDebugOverlays();
-            
+
         } catch (error) {
             //ignore
         }
-        
+
         try {
             console.log(cfi);
-            
+
             var range = this.getDomRangeFromRangeCfi(cfi);
             console.log(range);
-            
+
             var res = ReadiumSDK._DEBUG_CfiNavigationLogic.drawDebugOverlayFromDomRange(range);
             console.log(res);
-        
+
             var cfiFirst = ReadiumSDK.reader.getFirstVisibleCfi();
             console.log(cfiFirst);
-            
+
             var cfiLast  = ReadiumSDK.reader.getLastVisibleCfi();
             console.log(cfiLast);
-            
+
         } catch (error) {
             //ignore
         }
-        
+
         setTimeout(function() {
             try {
                 ReadiumSDK._DEBUG_CfiNavigationLogic.clearDebugOverlays();
@@ -19125,7 +19125,7 @@ var ReaderView = function (options) {
 
         readerView.on(Globals.Events.CONTENT_DOCUMENT_LOADED, function ($iframe, spineItem) {
             Globals.logEvent("CONTENT_DOCUMENT_LOADED", "ON", "reader_view.js (via BackgroundAudioTrackManager) [ " + spineItem.href + " ]");;
-            
+
             try {
                 if (spineItem && spineItem.idref && $iframe && $iframe[0]) {
                     // console.log("CONTENT_DOCUMENT_LOADED");
@@ -19142,7 +19142,7 @@ var ReaderView = function (options) {
 
         readerView.on(Globals.Events.PAGINATION_CHANGED, function (pageChangeData) {
             Globals.logEvent("PAGINATION_CHANGED", "ON", "reader_view.js (via BackgroundAudioTrackManager)");
-            
+
             // console.log("PAGINATION_CHANGED");
             // console.debug(pageChangeData);
             //
@@ -19260,7 +19260,7 @@ var ReaderView = function (options) {
 
         readerView.on(Globals.Events.MEDIA_OVERLAY_STATUS_CHANGED, function (value) {
             Globals.logEvent("MEDIA_OVERLAY_STATUS_CHANGED", "ON", "reader_view.js (via BackgroundAudioTrackManager)");
-            
+
             if (!value.smilIndex) return;
             var package = readerView.package();
             var smil = package.media_overlay.smilAt(value.smilIndex);
@@ -19534,7 +19534,7 @@ var ReaderView = function (options) {
         }
         return undefined;
     };
-       
+
     /**
      * Useful for getting a CFI that's as close as possible to an invisible (not rendered, zero client rects) element
      * @param {HTMLElement} element
@@ -19546,7 +19546,7 @@ var ReaderView = function (options) {
         }
         return undefined;
     };
-    
+
 };
 
 /**
