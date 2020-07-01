@@ -12,7 +12,7 @@
 //  prior written permission.
 
 //'text!empty:'
-define(['./globals', 'jquery', 'console_shim', 'es6-collections', 'eventEmitter', 'URIjs', 'readium_cfi_js', 'readium_js_plugins'], function (Globals, $, console_shim, es6collections, EventEmitter, URI, epubCfi, PluginsController) {
+define(['./globals', 'jquery', 'console_shim', 'es6-collections', 'eventEmitter', 'URIjs', 'readium_cfi_js', 'readium_js_plugins', 'underscore'], function (Globals, $, console_shim, es6collections, EventEmitter, URI, epubCfi, PluginsController, _) {
 
     console.log("Globals...");
 
@@ -45,9 +45,9 @@ define(['./globals', 'jquery', 'console_shim', 'es6-collections', 'eventEmitter'
     // Plugins bootstrapping begins
     Globals.Plugins = PluginsController;
     Globals.on(Globals.Events.READER_INITIALIZED, function(reader) {
-        
+
         Globals.logEvent("READER_INITIALIZED", "ON", "globalsSetup.js");
-        
+
         try {
             PluginsController.initialize(reader);
         } catch (ex) {
