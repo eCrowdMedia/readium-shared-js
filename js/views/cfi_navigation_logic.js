@@ -506,6 +506,11 @@ var CfiNavigationLogic = function (options) {
             } else {
                 //noinspection JSUnresolvedFunction
                 clientRectList = $el[0].getClientRects();
+                // 2021.02.17 Safari有bug，如果是svg的image element，safari會無法讀取getClientRects，導致後續cfi相關功能全部出錯
+                if($el[0].tagName === 'image' && clientRectList.length === 0){
+                    var rect = $el[0].getBoundingClientRect();
+                    clientRectList = [rect];
+                }
             }
 
             // all the separate rectangles (for detecting position of the element
