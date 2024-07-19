@@ -207,7 +207,8 @@ var InternalLinksSupport = function(reader) {
                 }
                 else if(isNoteRef){
                     overrideClickEvent = true;
-                    var text = clickEvent.currentTarget.ownerDocument.querySelector(href).innerText;
+                    var text = clickEvent.currentTarget.ownerDocument.querySelector(href).innerHTML;
+                    console.log('text',text);
                     if (text){
                         MooReaderApp.showNoteRef(text);
                     }

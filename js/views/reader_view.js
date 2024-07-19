@@ -769,7 +769,7 @@ var ReaderView = function (options) {
      * @param {object} initiator optional
      */
     this.openSpineItemElementCfi = function (idref, elementCfi, initiator) {
-
+        console.log('from readium', idref, elementCfi, initiator);
         var spineItem = getSpineItem(idref);
 
         if (!spineItem) {
@@ -1649,7 +1649,10 @@ var ReaderView = function (options) {
      * @returns {ReadiumSDK.Models.CurrentPagesInfo}
      */
     this.getPaginationInfo = function(){
-        return _currentView.getPaginationInfo();
+        if (_currentView) {
+            return _currentView.getPaginationInfo();
+        }
+        return undefined;
     };
     /**
      * Get CFI of the first element visible in the viewport
